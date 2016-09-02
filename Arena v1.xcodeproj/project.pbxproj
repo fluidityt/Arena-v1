@@ -16,6 +16,8 @@
 		C18B22A01D7A25990008A65B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C18B229E1D7A25990008A65B /* LaunchScreen.storyboard */; };
 		C18B22AB1D7A259A0008A65B /* Arena_v1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22AA1D7A259A0008A65B /* Arena_v1Tests.swift */; };
 		C18B22B61D7A259A0008A65B /* Arena_v1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22B51D7A259A0008A65B /* Arena_v1UITests.swift */; };
+		C18B22C51D7A25CD0008A65B /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22C41D7A25CD0008A65B /* utils.swift */; };
+		C18B22C71D7A26CB0008A65B /* global.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22C61D7A26CB0008A65B /* global.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,20 +39,22 @@
 
 /* Begin PBXFileReference section */
 		C18B228E1D7A25990008A65B /* Arena v1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Arena v1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C18B22911D7A25990008A65B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C18B22911D7A25990008A65B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Arena v1/AppDelegate.swift"; sourceTree = "<group>"; };
 		C18B22931D7A25990008A65B /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		C18B22951D7A25990008A65B /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		C18B22971D7A25990008A65B /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		C18B22971D7A25990008A65B /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameViewController.swift; path = "Arena v1/GameViewController.swift"; sourceTree = "<group>"; };
 		C18B229A1D7A25990008A65B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C18B229C1D7A25990008A65B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C18B229C1D7A25990008A65B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Arena v1/Assets.xcassets"; sourceTree = "<group>"; };
 		C18B229F1D7A25990008A65B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C18B22A11D7A25990008A65B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C18B22A11D7A25990008A65B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Arena v1/Info.plist"; sourceTree = "<group>"; };
 		C18B22A61D7A259A0008A65B /* Arena v1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Arena v1Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18B22AA1D7A259A0008A65B /* Arena_v1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arena_v1Tests.swift; sourceTree = "<group>"; };
 		C18B22AC1D7A259A0008A65B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C18B22B11D7A259A0008A65B /* Arena v1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Arena v1UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18B22B51D7A259A0008A65B /* Arena_v1UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arena_v1UITests.swift; sourceTree = "<group>"; };
 		C18B22B71D7A259A0008A65B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C18B22C41D7A25CD0008A65B /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
+		C18B22C61D7A26CB0008A65B /* global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = global.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +88,7 @@
 				C18B22901D7A25990008A65B /* Arena v1 */,
 				C18B22A91D7A259A0008A65B /* Arena v1Tests */,
 				C18B22B41D7A259A0008A65B /* Arena v1UITests */,
-				C18B228F1D7A25990008A65B /* Products */,
+				C18B22C31D7A25AB0008A65B /* junk */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,14 +105,10 @@
 		C18B22901D7A25990008A65B /* Arena v1 */ = {
 			isa = PBXGroup;
 			children = (
-				C18B22911D7A25990008A65B /* AppDelegate.swift */,
 				C18B22931D7A25990008A65B /* GameScene.sks */,
 				C18B22951D7A25990008A65B /* GameScene.swift */,
-				C18B22971D7A25990008A65B /* GameViewController.swift */,
-				C18B22991D7A25990008A65B /* Main.storyboard */,
-				C18B229C1D7A25990008A65B /* Assets.xcassets */,
-				C18B229E1D7A25990008A65B /* LaunchScreen.storyboard */,
-				C18B22A11D7A25990008A65B /* Info.plist */,
+				C18B22C61D7A26CB0008A65B /* global.swift */,
+				C18B22C41D7A25CD0008A65B /* utils.swift */,
 			);
 			path = "Arena v1";
 			sourceTree = "<group>";
@@ -129,6 +129,20 @@
 				C18B22B71D7A259A0008A65B /* Info.plist */,
 			);
 			path = "Arena v1UITests";
+			sourceTree = "<group>";
+		};
+		C18B22C31D7A25AB0008A65B /* junk */ = {
+			isa = PBXGroup;
+			children = (
+				C18B22911D7A25990008A65B /* AppDelegate.swift */,
+				C18B22971D7A25990008A65B /* GameViewController.swift */,
+				C18B22991D7A25990008A65B /* Main.storyboard */,
+				C18B229C1D7A25990008A65B /* Assets.xcassets */,
+				C18B229E1D7A25990008A65B /* LaunchScreen.storyboard */,
+				C18B22A11D7A25990008A65B /* Info.plist */,
+				C18B228F1D7A25990008A65B /* Products */,
+			);
+			name = junk;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,6 +280,8 @@
 				C18B22961D7A25990008A65B /* GameScene.swift in Sources */,
 				C18B22981D7A25990008A65B /* GameViewController.swift in Sources */,
 				C18B22921D7A25990008A65B /* AppDelegate.swift in Sources */,
+				C18B22C51D7A25CD0008A65B /* utils.swift in Sources */,
+				C18B22C71D7A26CB0008A65B /* global.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +323,7 @@
 				C18B229A1D7A25990008A65B /* Base */,
 			);
 			name = Main.storyboard;
+			path = "Arena v1";
 			sourceTree = "<group>";
 		};
 		C18B229E1D7A25990008A65B /* LaunchScreen.storyboard */ = {
@@ -315,6 +332,7 @@
 				C18B229F1D7A25990008A65B /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = "Arena v1";
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
