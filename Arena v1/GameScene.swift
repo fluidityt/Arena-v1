@@ -24,8 +24,9 @@ class GameScene: SKScene {
 					override init() {
 				
 						big = SKShapeNode.init(circleOfRadius: 100)
-						 big.fillColor = UIColor.redColor()
-
+						 big.fillColor = UIColor.whiteColor()
+						   big.fillTexture = SKTexture.init(image: UIImage(named: "twistycenter")!)
+						
 						small = SKShapeNode.init(circleOfRadius: 10)
 						 small.fillColor = UIColor.greenColor()
 						
@@ -43,6 +44,9 @@ class GameScene: SKScene {
 						 self.small.runAction(SKAction.moveBy(MOVE_UP, duration: 0))
 						
 					}
+					
+					func rotater() {}
+						
 					
 					required init?(coder aDecoder: NSCoder) {
 						fatalError("init(coder:) has not been implemented")
@@ -88,9 +92,13 @@ class GameScene: SKScene {
 				
 				//rotate clockwise
 				if (touch.locationInNode(self).y) > prevY {
-					
-					let action = SKAction.rotateByAngle(CGFloat(12.0), duration:0)
-					 central?.runAction(action)
+					Hotfix(){
+				
+						Test(false) {
+							let action = SKAction.rotateByAngle(CGFloat(12.0), duration:0)
+						 central?.runAction(action)}
+						
+
 				}
 					
 				//rotate counter

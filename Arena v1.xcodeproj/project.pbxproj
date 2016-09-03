@@ -44,7 +44,7 @@
 		C18B22951D7A25990008A65B /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		C18B22971D7A25990008A65B /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameViewController.swift; path = "Arena v1/GameViewController.swift"; sourceTree = "<group>"; };
 		C18B229A1D7A25990008A65B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C18B229C1D7A25990008A65B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Arena v1/Assets.xcassets"; sourceTree = "<group>"; };
+		C18B229C1D7A25990008A65B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C18B229F1D7A25990008A65B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C18B22A11D7A25990008A65B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Arena v1/Info.plist"; sourceTree = "<group>"; };
 		C18B22A61D7A259A0008A65B /* Arena v1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Arena v1Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +109,7 @@
 				C18B22951D7A25990008A65B /* GameScene.swift */,
 				C18B22C61D7A26CB0008A65B /* global.swift */,
 				C18B22C41D7A25CD0008A65B /* utils.swift */,
+				C18B229C1D7A25990008A65B /* Assets.xcassets */,
 			);
 			path = "Arena v1";
 			sourceTree = "<group>";
@@ -137,7 +138,6 @@
 				C18B22911D7A25990008A65B /* AppDelegate.swift */,
 				C18B22971D7A25990008A65B /* GameViewController.swift */,
 				C18B22991D7A25990008A65B /* Main.storyboard */,
-				C18B229C1D7A25990008A65B /* Assets.xcassets */,
 				C18B229E1D7A25990008A65B /* LaunchScreen.storyboard */,
 				C18B22A11D7A25990008A65B /* Info.plist */,
 				C18B228F1D7A25990008A65B /* Products */,
@@ -512,6 +512,7 @@
 				C18B22BC1D7A259A0008A65B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C18B22BD1D7A259A0008A65B /* Build configuration list for PBXNativeTarget "Arena v1Tests" */ = {
 			isa = XCConfigurationList;
@@ -520,6 +521,7 @@
 				C18B22BF1D7A259A0008A65B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C18B22C01D7A259A0008A65B /* Build configuration list for PBXNativeTarget "Arena v1UITests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +530,7 @@
 				C18B22C21D7A259A0008A65B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
