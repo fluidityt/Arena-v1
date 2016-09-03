@@ -3,13 +3,13 @@
 //  Arena v1
 //
 //  Created by Dude Guy  on 9/2/16.
-//  Copyright (c) 2016 Dude Guy . All rights reserved.
+//  Copyright (c) 2016 Dude Guy . All rights reserved.																	//
 //
 
 import SpriteKit
 
 class GameScene: SKScene {
-    override func didMoveToView(view: SKView) {
+	override func didMoveToView(view: SKView) {
 			
 			// update our globes to work
 			SELF = self
@@ -57,21 +57,60 @@ class GameScene: SKScene {
 				
 			}//
 	}// //
+	
+//	let location = touch.locationInNode(self)
+
 
 	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-       /* Called when a touch begins */
-			
 		for touch in touches {
-			let location = touch.locationInNode(self)
-		
-			central?.position = location
-			print(location)
 			
-		}
-            //let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-	}
-
-
+			Test (true, "T3: drag to rotate") {
+				
+				// entry: prevLoc = locationTB
+				// moved: rotate in direction of locationTM
+				// moved pt2: prevLoc = locationTM
+				
+				prevY = touch.locationInNode(self).y
+			
+			}//-
+			
+			
+		}//
+	}// //tb
+	
+	
+	
+	override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+		for touch in touches {
+			
+			
+			Test (true, "test 3") {
+				
+				//rotate clockwise
+				if (touch.locationInNode(self).y) > prevY {
+					
+					let action = SKAction.rotateByAngle(CGFloat(12.0), duration:0)
+					 central?.runAction(action)
+				}
+					
+				//rotate counter
+				else if (touch.locationInNode(self).y) < prevY {
+					
+					let action = SKAction.rotateByAngle(CGFloat(-12.0), duration:0)
+					 central?.runAction(action)
+				}
+					
+				//do nothing (movement was lateral)
+				else {		return		}
+				
+				// Reset for next entry
+				defer { prevY = touch.locationInNode(self).y }
+				
+			}//-test
+			
+		}//
+	}// //tm
+	
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
     }

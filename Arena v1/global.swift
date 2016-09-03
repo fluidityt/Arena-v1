@@ -30,3 +30,6 @@ var central : SKNode?
 // get bounds
 // move to bounds
 // use pritns to make sure
+
+
+var prevY : CGFloat = 0
