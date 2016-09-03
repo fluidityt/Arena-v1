@@ -50,7 +50,11 @@
 		public func disregard<t>(an:t){}
 		
 		/// Inline fun
-		func Test(block: ()->() ) {	block()  }
+		func Test(run_code:Bool = true,_ description:String = "",_ block: ()->() ) {
+			if run_code == true {block()}
+		}
+		
+		func ToDo(s:String){}
 		
 		/// Inline fun, with values
 		func Test(description: String,_ values: [Any],_ block: ()->() ) {
@@ -67,7 +71,7 @@
 		public struct Hotfix {	public init (_ block: ()->() ) { block() } }
 		
 		/// Allows me to turn on / off a block of code
-		public struct Debug{public init(_ exec:Bool=true,_ block:()->()){if exec==true{block()}}}
+		public struct Debug{public init(_ block:()->()){if exec==true{block()}}}
 		
 		
 		

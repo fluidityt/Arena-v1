@@ -15,6 +15,18 @@ var node_list = [SKNode()]
 let player = SKSpriteNode()
 var SELF = GameScene()
 
+var exec = true
+
 let CENTER_SCREEN = CGPoint(x:CGRectGetMidX(SELF.frame),
                             y:CGRectGetMidY(SELF.frame))
-			   
+
+func getCenter(node:SKNode) -> CGPoint {
+	return (CGPoint(x:CGRectGetMidX(node.frame),
+	        y:CGRectGetMidY(node.frame)))
+}
+
+
+var central : SKNode?
+// get bounds
+// move to bounds
+// use pritns to make sure

@@ -13,56 +13,65 @@ class GameScene: SKScene {
 			
 			// update our globes to work
 			SELF = self
+		
+		
+			Test(true, "try 2") {
 			
-			// make our big circle
-			initCircle: do {
-			 let circle = SKShapeNode.init(circleOfRadius: 100)
-				circle.fillColor = UIColor.redColor()
-				 circle.position = CENTER_SCREEN
-			  	addChild(circle)
-				
-				_=Hotfix() { print("How to attach to a parent")
-				// make our smaller circles
-				initSmallerCircle: do {
-					let small_circle = SKShapeNode.init(circleOfRadius: 10)
-						small_circle.position = CENTER_SCREEN
+				class Circle: SKNode {
+					var big: SKShapeNode
+					var small: SKShapeNode
 					
-						small_circle.fillColor = UIColor.greenColor()
-							self.addChild(small_circle)
-						 		let MOVE_UP = CGVector(dx: 0, dy: 100)
-								 small_circle.runAction(SKAction.moveBy(MOVE_UP, duration: 0))
-									Hotfix(){
-										circle.zPosition = -10
-									  small_circle.zPosition = 2
-										
-									}
+					override init() {
+				
+						big = SKShapeNode.init(circleOfRadius: 100)
+						 big.fillColor = UIColor.redColor()
+
+						small = SKShapeNode.init(circleOfRadius: 10)
+						 small.fillColor = UIColor.greenColor()
+						
+						super.init()
+						
+						self.position = CENTER_SCREEN
+						 small.position = getCenter(self)
+						  big.position = getCenter(self)
+					
+						
+						addChild(big)
+						 addChild(small)
+				
+						let MOVE_UP = CGVector(dx: 0, dy: 100)
+						 self.small.runAction(SKAction.moveBy(MOVE_UP, duration: 0))
+						
 					}
 					
+					required init?(coder aDecoder: NSCoder) {
+						fatalError("init(coder:) has not been implemented")
+					}
+				
+				}//--
+				
+				central = Circle()
+				self.addChild(central!)
+				
+				
+				
+			}//
+	}// //
 
-				}//
-			}// //
-    }// // //
-	
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
 			
-        for touch in touches {
-            let location = touch.locationInNode(self)
-					
-            let sprite = SKSpriteNode(imageNamed:"Spaceship")
-					
-            sprite.xScale = 0.5
-            sprite.yScale = 0.5
-            sprite.position = location
-					
-            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-					
-            sprite.runAction(SKAction.repeatActionForever(action))
-					
-            self.addChild(sprite)
-        }
-    }
-	
+		for touch in touches {
+			let location = touch.locationInNode(self)
+		
+			central?.position = location
+			print(location)
+			
+		}
+            //let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
+	}
+
+
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
     }
