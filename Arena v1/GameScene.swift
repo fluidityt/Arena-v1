@@ -10,59 +10,53 @@ import SpriteKit
 
 class GameScene: SKScene {
 	override func didMoveToView(view: SKView) {
-			
-			// update our globes to work
-			SELF = self
+		
+		// update our globes to work
+		SELF = self
 		
 		
-			Test(true, "try 2") {
+		class Circle: SKNode {
+			var big: SKSpriteNode
+			var small: SKShapeNode
 			
-				class Circle: SKNode {
-					var big: SKShapeNode
-					var small: SKShapeNode
-					
-					override init() {
+			override init() {
 				
-						big = SKShapeNode.init(circleOfRadius: 100)
-						 big.fillColor = UIColor.whiteColor()
-						   big.fillTexture = SKTexture.init(image: UIImage(named: "twistycenter")!)
-						
-						small = SKShapeNode.init(circleOfRadius: 10)
-						 small.fillColor = UIColor.greenColor()
-						
-						super.init()
-						
-						self.position = CENTER_SCREEN
-						 small.position = getCenter(self)
-						  big.position = getCenter(self)
-					
-						
-						addChild(big)
-						 addChild(small)
+				big = SKSpriteNode(imageNamed: "twistycenter")
+				big.size = CGSize(width: 200, height: 200)
 				
-						let MOVE_UP = CGVector(dx: 0, dy: 100)
-						 self.small.runAction(SKAction.moveBy(MOVE_UP, duration: 0))
-						
-					}
-					
-					func rotater() {}
-						
-					
-					required init?(coder aDecoder: NSCoder) {
-						fatalError("init(coder:) has not been implemented")
-					}
+				small = SKShapeNode.init(circleOfRadius: 10)
+				small.fillColor = UIColor.greenColor()
 				
-				}//--
-				
-				central = Circle()
-				self.addChild(central!)
+				// Supra!
+				super.init()
+
+				self.position = CENTER_SCREEN
+				small.position = getCenter(self)
+				big.position = getCenter(self)
 				
 				
+				addChild(big)
+				addChild(small)
 				
-			}//
-	}// //
+				let MOVE_UP = CGVector(dx: 0, dy: 100)
+				self.small.runAction(SKAction.moveBy(MOVE_UP, duration: 0))
+				
+			}
+		
+			required init?(coder aDecoder: NSCoder) {
+				fatalError("init(coder:) has not been implemented")
+			}
+		}
+
+		
+		central = Circle()
+		self.addChild(central!)
+		
+		
+		
+	}//
 	
-//	let location = touch.locationInNode(self)
+
 
 
 	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -92,19 +86,17 @@ class GameScene: SKScene {
 				
 				//rotate clockwise
 				if (touch.locationInNode(self).y) > prevY {
-					Hotfix(){
-				
-						Test(false) {
-							let action = SKAction.rotateByAngle(CGFloat(12.0), duration:0)
-						 central?.runAction(action)}
-						
+					
+					let action = SKAction.rotateByAngle(CGFloat(18.0), duration:0)
+					central?.runAction(action)
+					
 
 				}
 					
 				//rotate counter
 				else if (touch.locationInNode(self).y) < prevY {
 					
-					let action = SKAction.rotateByAngle(CGFloat(-12.0), duration:0)
+					let action = SKAction.rotateByAngle(CGFloat(-18.0), duration:0)
 					 central?.runAction(action)
 				}
 					
@@ -114,7 +106,7 @@ class GameScene: SKScene {
 				// Reset for next entry
 				defer { prevY = touch.locationInNode(self).y }
 				
-			}//-test
+			}//-test3
 			
 		}//
 	}// //tm
@@ -124,5 +116,9 @@ class GameScene: SKScene {
     }
 }
 
-func copy() {}
+func shapeTex(node:SKShapeNode) {
+
+	node.fillColor = UIColor.whiteColor()
+	node.fillTexture = SKTexture.init(image: UIImage(named: "twistycenter")!)
+}
 

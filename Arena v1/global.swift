@@ -33,3 +33,5 @@ var central : SKNode?
 
 
 var prevY : CGFloat = 0
+
+
