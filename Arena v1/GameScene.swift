@@ -21,16 +21,22 @@ class GameScene: SKScene {
 				 circle.position = CENTER_SCREEN
 			  	addChild(circle)
 				
-			
+				_=Hotfix() { print("How to attach to a parent")
 				// make our smaller circles
 				initSmallerCircle: do {
 					let small_circle = SKShapeNode.init(circleOfRadius: 10)
-				   small_circle.fillColor = UIColor.greenColor()
-  					small_circle.position = CENTER_SCREEN
-						 let MOVE_UP = CGVector(dx: 0, dy: 100)
-							small_circle.runAction(SKAction.moveBy(MOVE_UP, duration: 0))
+						small_circle.position = CENTER_SCREEN
 					
-						  addChild(small_circle)
+						small_circle.fillColor = UIColor.greenColor()
+							self.addChild(small_circle)
+						 		let MOVE_UP = CGVector(dx: 0, dy: 100)
+								 small_circle.runAction(SKAction.moveBy(MOVE_UP, duration: 0))
+									Hotfix(){
+										circle.zPosition = -10
+									  small_circle.zPosition = 2
+										
+									}
+					}
 					
 
 				}//
@@ -62,4 +68,5 @@ class GameScene: SKScene {
     }
 }
 
+func copy() {}
 
