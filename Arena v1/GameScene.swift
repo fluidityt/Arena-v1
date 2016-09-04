@@ -52,7 +52,8 @@ class GameScene: SKScene {
 		central = Circle()
 		self.addChild(central!)
 		
-		
+		central?.runAction(SKAction.rotateToAngle(0, duration: 0.5))
+
 		
 	}//
 	
@@ -82,7 +83,7 @@ class GameScene: SKScene {
 		for touch in touches {
 			
 			
-			Test (true, "test 3") {
+			Test (false, "test 3") {
 				
 				//rotate clockwise
 				if (touch.locationInNode(self).y) > prevY {

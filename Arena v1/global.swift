@@ -33,5 +33,7 @@ var central : SKNode?
 
 
 var prevY : CGFloat = 0
+var prevA : CGFloat = 0
 
+let full_circle = 6.281
 
