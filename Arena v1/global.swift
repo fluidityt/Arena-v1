@@ -32,8 +32,11 @@ var _central : SKNode?
 // use pritns to make sure
 
 
+var _firstY : CGFloat = 0
 var _prevY : CGFloat = 0
-var _prevA : CGFloat = 0
+var _curY  : CGFloat = 0
+
+var _curA  : CGFloat = 0
 
 let _full_circle = 6.281
 
@@ -41,3 +44,10 @@ var _clock_count = 0
 var _seconds = 0
 
 var _accel = 0
+
+var first_drag = false
+
+var _accelTime = NSTimeInterval(0)
+
+var _time: CFTimeInterval = 0
+

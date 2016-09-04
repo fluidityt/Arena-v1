@@ -3,9 +3,7 @@
 //  Arena v1
 //
 //  Created by Dude Guy  on 9/2/16.
-//  Copyright (c) 2016 Dude Guy . All rights reserved.																	//
-//
-
+//  Copyright (c) 2016 Dude Guy . All rights reserved.
 import SpriteKit
 
 class GameScene: SKScene {
@@ -21,31 +19,37 @@ class GameScene: SKScene {
 	
 
 	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-		for touch in touches {
+		for touch in touches { disregard(touch)
 			
+		_firstY = touch.locationInNode(self).y
+		 first_drag = true
 	
-				// entry: prevLoc = locationTB
-				// moved: rotate in direction of locationTM
-				// moved pt2: prevLoc = locationTM
-				_prevY = touch.locationInNode(self).y
-		
-	}}// //tb
+		}}// //tb
 	
 	
 	
 	override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		
 		
+		if first_drag == true {		_prevY = _firstY	}
+		
 		for touch in touches {
 			
-			// Handle the direction of drag
-			handleDirection(touch)
+			handleDirection (current_y: touch.locationInNode(self).y)
 			
 			
 		}}// //tm
 	
 	
+	override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+		
+		// Reset
+		_central?.removeAllActions()
+		
+	}//te
+	
   override func update(currentTime: CFTimeInterval) {
+		
 		updateClock: do {
 			_clock_count += 1
 			
@@ -53,15 +57,15 @@ class GameScene: SKScene {
 				_clock_count = 0
 				_seconds += 1
 				print(_seconds, _accel, currentTime)
-				_accel = 0
+				
 			}
 	}
 		
+		_time = currentTime
 		
-		
-		
-	}
+	}//update
 
+	
 
 
 }//EoC
