@@ -40,18 +40,10 @@ func accelerateTimer (
 					deltaY    	= absV(curY - prevY),
 			
 					// dT:
-					deltaT			= (curT - prevT) as? Double,
+					deltaT			= CGFloat(curT - prevT)
 		
-					da = deltaT as! Float64?,
 		
-					daa = da as! Float?,
-		
-					daaa = daa as! CGFloat?,
-		
-					converted_dT = daaa
-		;
-		
-		var	PPS    			= (deltaY / converted_dT!)
+		var	PPS	= (deltaY / deltaT)
 		
 	
 		
@@ -61,7 +53,7 @@ func accelerateTimer (
 		
 		
 	// No cleanup :D
-		return PPS as! NSTimeInterval
+		return NSTimeInterval(PPS)
 
 }
 
