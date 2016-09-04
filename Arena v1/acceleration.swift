@@ -1,9 +1,7 @@
 import SpriteKit
 
 /**
-//min speed is 100 PPS
-if result < 100 { return 2 }
-if result >
+
 
 PPS = |change in pixels| / change in time
 
@@ -44,7 +42,12 @@ func accelerateTimer (
 			// dT:
 			deltaT		= (curT - prevT),
 		
+			// I NEED TO CONVERT ;P
 			PPS    		= (deltaY / deltaT)
+		
+		// (min/max speed is 100/400 PPS)
+		if PPS > 400 { PPS = max_speed }
+		if PPS < 100 { PPS = min_speed }
 		
 		return PPS as! NSTimeInterval
 
