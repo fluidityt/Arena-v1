@@ -26,29 +26,41 @@ func accelerateTimer (
 			else if number < 0 { return (number * -1)}
 			
 			// Error
-			return number = -1
+			return number-1
 		}
 		
-	// Locals:
+		
+		// Locals:
 		let
-	
-			// Time in seconds to rotate 360
-			max_speed = 0.5,
-			min_speed = 2,
-	
-			// dY:
-			deltaY    = absV(curY - prevY),
-	
-			// dT:
-			deltaT		= (curT - prevT),
+					// Time in seconds to rotate 360
+					max_speed 	:CGFloat = 0.5,
+					min_speed 	:CGFloat = 2,
+			
+					// dY:
+					deltaY    	= absV(curY - prevY),
+			
+					// dT:
+					deltaT			= (curT - prevT) as? Double,
 		
-			// I NEED TO CONVERT ;P
-			PPS    		= (deltaY / deltaT)
+					da = deltaT as! Float64?,
 		
-		// (min/max speed is 100/400 PPS)
+					daa = da as! Float?,
+		
+					daaa = daa as! CGFloat?,
+		
+					converted_dT = daaa
+		;
+		
+		var	PPS    			= (deltaY / converted_dT!)
+		
+	
+		
+	// (min/max speed is 100/400 PPS)
 		if PPS > 400 { PPS = max_speed }
 		if PPS < 100 { PPS = min_speed }
 		
+		
+	// No cleanup :D
 		return PPS as! NSTimeInterval
 
 }
