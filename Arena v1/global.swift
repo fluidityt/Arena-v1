@@ -26,14 +26,18 @@ func getCenter(node:SKNode) -> CGPoint {
 }
 
 
-var central : SKNode?
+var _central : SKNode?
 // get bounds
 // move to bounds
 // use pritns to make sure
 
 
-var prevY : CGFloat = 0
-var prevA : CGFloat = 0
+var _prevY : CGFloat = 0
+var _prevA : CGFloat = 0
 
-let full_circle = 6.281
+let _full_circle = 6.281
 
+var _clock_count = 0
+var _seconds = 0
+
+var _accel = 0

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C17E84BD1D7BADE40036BE89 /* GameSceneFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17E84BC1D7BADE40036BE89 /* GameSceneFuncs.swift */; };
 		C18B22921D7A25990008A65B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22911D7A25990008A65B /* AppDelegate.swift */; };
 		C18B22941D7A25990008A65B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C18B22931D7A25990008A65B /* GameScene.sks */; };
 		C18B22961D7A25990008A65B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22951D7A25990008A65B /* GameScene.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C17E84BC1D7BADE40036BE89 /* GameSceneFuncs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSceneFuncs.swift; sourceTree = "<group>"; };
 		C18B228E1D7A25990008A65B /* Arena v1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Arena v1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18B22911D7A25990008A65B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Arena v1/AppDelegate.swift"; sourceTree = "<group>"; };
 		C18B22931D7A25990008A65B /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			children = (
 				C18B22931D7A25990008A65B /* GameScene.sks */,
 				C18B22951D7A25990008A65B /* GameScene.swift */,
+				C17E84BC1D7BADE40036BE89 /* GameSceneFuncs.swift */,
 				C18B22C61D7A26CB0008A65B /* global.swift */,
 				C18B22C41D7A25CD0008A65B /* utils.swift */,
 				C18B229C1D7A25990008A65B /* Assets.xcassets */,
@@ -277,6 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C17E84BD1D7BADE40036BE89 /* GameSceneFuncs.swift in Sources */,
 				C18B22961D7A25990008A65B /* GameScene.swift in Sources */,
 				C18B22981D7A25990008A65B /* GameViewController.swift in Sources */,
 				C18B22921D7A25990008A65B /* AppDelegate.swift in Sources */,
