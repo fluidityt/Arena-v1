@@ -83,29 +83,50 @@ class GameScene: SKScene {
 		for touch in touches {
 			
 			
-			Test (false, "test 3") {
+			Test (true, "test 4") {
 				
-				//rotate clockwise
-				if (touch.locationInNode(self).y) > prevY {
+				
+				
+				// How much to move each click
+				let regular_increment :CGFloat = 0.25
+				let increment_angle: CGFloat
+				
+				
+				
+				handleDirection: do {
+					// Drag up
+					if (touch.locationInNode(self).y) > prevY {
+						
+						//rotate clockwise
+						increment_angle = (prevA + regular_increment)
+						 let action = SKAction.rotateToAngle(increment_angle, duration:0)
+							central?.runAction(action)
+					}
+						
+					// Drag down
+					else if (touch.locationInNode(self).y) < prevY {
+						
+						//rotate counter
+						increment_angle = (prevA - regular_increment)
+						 let action = SKAction.rotateToAngle(increment_angle, duration:0)
+							central?.runAction(action)
+					}
+						
+					// do nothing (movement was lateral)
+					else {		return		}
 					
-					let action = SKAction.rotateByAngle(CGFloat(18.0), duration:0)
-					central?.runAction(action)
-					
-
-				}
-					
-				//rotate counter
-				else if (touch.locationInNode(self).y) < prevY {
-					
-					let action = SKAction.rotateByAngle(CGFloat(-18.0), duration:0)
-					 central?.runAction(action)
-				}
-					
-				//do nothing (movement was lateral)
-				else {		return		}
+				
+				}//-
+				
 				
 				// Reset for next entry
-				defer { prevY = touch.locationInNode(self).y }
+				defer {
+					prevY = touch.locationInNode(self).y
+					prevA = increment_angle
+				}
+				
+				
+				
 				
 			}//-test3
 			
