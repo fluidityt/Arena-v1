@@ -1,7 +1,7 @@
 import SpriteKit
 
 
-func handleDirection ( 	current_angle current_angle		:CGFloat,
+func rotateInDirectionWithAccel ( 	current_angle current_angle		:CGFloat,
 												
                        	previous_y			:CGFloat,
 												current_y				:CGFloat,
@@ -57,7 +57,7 @@ func handleDirection ( 	current_angle current_angle		:CGFloat,
 			// Paused (lateral)
 			else if (current_y == previous_y){
 				printl("pause")
-				_central?.removeAllActions()
+				Hotfix() {_central?.removeAllActions()}
 			}
 	
 		}

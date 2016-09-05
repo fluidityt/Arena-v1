@@ -45,13 +45,14 @@ class GameScene: SKScene {
 		for touch in touches {
 			
 			let TLOC = touch.locationInNode(self)
-			
-			handleDirection (
+
+			rotateInDirectionWithAccel (
 				current_angle: 		_curA,
 				 previous_y: 			_prevY,
 				 current_y: 			TLOC.y,
 				  previous_time:	_timeThen,
 				  current_time: 	_timeNow)
+			
 		}
 	
 	}// //tm
@@ -78,6 +79,7 @@ class GameScene: SKScene {
 	}
 		
 		_timeNow = currentTime
+
 		
 	}//update
 
