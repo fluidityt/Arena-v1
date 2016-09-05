@@ -1,12 +1,16 @@
 import SpriteKit
 
 
-func handleDirection ( 	current_angle		:CGFloat = _curA,
-												previous_y			:CGFloat = _prevY,
-												current_y				:CGFloat
+func handleDirection ( 	current_angle current_angle		:CGFloat,
+												
+                       	previous_y			:CGFloat,
+												current_y				:CGFloat,
+												
+												previous_time		:NSTimeInterval,
+												current_time		:NSTimeInterval
 										 ) 																			{
 	
-	// Locals:
+	// Locals: \\
 		let
 			clock_spin 		:CGFloat = 6.281,
 			counter_spin 	:CGFloat = -6.281,
@@ -15,21 +19,25 @@ func handleDirection ( 	current_angle		:CGFloat = _curA,
 		var next_angle = (current_angle) + (no_spin)
 	
 	
-	// Utilities
+	// Utilities \\
 		func rotateIt() {
-		 Hotfix()				{
 			
-			let
-				action = SKAction
-					.rotateToAngle(next_angle, duration:
-						accelerateTimer(previous_y, curY: current_y, prevT: _timeThen, curT: _timeNow))
-						
-						_central?.runAction(action)
-		 }
+			// Store action from accelerator
+			let	action = SKAction.rotateToAngle(
+				next_angle,
+				duration: accelerateTimer(
+					previous_y,
+					curY: current_y,
+					prevT: _timeThen,
+					curT: _timeNow))
+			
+			// Run it
+			_central?.runAction(action)
+		 
 		}
 	
 	
-	// Handle touch
+	// Handle touch \\
 		doLogic() {
 			
 			// Drag up
@@ -55,16 +63,20 @@ func handleDirection ( 	current_angle		:CGFloat = _curA,
 		}
 	
 	
-	// Wrap up
+	// Wrap up \\
 		defer {
 			
-			// for sanity
+			///for temporal sanity
 			let finished_y = current_y
+			let finished_time = current_time
 			
-			// Update globes for next entry
+			///Update globes for next entry
 			_prevY = finished_y
 			_curY  = current_y
+			
 			_curA  = next_angle
+			
+			_timeThen = finished_time
 		}
 	
 	

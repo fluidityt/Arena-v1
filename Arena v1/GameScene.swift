@@ -34,16 +34,24 @@ class GameScene: SKScene {
 	override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		
 		
- 	 // Initials for temporal naming sanity
+ 	 // Initials for temporal naming sanity \\
 		if _firstDrag == true {
 				_prevY 			= _firstY
 				_timeThen 	= _firstTime
 				_firstDrag	= false
 		}
 		
-	 // Do some shit
+	 // Do some shit \\
 		for touch in touches {
-			handleDirection (current_y: touch.locationInNode(self).y)
+			
+			let TLOC = touch.locationInNode(self)
+			
+			handleDirection (
+				current_angle: 		_curA,
+				 previous_y: 			_prevY,
+				 current_y: 			TLOC.y,
+				  previous_time:	_timeThen,
+				  current_time: 	_timeNow)
 		}
 	
 	}// //tm
@@ -51,7 +59,7 @@ class GameScene: SKScene {
 	
 	override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		
-		// Reset
+		///Reset
 		_central?.removeAllActions()
 		
 	}//te
@@ -64,7 +72,7 @@ class GameScene: SKScene {
 			if _clock_count == 60 {
 				_clock_count = 0
 				_seconds += 1
-				print(_seconds, _accel, currentTime)
+				//print(_seconds, _accel, currentTime)
 				
 			}
 	}
