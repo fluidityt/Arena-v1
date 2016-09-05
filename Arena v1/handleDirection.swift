@@ -18,9 +18,12 @@ func handleDirection ( 	current_angle		:CGFloat = _curA,
 	// Utilities
 		func rotateIt() {
 		 Hotfix()				{
+			
 			let
 				action = SKAction
-					.rotateToAngle(next_angle, duration: accelerateTimer())
+					.rotateToAngle(next_angle, duration:
+						accelerateTimer(previous_y, curY: current_y, prevT: _timeThen, curT: _timeNow))
+						
 						_central?.runAction(action)
 		 }
 		}

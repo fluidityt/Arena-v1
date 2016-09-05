@@ -12,27 +12,29 @@ PPS = |change in pixels| / change in time
 
 
 */
+
 func accelerateTimer (
-								       prevY: CGFloat = _prevY,
-								       curY : CGFloat = _curY,
+								       prevY: CGFloat,
+								       curY : CGFloat,
 								       
-                       prevT: NSTimeInterval = _timeThen,
-                       curT : NSTimeInterval = _timeNow
+                       prevT: NSTimeInterval,
+                       curT : NSTimeInterval
 										 )													 	-> NSTimeInterval {
 
 	// TODO: Add per inches / accel slider / box
 	
 	// Util:
 		func absV(number:CGFloat) -> CGFloat {
+			printd("number: ", number)
+
 			if number >= 0 { return number }
 			else if number < 0 { return (number * -1)}
 			
 			// Error
 			return number-1
 		}
-		
-		
-		// Locals:
+
+	// Locals:
 		let
 					// Time in seconds to rotate 360
 					max_speed 	:CGFloat = 0.5,
@@ -46,7 +48,7 @@ func accelerateTimer (
 		
 		
 		var	PPS	= (deltaY / deltaT)
-		
+		printd(NSTimeInterval(PPS))
 	
 	
 	// (min/max speed is 100/400 PPS)
@@ -54,7 +56,6 @@ func accelerateTimer (
 		if PPS < 100 { PPS = min_speed }
 	
 	// No cleanup :D
-		printl(NSTimeInterval(PPS))
 		return NSTimeInterval(PPS)
 
 }
