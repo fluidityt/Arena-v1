@@ -29,7 +29,7 @@ func rotateInDirectionWithAccel ( 	current_angle current_angle		:CGFloat,
 			
 			// Store action from accelerator
 			let	action = SKAction.rotateToAngle(next_angle,
-			   	                                duration: 0.02)
+			   	                                duration: 0.0)
 			
 			// Run it
 			_central?.runAction(action)
@@ -56,8 +56,13 @@ func rotateInDirectionWithAccel ( 	current_angle current_angle		:CGFloat,
 			
 			// Paused (lateral)
 			else if (current_y == previous_y){
-				printl("pause")
-				Hotfix() {_central?.removeAllActions()}
+				///Reset
+				printl("paused but didn't release")
+				Hotfix() {
+					_central?.removeAllActions()
+					y1 = 0; y2 = 0; y3 = 0
+
+				}
 			}
 	
 		}

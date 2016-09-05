@@ -47,7 +47,7 @@ class GameScene: SKScene {
 			//Hotfix() { _central?.removeAllActions()}
 			let TLOC = touch.locationInNode(self)
 
-			let smoothed_y = deflatedY(TLOC.y)
+			let smoothed_y = deflateY(TLOC.y)
 			
 			rotateInDirectionWithAccel (
 				current_angle: 		_curA,
@@ -65,6 +65,7 @@ class GameScene: SKScene {
 		
 		///Reset
 		_central?.removeAllActions()
+		y1 = 0; y2 = 0; y3 = 0
 		
 	}//te
 	
