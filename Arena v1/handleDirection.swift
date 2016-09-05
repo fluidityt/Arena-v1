@@ -12,24 +12,24 @@ func rotateInDirectionWithAccel ( 	current_angle current_angle		:CGFloat,
 	
 	// Locals: \\
 		let
-			clock_spin 		:CGFloat = 6.281,
-			counter_spin 	:CGFloat = -6.281,
+			accel_coef	 = accelerateTimer(previous_y,
+																		 curY: current_y,
+																		 prevT: previous_time,
+																		 curT: current_time),
+	
+			clock_spin 		= (0 - accel_coef),
+			counter_spin 	= (0 + accel_coef),
 			no_spin 			:CGFloat = 0
 	
 		var next_angle = (current_angle) + (no_spin)
-	
+		printd("acc  : \(accel_coef)")
 	
 	// Utilities \\
 		func rotateIt() {
 			
 			// Store action from accelerator
-			let	action = SKAction.rotateToAngle(
-				next_angle,
-				duration: accelerateTimer(
-					previous_y,
-					curY: current_y,
-					prevT: _timeThen,
-					curT: _timeNow))
+			let	action = SKAction.rotateToAngle(next_angle,
+			   	                                duration: 0)
 			
 			// Run it
 			_central?.runAction(action)

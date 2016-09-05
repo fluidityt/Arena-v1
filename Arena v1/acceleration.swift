@@ -1,18 +1,13 @@
 import SpriteKit
 
 /**
-		// x = pps y = time in seconds
+		// x = pps y = radians to spin (in 0)
 	y = −0.005x + 2.5
-
-PPS = |change in pixels| / change in time
-
-
-400 - 200					200
----------					---
-1  -   .5					.5
 
 
 */
+
+// MAKE A DEBUGGING GRAPH?
 
 
 func slope(y1 y1: CGFloat, y2: CGFloat, x1:CGFloat, x2:CGFloat) -> CGFloat {
@@ -34,7 +29,7 @@ func accelerateTimer (
 								       
                        prevT: NSTimeInterval,
                        curT : NSTimeInterval
-										 )													 	-> NSTimeInterval {
+										 )													 	-> CGFloat {
 
 	// TODO: Add per inches / accel slider / box
 	
@@ -51,8 +46,8 @@ func accelerateTimer (
 	// Locals: \\
 		let
 					/// Time in seconds to rotate 360
-					min_speed 	:CGFloat = 2,
-					max_speed 	:CGFloat = 0.5,
+					min_speed 	:CGFloat = 0.05,
+					max_speed 	:CGFloat = 2,
 	
 					/// dY:
 					deltaY    	= absV(curY - prevY),
@@ -63,24 +58,24 @@ func accelerateTimer (
 					/// pixels per second:
 					PPS	= (deltaY / deltaT)
 	
-		var action_duration = ((PPS * -0.005) + 2.5)
+		var radian_spin = absV((PPS * -0.005) + 0.01)
 	
-		printd("pps  : \(PPS)")
-		printd("ads  : \(action_duration)")
+		printd("rad1  : \(radian_spin)")
 	
 	// Set to min/max: \\
 		/// (min/max speed is 100/400 PPS)
-		if action_duration > 2 { action_duration = min_speed }
-		if action_duration < 0.5 { action_duration = max_speed }
+		if radian_spin > max_speed { radian_spin = max_speed }
+		if radian_spin < min_speed { radian_spin = min_speed }
 	
 	// Debugging: \\
-		printd("ADS  : \(NSTimeInterval(action_duration))")
+		printd("rad2  : \(CGFloat(radian_spin))")
 		print("\n")
 	
 	// No cleanup :D
-		return NSTimeInterval(PPS)
+		return CGFloat(radian_spin)
 
 }
 
-		
+
+//printd("pps  : \(PPS)")
 		

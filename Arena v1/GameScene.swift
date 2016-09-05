@@ -44,6 +44,7 @@ class GameScene: SKScene {
 	 // Do some shit \\
 		for touch in touches {
 			
+			//Hotfix() { _central?.removeAllActions()}
 			let TLOC = touch.locationInNode(self)
 
 			rotateInDirectionWithAccel (
