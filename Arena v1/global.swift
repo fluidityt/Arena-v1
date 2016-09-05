@@ -45,9 +45,10 @@ var _seconds = 0
 
 var _accel = 0
 
-var first_drag = false
+var _firstDrag = false
 
 var _accelTime = NSTimeInterval(0)
 
-var _time: CFTimeInterval = 0
-
+var _firstTime: CFTimeInterval = 0
+var _timeThen: CFTimeInterval = 0
+var _timeNow : CFTimeInterval = 0

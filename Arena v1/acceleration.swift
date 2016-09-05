@@ -13,10 +13,12 @@ PPS = |change in pixels| / change in time
 
 */
 func accelerateTimer (
-								       prevY: CGFloat, curY: CGFloat,
-                       prevT: NSTimeInterval, curT: NSTimeInterval
-										 )
-	-> NSTimeInterval {
+								       prevY: CGFloat = _prevY,
+								       curY : CGFloat = _curY,
+								       
+                       prevT: NSTimeInterval = _timeThen,
+                       curT : NSTimeInterval = _timeNow
+										 )													 	-> NSTimeInterval {
 
 	// TODO: Add per inches / accel slider / box
 	
@@ -46,16 +48,25 @@ func accelerateTimer (
 		var	PPS	= (deltaY / deltaT)
 		
 	
-		
+	
 	// (min/max speed is 100/400 PPS)
 		if PPS > 400 { PPS = max_speed }
 		if PPS < 100 { PPS = min_speed }
-		
-		
+	
 	// No cleanup :D
+		printl(NSTimeInterval(PPS))
 		return NSTimeInterval(PPS)
 
 }
+
+/*
+		accel works but my tests don't?
+*/
+
+
+
+
+
 
 		
 		

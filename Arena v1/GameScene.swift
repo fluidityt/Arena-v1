@@ -4,6 +4,8 @@
 //
 //  Created by Dude Guy  on 9/2/16.
 //  Copyright (c) 2016 Dude Guy . All rights reserved.
+
+// _ means global 
 import SpriteKit
 
 class GameScene: SKScene {
@@ -21,8 +23,9 @@ class GameScene: SKScene {
 	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		for touch in touches { disregard(touch)
 			
-		_firstY = touch.locationInNode(self).y
-		 first_drag = true
+		_firstDrag   = true
+		 _firstY 		 = touch.locationInNode(self).y
+			_firstTime = _timeNow
 	
 		}}// //tb
 	
@@ -31,14 +34,19 @@ class GameScene: SKScene {
 	override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		
 		
-		if first_drag == true {		_prevY = _firstY	}
+ 	 // Initials for temporal naming sanity
+		if _firstDrag == true {
+				_prevY 			= _firstY
+				_timeThen 	= _firstTime
+				_firstDrag	= false
+		}
 		
+	 // Do some shit
 		for touch in touches {
-			
 			handleDirection (current_y: touch.locationInNode(self).y)
-			
-			
-		}}// //tm
+		}
+	
+	}// //tm
 	
 	
 	override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -61,7 +69,7 @@ class GameScene: SKScene {
 			}
 	}
 		
-		_time = currentTime
+		_timeNow = currentTime
 		
 	}//update
 

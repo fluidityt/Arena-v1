@@ -17,7 +17,12 @@ func handleDirection ( 	current_angle		:CGFloat = _curA,
 	
 	// Utilities
 		func rotateIt() {
-			_central?.runAction(SKAction.rotateToAngle(next_angle, duration: 0))
+		 Hotfix()				{
+			let
+				action = SKAction
+					.rotateToAngle(next_angle, duration: accelerateTimer())
+						_central?.runAction(action)
+		 }
 		}
 	
 	
@@ -40,7 +45,7 @@ func handleDirection ( 	current_angle		:CGFloat = _curA,
 			
 			// Paused (lateral)
 			else if (current_y == previous_y){
-			
+				printl("pause")
 				_central?.removeAllActions()
 			}
 	
