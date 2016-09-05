@@ -15,29 +15,29 @@ func initCircles() {
 	
 	class Circle: SKNode {
 		var big: SKSpriteNode
-		var small: SKShapeNode
+		//var small: SKShapeNode
 		
 		override init() {
 			
 			big = SKSpriteNode(imageNamed: "twistycenter")
-			big.size = CGSize(width: 200, height: 200)
+			big.size = CGSize(width: 300, height: 300)
 			
-			small = SKShapeNode.init(circleOfRadius: 10)
-			small.fillColor = UIColor.greenColor()
+			//small = SKShapeNode.init(circleOfRadius: 10)
+			//small.fillColor = UIColor.greenColor()
 			
 			// Supra!
 			super.init()
 			
 			self.position = CENTER_SCREEN
-			small.position = getCenter(self)
+			//small.position = getCenter(self)
 			big.position = getCenter(self)
 			
 			
 			addChild(big)
-			addChild(small)
+			//addChild(small)
 			
-			let MOVE_UP = CGVector(dx: 0, dy: 100)
-			self.small.runAction(SKAction.moveBy(MOVE_UP, duration: 0))
+			//let MOVE_UP = CGVector(dx: 0, dy: 100)
+			//self.small.runAction(SKAction.moveBy(MOVE_UP, duration: 0))
 			
 		}
 		
@@ -51,6 +51,7 @@ func initCircles() {
 	SELF.addChild(_central!)
 	
 	_central?.runAction(SKAction.rotateToAngle(0, duration: 0.5))
+	_superAngle = _central!.zRotation
 	
 }
 

@@ -56,7 +56,14 @@
 			 return (total / CGFloat(nums.count))
 		}
 		
-		
+		func randy(int:Int) -> Int {
+			
+			var result = Int(arc4random_uniform(UInt32(int)))
+			
+			
+			return result
+		}
+
 		//---------------
 		//<#MARK: - XCODE:#>
 		//---------------

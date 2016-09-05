@@ -44,10 +44,10 @@ class GameScene: SKScene {
 	 // Do some shit \\
 		for touch in touches {
 			
-			//Hotfix() { _central?.removeAllActions()}
 			let TLOC = touch.locationInNode(self)
-
 			let smoothed_y = deflateY(TLOC.y)
+	
+			hitDetect()
 			
 			rotateInDirectionWithAccel (
 				current_angle: 		_curA,
@@ -72,15 +72,27 @@ class GameScene: SKScene {
   override func update(currentTime: CFTimeInterval) {
 		
 		updateClock: do {
+			
+			// Clocker...
 			_clock_count += 1
 			
+			// Seconder...
 			if _clock_count == 60 {
+				
 				_clock_count = 0
 				_seconds += 1
-				//print(_seconds, _accel, currentTime)
-				
 			}
-	}
+			
+			// Spawner...
+			if _seconds == 3 {
+				
+				enemySpawner()
+				_seconds = 0
+			}
+			
+			
+			
+		}
 		
 		_timeNow = currentTime
 

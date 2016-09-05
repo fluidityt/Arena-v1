@@ -51,4 +51,7 @@ var
 var
 		y1 = CGFloat(0), y2 = CGFloat(0), y3 = CGFloat(0)
 
+var
+		_superAngle = CGFloat(0)
+
 
