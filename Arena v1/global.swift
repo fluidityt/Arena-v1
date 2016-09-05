@@ -32,23 +32,23 @@ var _central : SKNode?
 // use pritns to make sure
 
 
-var _firstY : CGFloat = 0
-var _prevY : CGFloat = 0
-var _curY  : CGFloat = 0
-
-var _curA  : CGFloat = 0
+var
+		_firstY: CGFloat = 0, _prevY: CGFloat = 0,	_curY: CGFloat = 0, _curA: CGFloat = 0
 
 let _full_circle = 6.281
 
-var _clock_count = 0
-var _seconds = 0
+var
+		_clock_count = 0, _seconds = 0
 
-var _accel = 0
+var _accel = 0, _accelTime = NSTimeInterval(0)
 
 var _firstDrag = false
 
-var _accelTime = NSTimeInterval(0)
 
-var _firstTime: CFTimeInterval = 0
-var _timeThen: CFTimeInterval = 0
-var _timeNow : CFTimeInterval = 0
+var
+		_firstTime: CFTimeInterval=0, _timeThen: CFTimeInterval=0, _timeNow: CFTimeInterval=0
+
+var
+		y1 = CGFloat(0), y2 = CGFloat(0), y3 = CGFloat(0)
+
+

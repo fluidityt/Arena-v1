@@ -42,6 +42,20 @@
 		/// For visibility on lhs (many things already are on rhs) and cuz swift3 SUCKS
 		func plusplus(inout variable: Int)   {        variable += 1    }
 	 func negneg(inout variable: Int)     {        variable -= 1    }
+	
+		func absV(num:CGFloat) -> CGFloat {
+			return {	if num >= 0 { return num}	else { return (num * -1) }	}()
+		}
+		func slope(y1 y1: CGFloat, y2: CGFloat, x1:CGFloat, x2:CGFloat) -> CGFloat {
+			let dY = (y2 - y1), dX = (x2 - x1), slope = (dY / dX); return slope
+		}
+
+		
+		func average (nums: [CGFloat]) -> CGFloat {
+			var total = CGFloat(0);	for num in nums {total += num}
+			 return (total / CGFloat(nums.count))
+		}
+		
 		
 		//---------------
 		//<#MARK: - XCODE:#>
