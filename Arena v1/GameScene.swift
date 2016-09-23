@@ -39,11 +39,43 @@ class GameScene: SKScene {
 			_prevY 			= _firstY
 			_timeThen 	= _firstTime
 			_firstDrag	= false
+			
+			FirstEntry: do {
+				// Paused (lateral)--no angle now--reset values
+				guard (_curY == _prevY) else {
+					
+					// TODO: get rid of globalz
+					_=Hotfix() {
+						printl("paused but didn't release")
+						_central?.removeAllActions()
+						y1 = 0; y2 = 0; y3 = 0
+					}
+					
+					return
+				}
+				
+				// Enter the massive func!
+				printd("going into wheelspin")
+				let fully_handled_rotation_action_with_acceleration_and_smoothing
+					= F.WheelSpin.findRotationAction(
+						_curA,
+						previous_y: 			_prevY,
+						current_y: 				_curY,
+						previous_time:	_timeThen,
+						current_time: 	_timeNow
+				)
+				
+				// Run it!
+				_central?.runAction(fully_handled_rotation_action_with_acceleration_and_smoothing)
+			}
+			
+			return
 		}
 		
 	 // Do some shit \\
 		for touch in touches {
-			
+			// Old stuff
+			_prevY = _curY
 			// New stuff
 			_curY = touch.locationInNode(self).y
 			
@@ -57,7 +89,7 @@ class GameScene: SKScene {
 				
 				// TODO: get rid of globalz
 				_=Hotfix() {
-					printl("paused but didn't release")
+					//printl("paused but didn't release")
 					_central?.removeAllActions()
 					y1 = 0; y2 = 0; y3 = 0
 				}
@@ -66,6 +98,7 @@ class GameScene: SKScene {
 			}
 			
 			// Enter the massive func!
+			printd("going into wheelspin")
 			let fully_handled_rotation_action_with_acceleration_and_smoothing
 				= F.WheelSpin.findRotationAction(
 													_curA,

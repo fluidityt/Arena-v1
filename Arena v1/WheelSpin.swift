@@ -20,12 +20,12 @@ extension F {
 	struct WheelSpin {
 		
 		// tM() -> rotateIt() -> rIDWA() -> accelTimer() -> smoothY() -> rotate()
-		static func findRotationAction( 	 current_angle		:CGFloat,
+		static func findRotationAction( 	 current_angle	:CGFloat,
 		                                	 
 		                                	 previous_y			:CGFloat,
-		                                	 current_y				:CGFloat,
+		                                	 current_y			:CGFloat,
 		                                	 
-		                                	 previous_time		:NSTimeInterval,
+		                                	 previous_time	:NSTimeInterval,
 		                                	 current_time		:NSTimeInterval
 			) -> SKAction {
 			
@@ -114,7 +114,7 @@ extension F {
 					else {  return average([y1,y2,y3]) }
 				}
 			}()
-			
+			print(smoothed_y)
 			
 			// How fast we moved the cursor
 			// findAccel() -> doLogic() -> (how far to move wheel)
@@ -156,11 +156,11 @@ extension F {
 					}
 				}
 			}()
-			
+			print(accelerated_angle)
 			
 			// Next angle
 			next_angle = {
-				
+				printd("current angle: \(current_angle)")
 				// Dragged up (clockwise)
 				if (current_y > previous_y) {
 					return current_angle + accelerated_angle!
@@ -172,16 +172,19 @@ extension F {
 				}
 				
 			}()
+			print(next_angle)
 			
 			
 			// Our final calculation:
 			fully_calibrated_action = SKAction.rotateToAngle(next_angle!, duration: 0.0)
+			print(fully_calibrated_action)
+			print("\n")
 			
 			
 			// Update globes for next entry
 			wrapUp: do {
 				
-				_prevY = current_y
+				//_prevY = current_y
 				_curY  = smoothed_y!
 				
 				_curA  = next_angle!

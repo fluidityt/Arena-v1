@@ -33,7 +33,10 @@ var _central : SKNode?
 
 
 var
-		_firstY: CGFloat = 0, _prevY: CGFloat = 0,	_curY: CGFloat = 0, _curA: CGFloat = 0
+		_firstY: CGFloat = 0,
+_prevY: CGFloat = 0,
+_curY: CGFloat = 0,
+_curA: CGFloat = 0
 
 let _full_circle = 6.281
 
