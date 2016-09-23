@@ -1,4 +1,5 @@
 import SpriteKit
+// tM() -> rIDWA() -> accelTimer() -> smoothY()
 
 /**
 		// x = pps y = radians to spin (in 0)
@@ -38,13 +39,13 @@ func accelerateTimer (
 	
 	// Calculate Speed: \\
 		let
-					/// Rads to spin in 0
-					min_speed 	:CGFloat = 0.0025,
-					max_speed 	:CGFloat = 0.5,
+					/// Rads to spin in .0025 .5 for pc
+					min_speed 	:CGFloat = 0.001,
+					max_speed 	:CGFloat = 0.4,
 	
 					/// Adjust to increase / decrease overall accel
 					accel_slider = CGFloat(0.001)
-						//printd("rad  : \(CGFloat(radian_spin + accel_slider))\n")
+						//printd("rad  : \(CGFloat(radian_spin + accel_slider))n")
 	
 		return {
 		

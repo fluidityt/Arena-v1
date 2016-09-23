@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C17E84BD1D7BADE40036BE89 /* handleDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17E84BC1D7BADE40036BE89 /* handleDirection.swift */; };
+		C14203571D950C7300A50EAD /* WheelSpin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14203561D950C7300A50EAD /* WheelSpin.swift */; };
+		C17E84BD1D7BADE40036BE89 /* rotateInDirectionWithAccel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17E84BC1D7BADE40036BE89 /* rotateInDirectionWithAccel.swift */; };
 		C18B22921D7A25990008A65B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22911D7A25990008A65B /* AppDelegate.swift */; };
 		C18B22941D7A25990008A65B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C18B22931D7A25990008A65B /* GameScene.sks */; };
 		C18B22961D7A25990008A65B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22951D7A25990008A65B /* GameScene.swift */; };
@@ -20,10 +21,11 @@
 		C18B22C51D7A25CD0008A65B /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22C41D7A25CD0008A65B /* utils.swift */; };
 		C18B22C71D7A26CB0008A65B /* global.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22C61D7A26CB0008A65B /* global.swift */; };
 		C1AEC4FA1D7D811A00821CDB /* enemySpawner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AEC4F91D7D811A00821CDB /* enemySpawner.swift */; };
-		C1AEC4FC1D7D814500821CDB /* accelSmoother.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AEC4FB1D7D814500821CDB /* accelSmoother.swift */; };
+		C1AEC4FC1D7D814500821CDB /* smoothY.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AEC4FB1D7D814500821CDB /* smoothY.swift */; };
 		C1AEC4FE1D7D8B8100821CDB /* hitDetect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AEC4FD1D7D8B8100821CDB /* hitDetect.swift */; };
 		C1B1C36D1D7BD31600739B36 /* initCircles.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1C36C1D7BD31600739B36 /* initCircles.swift */; };
-		C1B1C36F1D7BE3C300739B36 /* acceleration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1C36E1D7BE3C300739B36 /* acceleration.swift */; };
+		C1B1C36F1D7BE3C300739B36 /* accelerateTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1C36E1D7BE3C300739B36 /* accelerateTimer.swift */; };
+		C1CCD99B1D94EBA600738273 /* newFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CCD99A1D94EBA600738273 /* newFunc.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +46,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C17E84BC1D7BADE40036BE89 /* handleDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = handleDirection.swift; sourceTree = "<group>"; };
+		C14203561D950C7300A50EAD /* WheelSpin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WheelSpin.swift; sourceTree = "<group>"; };
+		C14203581D950F0B00A50EAD /* arenaplayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = arenaplayground.playground; sourceTree = "<group>"; };
+		C17E84BC1D7BADE40036BE89 /* rotateInDirectionWithAccel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rotateInDirectionWithAccel.swift; sourceTree = "<group>"; };
 		C18B228E1D7A25990008A65B /* Arena v1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Arena v1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18B22911D7A25990008A65B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Arena v1/AppDelegate.swift"; sourceTree = "<group>"; };
 		C18B22931D7A25990008A65B /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -63,10 +67,11 @@
 		C18B22C41D7A25CD0008A65B /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		C18B22C61D7A26CB0008A65B /* global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = global.swift; sourceTree = "<group>"; };
 		C1AEC4F91D7D811A00821CDB /* enemySpawner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = enemySpawner.swift; sourceTree = "<group>"; };
-		C1AEC4FB1D7D814500821CDB /* accelSmoother.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = accelSmoother.swift; sourceTree = "<group>"; };
+		C1AEC4FB1D7D814500821CDB /* smoothY.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = smoothY.swift; sourceTree = "<group>"; };
 		C1AEC4FD1D7D8B8100821CDB /* hitDetect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hitDetect.swift; sourceTree = "<group>"; };
 		C1B1C36C1D7BD31600739B36 /* initCircles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = initCircles.swift; sourceTree = "<group>"; };
-		C1B1C36E1D7BE3C300739B36 /* acceleration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = acceleration.swift; sourceTree = "<group>"; };
+		C1B1C36E1D7BE3C300739B36 /* accelerateTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = accelerateTimer.swift; sourceTree = "<group>"; };
+		C1CCD99A1D94EBA600738273 /* newFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newFunc.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,9 +99,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C14203541D950A2D00A50EAD /* wheel spin stuff */ = {
+			isa = PBXGroup;
+			children = (
+				C17E84BC1D7BADE40036BE89 /* rotateInDirectionWithAccel.swift */,
+				C1B1C36E1D7BE3C300739B36 /* accelerateTimer.swift */,
+				C1AEC4FB1D7D814500821CDB /* smoothY.swift */,
+				C14203561D950C7300A50EAD /* WheelSpin.swift */,
+			);
+			name = "wheel spin stuff";
+			sourceTree = "<group>";
+		};
+		C14203551D950A7700A50EAD /* general stuff */ = {
+			isa = PBXGroup;
+			children = (
+				C1B1C36C1D7BD31600739B36 /* initCircles.swift */,
+				C1AEC4F91D7D811A00821CDB /* enemySpawner.swift */,
+				C1AEC4FD1D7D8B8100821CDB /* hitDetect.swift */,
+				C1CCD99A1D94EBA600738273 /* newFunc.swift */,
+			);
+			name = "general stuff";
+			sourceTree = "<group>";
+		};
 		C18B22851D7A25990008A65B = {
 			isa = PBXGroup;
 			children = (
+				C14203581D950F0B00A50EAD /* arenaplayground.playground */,
 				C18B22901D7A25990008A65B /* Arena v1 */,
 				C18B22A91D7A259A0008A65B /* Arena v1Tests */,
 				C18B22B41D7A259A0008A65B /* Arena v1UITests */,
@@ -118,10 +146,10 @@
 			isa = PBXGroup;
 			children = (
 				C18B22931D7A25990008A65B /* GameScene.sks */,
-				C18B22951D7A25990008A65B /* GameScene.swift */,
-				C1B1C36B1D7BD2EE00739B36 /* funcs */,
 				C18B22C61D7A26CB0008A65B /* global.swift */,
 				C18B22C41D7A25CD0008A65B /* utils.swift */,
+				C18B22951D7A25990008A65B /* GameScene.swift */,
+				C1B1C36B1D7BD2EE00739B36 /* funcs */,
 				C18B229C1D7A25990008A65B /* Assets.xcassets */,
 			);
 			path = "Arena v1";
@@ -161,12 +189,8 @@
 		C1B1C36B1D7BD2EE00739B36 /* funcs */ = {
 			isa = PBXGroup;
 			children = (
-				C17E84BC1D7BADE40036BE89 /* handleDirection.swift */,
-				C1B1C36C1D7BD31600739B36 /* initCircles.swift */,
-				C1B1C36E1D7BE3C300739B36 /* acceleration.swift */,
-				C1AEC4FB1D7D814500821CDB /* accelSmoother.swift */,
-				C1AEC4F91D7D811A00821CDB /* enemySpawner.swift */,
-				C1AEC4FD1D7D8B8100821CDB /* hitDetect.swift */,
+				C14203551D950A7700A50EAD /* general stuff */,
+				C14203541D950A2D00A50EAD /* wheel spin stuff */,
 			);
 			name = funcs;
 			sourceTree = "<group>";
@@ -239,6 +263,7 @@
 				TargetAttributes = {
 					C18B228D1D7A25990008A65B = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 57ES2MLM4Y;
 					};
 					C18B22A51D7A259A0008A65B = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -303,8 +328,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C17E84BD1D7BADE40036BE89 /* handleDirection.swift in Sources */,
-				C1AEC4FC1D7D814500821CDB /* accelSmoother.swift in Sources */,
+				C17E84BD1D7BADE40036BE89 /* rotateInDirectionWithAccel.swift in Sources */,
+				C1AEC4FC1D7D814500821CDB /* smoothY.swift in Sources */,
+				C1CCD99B1D94EBA600738273 /* newFunc.swift in Sources */,
 				C18B22961D7A25990008A65B /* GameScene.swift in Sources */,
 				C18B22981D7A25990008A65B /* GameViewController.swift in Sources */,
 				C18B22921D7A25990008A65B /* AppDelegate.swift in Sources */,
@@ -312,8 +338,9 @@
 				C18B22C71D7A26CB0008A65B /* global.swift in Sources */,
 				C1B1C36D1D7BD31600739B36 /* initCircles.swift in Sources */,
 				C1AEC4FA1D7D811A00821CDB /* enemySpawner.swift in Sources */,
+				C14203571D950C7300A50EAD /* WheelSpin.swift in Sources */,
 				C1AEC4FE1D7D8B8100821CDB /* hitDetect.swift in Sources */,
-				C1B1C36F1D7BE3C300739B36 /* acceleration.swift in Sources */,
+				C1B1C36F1D7BE3C300739B36 /* accelerateTimer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,10 +486,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Arena v1/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Ziggly.Arena-v1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -470,10 +501,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Arena v1/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Ziggly.Arena-v1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

@@ -55,4 +55,3 @@ func initCircles() {
 	
 }
 
-func doLogic(block: ()->()) { block() }

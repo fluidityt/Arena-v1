@@ -45,7 +45,7 @@ class GameScene: SKScene {
 		for touch in touches {
 			
 			let TLOC = touch.locationInNode(self)
-			let smoothed_y = deflateY(TLOC.y)
+			let smoothed_y = smoothY(TLOC.y)
 	
 			hitDetect()
 			

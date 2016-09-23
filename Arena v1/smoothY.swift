@@ -1,16 +1,11 @@
-//
-//  accelSmoother.swift
-//  Arena v1
-//
-//  Created by Dude Guy  on 9/5/16.
-//  Copyright © 2016 Dude Guy . All rights reserved.
-//
+// tM() -> rIDWA() -> accelTimer() -> smoothY()
+
 
 import Foundation
 import SpriteKit
 
 // TODO: I could smooth the raw input, as well as drop outliers, as well as smooth the accel
-func deflateY(current_y: CGFloat) -> CGFloat  {
+func smoothY(current_y: CGFloat) -> CGFloat  {
 	
 	// Util:
 	/// Reguires 3 y values

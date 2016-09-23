@@ -1,5 +1,5 @@
 import SpriteKit
-
+// tM() -> rIDWA() -> accelTimer() -> smoothY()
 
 func rotateInDirectionWithAccel ( 	current_angle current_angle		:CGFloat,
 												
@@ -25,7 +25,7 @@ func rotateInDirectionWithAccel ( 	current_angle current_angle		:CGFloat,
 		var next_angle = (current_angle + no_spin)
 	
 	// Utilities \\
-		func rotateIt() {
+		let rotateIt = {
 			
 			// Store action from accelerator
 			let	action = SKAction.rotateToAngle(next_angle,
@@ -38,7 +38,7 @@ func rotateInDirectionWithAccel ( 	current_angle current_angle		:CGFloat,
 	
 	
 	// Handle touch \\
-		doLogic() {
+		Logic: do {
 			
 			// Drag up
 			if (current_y > previous_y) {
@@ -58,7 +58,7 @@ func rotateInDirectionWithAccel ( 	current_angle current_angle		:CGFloat,
 			else if (current_y == previous_y){
 				///Reset
 				printl("paused but didn't release")
-				Hotfix() {
+				_=Hotfix() {
 					_central?.removeAllActions()
 					y1 = 0; y2 = 0; y3 = 0
 
