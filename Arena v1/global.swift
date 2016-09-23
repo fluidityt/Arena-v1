@@ -9,6 +9,7 @@
 import Foundation
 import SpriteKit
 
+// IDK WHAT THIS IS:
 var error_node = SKNode?()
 var verbose = false
 var node_list = [SKNode()]
@@ -22,40 +23,51 @@ let CENTER_SCREEN = CGPoint(x:CGRectGetMidX(SELF.frame),
 
 func getCenter(node:SKNode) -> CGPoint {
 	return (CGPoint(x:CGRectGetMidX(node.frame),
-	        y:CGRectGetMidY(node.frame)))
+		y:CGRectGetMidY(node.frame)))
 }
 
-
-var _central : SKNode?
-// get bounds
-// move to bounds
-// use pritns to make sure
-
-
-var
-		_firstY: CGFloat = 0,
-_prevY: CGFloat = 0,
-_curY: CGFloat = 0,
-_curA: CGFloat = 0
-
-let _full_circle = 6.281
-
-var
-		_clock_count = 0, _seconds = 0
-
-var _accel = 0, _accelTime = NSTimeInterval(0)
-
-var _firstDrag = false
-
-
-var
-		_firstTime: CFTimeInterval=0, _timeThen: CFTimeInterval=0, _timeNow: CFTimeInterval=0
-
-var
-		y1 = CGFloat(0), y2 = CGFloat(0), y3 = CGFloat(0)
-
-var
-		_superAngle = CGFloat(0)
+// Globals:
+struct GameData {
+	
+ let central : SKNode?
+	// get bounds
+	// move to bounds
+	// use pritns to make sure
+	
+	// Prev/cur
+	var
+	firstY: CGFloat = 0,
+	prevY: CGFloat = 0,
+	curY: CGFloat = 0,
+	curA: CGFloat = 0
+	
+	// Radians:
+	let full_circle = 6.281
+	
+	var
+	clock_count = 0,
+	seconds = 0
+	
+	var
+	accel = 0,
+	accelTime = NSTimeInterval(0)
+	
+	var	firstDrag = false
+	
+	
+	var
+	firstTime: CFTimeInterval=0,
+	timeThen: CFTimeInterval=0
+	timeNow: CFTimeInterval=0
+	
+	var
+	y1 = CGFloat(0),
+	y2 = CGFloat(0),
+	y3 = CGFloat(0)
+	
+	var
+	superAngle = CGFloat(0)
+}
 
 class F {}
 
