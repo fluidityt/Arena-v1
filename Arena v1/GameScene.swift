@@ -5,7 +5,7 @@
 //  Created by Dude Guy  on 9/2/16.
 //  Copyright (c) 2016 Dude Guy . All rights reserved.
 
-// _ means global 
+// _ means global
 import SpriteKit
 
 class GameScene: SKScene {
@@ -19,14 +19,14 @@ class GameScene: SKScene {
 		
 	}//
 	
-
+	
 	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		for touch in touches { disregard(touch)
 			
-		_firstDrag   = true
+			_firstDrag   = true
 		 _firstY 		 = touch.locationInNode(self).y
 			_firstTime = _timeNow
-	
+			
 		}}// //tb
 	
 	
@@ -34,30 +34,52 @@ class GameScene: SKScene {
 	override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		
 		
- 	 // Initials for temporal naming sanity \\
+		// Initials for temporal naming sanity \\
 		if _firstDrag == true {
-				_prevY 			= _firstY
-				_timeThen 	= _firstTime
-				_firstDrag	= false
+			_prevY 			= _firstY
+			_timeThen 	= _firstTime
+			_firstDrag	= false
 		}
 		
 	 // Do some shit \\
 		for touch in touches {
 			
-			let TLOC = touch.locationInNode(self)
-			let smoothed_y = smoothY(TLOC.y)
-	
+			// New stuff
+			_curY = touch.locationInNode(self).y
+			
+			
+			// Not sure
 			hitDetect()
 			
-			rotateInDirectionWithAccel (
-				current_angle: 		_curA,
-				 previous_y: 			_prevY,
-				 current_y: 			smoothed_y,
-				  previous_time:	_timeThen,
-				  current_time: 	_timeNow)
+			
+			// Paused (lateral)--no angle now--reset values
+			guard (_curY == _prevY) else {
+				
+				// TODO: get rid of globalz
+				_=Hotfix() {
+					printl("paused but didn't release")
+					_central?.removeAllActions()
+					y1 = 0; y2 = 0; y3 = 0
+				}
+				
+				return
+			}
+			
+			// Enter the massive func!
+			let fully_handled_rotation_action_with_acceleration_and_smoothing
+				= F.WheelSpin.findRotationAction(
+													_curA,
+					previous_y: 			_prevY,
+					current_y: 				_curY,
+					previous_time:	_timeThen,
+					current_time: 	_timeNow
+			)
+			
+			// Run it!
+			_central?.runAction(fully_handled_rotation_action_with_acceleration_and_smoothing)
 			
 		}
-	
+		
 	}// //tm
 	
 	
@@ -69,7 +91,7 @@ class GameScene: SKScene {
 		
 	}//te
 	
-  override func update(currentTime: CFTimeInterval) {
+	override func update(currentTime: CFTimeInterval) {
 		
 		updateClock: do {
 			
@@ -95,17 +117,17 @@ class GameScene: SKScene {
 		}
 		
 		_timeNow = currentTime
-
+		
 		
 	}//update
-
 	
-
-
+	
+	
+	
 }//EoC
 
 func shapeTex(node:SKShapeNode) {
-
+	
 	node.fillColor = UIColor.whiteColor()
 	node.fillTexture = SKTexture.init(image: UIImage(named: "twistycenter")!)
 }
