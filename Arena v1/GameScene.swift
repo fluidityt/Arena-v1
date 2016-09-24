@@ -19,13 +19,11 @@ class GameScene: SKScene {
 		
 		initCircles: do {
 			
-				
-			
-				_central = Circle()
+				central = Circle()
 				SELF.addChild(_central!)
 				
-				_central?.runAction(SKAction.rotateToAngle(0, duration: 0.5))
-				_superAngle = _central!.zRotation
+				central?.runAction(SKAction.rotateToAngle(0, duration: 0.5))
+				superAngle = _central!.zRotation
 				
 			}
 		}

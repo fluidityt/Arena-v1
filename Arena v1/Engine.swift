@@ -78,31 +78,3 @@ struct EngineData {
 		_current_engine_data = EngineData()
 	}
 }
-
-
-/*
-struct definition -> game data definition -> sp definition
-
-on entry:
-1. SP holds one instance of GD
-2. GD holds one instance of each GS
-*/
-
-
-/*
-// data
-struct GameObjects {
-	
-	struct EngineObjects {
-		
-		
-		// All my data... would be easy as var... lol
-		let
-		coord_data: GS.Coords,
-		
-		
-	}; typealias GD = GameData
-	
-}
-
-*/

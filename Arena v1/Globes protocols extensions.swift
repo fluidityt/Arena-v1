@@ -9,16 +9,7 @@
 import Foundation
 
 
-/// Gets put to a save file
-struct SavedVariables {
-	
-	// Data stuff..
-	static var data: GameData?
-	
-	
-	// Other stuff...
-	static let description = { print (SharedPrefs.data!) }
-};typealias SP = SharedPrefs
+typealias SP = SharedPrefs
 
 
 var _system_file = SavedVariables()
@@ -31,3 +22,5 @@ let CENTER_SCREEN: CGPoint?
 protocol Static {
 	// init(noInstances: Static)
 }
+
+protocol Singleton {}
