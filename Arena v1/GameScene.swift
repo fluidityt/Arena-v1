@@ -11,10 +11,24 @@ import SpriteKit
 class GameScene: SKScene {
 	override func didMoveToView(view: SKView) {
 		
+		
 		// update our globes to work
 		SELF = self
+		CENTER_SCREEN = CGPoint(x:CGRectGetMidX(SELF.frame),
+		                        y:CGRectGetMidY(SELF.frame))
 		
-		initCircles()
+		initCircles: do {
+			
+				
+			
+				_central = Circle()
+				SELF.addChild(_central!)
+				
+				_central?.runAction(SKAction.rotateToAngle(0, duration: 0.5))
+				_superAngle = _central!.zRotation
+				
+			}
+		}
 		
 		
 	}//
@@ -101,7 +115,7 @@ class GameScene: SKScene {
 			printd("going into wheelspin")
 			let fully_handled_rotation_action_with_acceleration_and_smoothing
 				= F.WheelSpin.findRotationAction(
-													_curA,
+					_curA,
 					previous_y: 			_prevY,
 					current_y: 				_curY,
 					previous_time:	_timeThen,

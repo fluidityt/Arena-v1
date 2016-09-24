@@ -17,7 +17,7 @@ import SpriteKit
 extension F {
 	
 	/// Handles user input to determine direction, speed, acceleration, of the wheel.
-	struct WheelSpin {
+	
 		
 		// tM() -> rotateIt() -> rIDWA() -> accelTimer() -> smoothY() -> rotate()
 		static func findRotationAction( 	 current_angle	:CGFloat,
