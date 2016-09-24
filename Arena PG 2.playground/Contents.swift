@@ -1,25 +1,25 @@
-//: Playground - noun: a place where people can play
+//: [Previous Topic](@previous)
+//: [Next Topic](@next)
 
 import Cocoa
 print("*****  PG Executing...  *****\n")
 
-
-
 // Entry
 initStuff: do {
-
-//cat.meow().doit()
-
+	
+	class cat {
+		
 }
 
 
 // first interaction
 testStuff: do {
 	
-
 	
-
 }
 
+	* | + | - string
+		* | + | - string
+		* | + | - string
 
 print("\n***** PG Success!! *******")

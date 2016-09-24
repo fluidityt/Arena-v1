@@ -3,27 +3,23 @@
 import Cocoa
 print("*****  PG Executing...  *****\n")
 
+
+
 // Entry
 initStuff: do {
-	
-	class strucs {
-		
-		class dog {}
-		static struct noder {
-			static func say() { print("hi")}
-		}
-	}
-	
-	strucs.noder.say()
-	
-	var floofy = strucs.noder()
+
+//cat.meow().doit()
+	class cat {
+		private
 }
 
 
 // first interaction
 testStuff: do {
 	
+
 	
+
 }
 
 

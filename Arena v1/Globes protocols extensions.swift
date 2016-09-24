@@ -9,18 +9,25 @@
 import Foundation
 
 
-class SharedPrefs: Static {
+/// Gets put to a save file
+struct SavedVariables {
 	
 	// Data stuff..
 	static var data: GameData?
+	
 	
 	// Other stuff...
 	static let description = { print (SharedPrefs.data!) }
 };typealias SP = SharedPrefs
 
 
-
+var _system_file = SavedVariables()
 
 let SELF: GameScene?
 let CENTER_SCREEN: CGPoint?
 
+
+/// NO INSTANCES
+protocol Static {
+	// init(noInstances: Static)
+}

@@ -9,7 +9,10 @@
 /* Begin PBXBuildFile section */
 		C14203571D950C7300A50EAD /* findRotationAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14203561D950C7300A50EAD /* findRotationAction.swift */; };
 		C1422DCD1D962CB400D9EF54 /* Funcs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1422DCC1D962CB400D9EF54 /* Funcs.swift */; };
-		C1422DCF1D96327F00D9EF54 /* Protocols and Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1422DCE1D96327F00D9EF54 /* Protocols and Extensions.swift */; };
+		C1422DCF1D96327F00D9EF54 /* HEY READ THIS FILE.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1422DCE1D96327F00D9EF54 /* HEY READ THIS FILE.swift */; };
+		C1422DD11D96419600D9EF54 /* TODO AND IDEAS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1422DD01D96419600D9EF54 /* TODO AND IDEAS.swift */; };
+		C1422DDB1D964CAC00D9EF54 /* tester test.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1422DDA1D964CAC00D9EF54 /* tester test.swift */; };
+		C1422DDC1D964CAC00D9EF54 /* tester test.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1422DDA1D964CAC00D9EF54 /* tester test.swift */; };
 		C18B22921D7A25990008A65B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22911D7A25990008A65B /* AppDelegate.swift */; };
 		C18B22941D7A25990008A65B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C18B22931D7A25990008A65B /* GameScene.sks */; };
 		C18B22961D7A25990008A65B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22951D7A25990008A65B /* GameScene.swift */; };
@@ -20,11 +23,11 @@
 		C18B22AB1D7A259A0008A65B /* Arena_v1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22AA1D7A259A0008A65B /* Arena_v1Tests.swift */; };
 		C18B22B61D7A259A0008A65B /* Arena_v1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22B51D7A259A0008A65B /* Arena_v1UITests.swift */; };
 		C18B22C51D7A25CD0008A65B /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22C41D7A25CD0008A65B /* utils.swift */; };
-		C18B22C71D7A26CB0008A65B /* DataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22C61D7A26CB0008A65B /* DataStructs.swift */; };
+		C18B22C71D7A26CB0008A65B /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22C61D7A26CB0008A65B /* Engine.swift */; };
 		C1AEC4FA1D7D811A00821CDB /* enemySpawner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AEC4F91D7D811A00821CDB /* enemySpawner.swift */; };
 		C1AEC4FE1D7D8B8100821CDB /* hitDetect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AEC4FD1D7D8B8100821CDB /* hitDetect.swift */; };
 		C1B1C36D1D7BD31600739B36 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1C36C1D7BD31600739B36 /* Circle.swift */; };
-		C1CCD99B1D94EBA600738273 /* globalVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CCD99A1D94EBA600738273 /* globalVars.swift */; };
+		C1CCD99B1D94EBA600738273 /* Globes protocols extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CCD99A1D94EBA600738273 /* Globes protocols extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,10 +49,12 @@
 
 /* Begin PBXFileReference section */
 		C14203561D950C7300A50EAD /* findRotationAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = findRotationAction.swift; sourceTree = "<group>"; };
-		C14203581D950F0B00A50EAD /* arenaplayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = arenaplayground.playground; sourceTree = "<group>"; };
-		C1422DCB1D961C6000D9EF54 /* PGTemplate.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = PGTemplate.playground; sourceTree = "<group>"; };
+		C14203581D950F0B00A50EAD /* Arena Templates.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Arena Templates.playground"; sourceTree = "<group>"; };
+		C1422DCB1D961C6000D9EF54 /* Arena PG 2.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Arena PG 2.playground"; sourceTree = "<group>"; };
 		C1422DCC1D962CB400D9EF54 /* Funcs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Funcs.swift; sourceTree = "<group>"; };
-		C1422DCE1D96327F00D9EF54 /* Protocols and Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Protocols and Extensions.swift"; sourceTree = "<group>"; };
+		C1422DCE1D96327F00D9EF54 /* HEY READ THIS FILE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HEY READ THIS FILE.swift"; sourceTree = "<group>"; };
+		C1422DD01D96419600D9EF54 /* TODO AND IDEAS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TODO AND IDEAS.swift"; sourceTree = "<group>"; };
+		C1422DDA1D964CAC00D9EF54 /* tester test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "tester test.swift"; sourceTree = "<group>"; };
 		C18B228E1D7A25990008A65B /* Arena v1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Arena v1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18B22911D7A25990008A65B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Arena v1/AppDelegate.swift"; sourceTree = "<group>"; };
 		C18B22931D7A25990008A65B /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -66,11 +71,11 @@
 		C18B22B51D7A259A0008A65B /* Arena_v1UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arena_v1UITests.swift; sourceTree = "<group>"; };
 		C18B22B71D7A259A0008A65B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C18B22C41D7A25CD0008A65B /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
-		C18B22C61D7A26CB0008A65B /* DataStructs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStructs.swift; sourceTree = "<group>"; };
+		C18B22C61D7A26CB0008A65B /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		C1AEC4F91D7D811A00821CDB /* enemySpawner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = enemySpawner.swift; sourceTree = "<group>"; };
 		C1AEC4FD1D7D8B8100821CDB /* hitDetect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hitDetect.swift; sourceTree = "<group>"; };
 		C1B1C36C1D7BD31600739B36 /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
-		C1CCD99A1D94EBA600738273 /* globalVars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = globalVars.swift; sourceTree = "<group>"; };
+		C1CCD99A1D94EBA600738273 /* Globes protocols extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Globes protocols extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,24 +103,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C14203551D950A7700A50EAD /* general stuff */ = {
+		C1422DD81D964BC100D9EF54 /* finished */ = {
 			isa = PBXGroup;
 			children = (
-				C1AEC4F91D7D811A00821CDB /* enemySpawner.swift */,
-				C1AEC4FD1D7D8B8100821CDB /* hitDetect.swift */,
 			);
-			name = "general stuff";
+			name = finished;
+			sourceTree = "<group>";
+		};
+		C1422DD91D964BFA00D9EF54 /* other */ = {
+			isa = PBXGroup;
+			children = (
+				C18B22B41D7A259A0008A65B /* Arena v1UITests */,
+				C18B22A91D7A259A0008A65B /* Arena v1Tests */,
+				C18B22C31D7A25AB0008A65B /* junk */,
+			);
+			name = other;
 			sourceTree = "<group>";
 		};
 		C18B22851D7A25990008A65B = {
 			isa = PBXGroup;
 			children = (
-				C14203581D950F0B00A50EAD /* arenaplayground.playground */,
-				C1422DCB1D961C6000D9EF54 /* PGTemplate.playground */,
+				C1422DD91D964BFA00D9EF54 /* other */,
+				C1422DCB1D961C6000D9EF54 /* Arena PG 2.playground */,
+				C14203581D950F0B00A50EAD /* Arena Templates.playground */,
 				C18B22901D7A25990008A65B /* Arena v1 */,
-				C18B22A91D7A259A0008A65B /* Arena v1Tests */,
-				C18B22B41D7A259A0008A65B /* Arena v1UITests */,
-				C18B22C31D7A25AB0008A65B /* junk */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,18 +143,21 @@
 		C18B22901D7A25990008A65B /* Arena v1 */ = {
 			isa = PBXGroup;
 			children = (
-				C1422DCE1D96327F00D9EF54 /* Protocols and Extensions.swift */,
-				C18B22931D7A25990008A65B /* GameScene.sks */,
+				C1422DCE1D96327F00D9EF54 /* HEY READ THIS FILE.swift */,
+				C1422DD01D96419600D9EF54 /* TODO AND IDEAS.swift */,
 				C18B22951D7A25990008A65B /* GameScene.swift */,
-				C18B22C61D7A26CB0008A65B /* DataStructs.swift */,
+				C18B22C61D7A26CB0008A65B /* Engine.swift */,
 				C1422DCC1D962CB400D9EF54 /* Funcs.swift */,
-				C1CCD99A1D94EBA600738273 /* globalVars.swift */,
+				C1CCD99A1D94EBA600738273 /* Globes protocols extensions.swift */,
 				C14203561D950C7300A50EAD /* findRotationAction.swift */,
 				C1B1C36C1D7BD31600739B36 /* Circle.swift */,
 				C18B22C41D7A25CD0008A65B /* utils.swift */,
-				C1E4E6B21D96162B001AB607 /* classes */,
-				C1B1C36B1D7BD2EE00739B36 /* funcs */,
+				C1AEC4FD1D7D8B8100821CDB /* hitDetect.swift */,
+				C1AEC4F91D7D811A00821CDB /* enemySpawner.swift */,
+				C1422DD81D964BC100D9EF54 /* finished */,
+				C1B1C36B1D7BD2EE00739B36 /* in progress */,
 				C18B229C1D7A25990008A65B /* Assets.xcassets */,
+				C18B22931D7A25990008A65B /* GameScene.sks */,
 			);
 			path = "Arena v1";
 			sourceTree = "<group>";
@@ -152,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				C18B22AA1D7A259A0008A65B /* Arena_v1Tests.swift */,
+				C1422DDA1D964CAC00D9EF54 /* tester test.swift */,
 				C18B22AC1D7A259A0008A65B /* Info.plist */,
 			);
 			path = "Arena v1Tests";
@@ -179,19 +194,11 @@
 			name = junk;
 			sourceTree = "<group>";
 		};
-		C1B1C36B1D7BD2EE00739B36 /* funcs */ = {
-			isa = PBXGroup;
-			children = (
-				C14203551D950A7700A50EAD /* general stuff */,
-			);
-			name = funcs;
-			sourceTree = "<group>";
-		};
-		C1E4E6B21D96162B001AB607 /* classes */ = {
+		C1B1C36B1D7BD2EE00739B36 /* in progress */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = classes;
+			name = "in progress";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,16 +334,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1CCD99B1D94EBA600738273 /* globalVars.swift in Sources */,
+				C1CCD99B1D94EBA600738273 /* Globes protocols extensions.swift in Sources */,
 				C18B22961D7A25990008A65B /* GameScene.swift in Sources */,
 				C18B22981D7A25990008A65B /* GameViewController.swift in Sources */,
 				C18B22921D7A25990008A65B /* AppDelegate.swift in Sources */,
 				C18B22C51D7A25CD0008A65B /* utils.swift in Sources */,
-				C18B22C71D7A26CB0008A65B /* DataStructs.swift in Sources */,
+				C18B22C71D7A26CB0008A65B /* Engine.swift in Sources */,
 				C1B1C36D1D7BD31600739B36 /* Circle.swift in Sources */,
+				C1422DD11D96419600D9EF54 /* TODO AND IDEAS.swift in Sources */,
 				C1AEC4FA1D7D811A00821CDB /* enemySpawner.swift in Sources */,
 				C14203571D950C7300A50EAD /* findRotationAction.swift in Sources */,
-				C1422DCF1D96327F00D9EF54 /* Protocols and Extensions.swift in Sources */,
+				C1422DCF1D96327F00D9EF54 /* HEY READ THIS FILE.swift in Sources */,
 				C1AEC4FE1D7D8B8100821CDB /* hitDetect.swift in Sources */,
 				C1422DCD1D962CB400D9EF54 /* Funcs.swift in Sources */,
 			);
@@ -347,6 +355,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C18B22AB1D7A259A0008A65B /* Arena_v1Tests.swift in Sources */,
+				C1422DDB1D964CAC00D9EF54 /* tester test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C18B22B61D7A259A0008A65B /* Arena_v1UITests.swift in Sources */,
+				C1422DDC1D964CAC00D9EF54 /* tester test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

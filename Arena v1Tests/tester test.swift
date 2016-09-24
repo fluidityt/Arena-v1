@@ -1,5 +1,5 @@
 //
-//  Protocols and Extensions.swift
+//  tester test.swift
 //  Arena v1
 //
 //  Created by Dude Guy  on 9/24/16.
@@ -8,8 +8,7 @@
 
 import Foundation
 
-/// NO INSTANCES
-protocol Static {
-	init(mustBePrivate: Static)
-}
+class tester test {
 
+	init() { print("hi") }
+}
