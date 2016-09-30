@@ -37,16 +37,16 @@ extension F {
 		
 		// lets get randy..
 		let
-		randomX = randy(Int(G.SELF.frame.width)),
-		randomY = randy(Int(G.SELF.frame.height))
+		randomX = randy(Int(Global.SELF.frame.width)),
+		randomY = randy(Int(Global.SELF.frame.height))
 		
 		
 		// do stuff
 		enemy.position = CGPoint(x: randomX, y: randomY)
-		G.SELF.addChild(enemy)
+		Global.SELF.addChild(enemy)
 		
 		// more stuff
-		enemy.runAction(SKAction.moveTo(N.central.position, duration: 3))
+		enemy.runAction(SKAction.moveTo(Global.Nodes.central.position, duration: 3))
 		
 	}
 }

@@ -26,6 +26,17 @@ something = purFunc(d)
 
 
 class GameScene: SKScene {
+
+	/* Shortcuts */
+	typealias G 	= Global
+	typealias N 	= G.Nodes
+	typealias A 	= G.Angles
+	typealias XY 	= G.XnY
+	
+	typealias Sanity = G.Funcs.Sanity
+
+	
+
 	override func didMoveToView(view: SKView) {
 		
 		genericInits: do {
@@ -37,26 +48,31 @@ class GameScene: SKScene {
 		
 		initCircles: do {
 			
-			N.central = Circle()
-			Global.SELF.addChild(N.central)
+			Global.Nodes.central = Circle()
+			G.SELF.addChild(N.central)
+			
 			N.central.runAction(SKAction.rotateToAngle(0, duration: 0.5))
 			G.Angles.super_angle = N.central.zRotation
 		}
-		return
+		return // from DMtV
 	}
+	
 	
 	
 	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		for touch in touches {
 			
-			Hotfix(){
-				Global.first_drag  = true
-				Global.time2.atBegan  = G.time.current
-				
-				Global.XnY.y.current = touch.locationInNode(self).y
-			}
+			// The time NOW (basically) when started TB
+			Global.time2.atBegan  = G.time.current
+
+			// The next input (TM) will be our 'first drag' | error checking is good!
+			Global.first_drag == false ? G.first_drag = true : printd("first drag was f\\ked")
+		
+			// Where we just clicked is our new y.current
+			Global.XnY.y.current = Sanity.updateCurrentY( touch.locationInNode(self).y)
 		}
-		return
+		
+		return // from TB
 	}
 	
 	
@@ -66,57 +82,38 @@ class GameScene: SKScene {
 		
 			updateGlobesWithNewInfo: do {
 				
-			typealias YValue = CGFloat
+				XY.y.previous = Sanity.updatePreviousY(currentY: XY.y.current)
+				XY.y.current  = Sanity.updateCurrentY (touch.locationInNode(self).y)
 			
-			func noLongerCurrentY(currentY not_current_y: CGFloat) -> YValue {
-				return not_current_y
-			}
-			
-			func updateCurrentY(new_y_coords) -> YValue {
-				return new_y_coords
-			}
-			
-			XY.y.previous = noLongerCurrentY(currentY: XY.y.current)
-			XY.y.current  = updateCurrentY(touch.locationInNode(self).y)
-			
-			if Global.first_drag == true {
+				if G.first_drag == true {
 				
-				Global.first_drag			= false
+					toggle(&G.first_drag)		 // This has to be false after first_entry
 				
-				// THis is basically time.entered compared with time.onMove
-				Global.time.previous 	= G.time.first
-					}
+					G.time.previous 	= G.time.first // time.atTB compared with time.atMove
 				}
-				
 			}
-			
-			// Update our global Y
-			Hotfix() {
-				Global
+				
+		
 			// Paused (lateral)--no angle now--reset values
 			guard (XY.y.current != XY.y.previous) else {
 				
-				// TODO: get rid of globalz
-				_=Hotfix() {
-					printl("paused but didn't release")
+				printl("paused but didn't release")
 					N.central.removeAllActions()
-					XY.y1 = 0
-					XY.y2 = 0
-					XY.y3 = 0
-				}
+						XY.y_tuple = ("refreshed", 0,0,0)
 				
 				return // From guard
 			}
 			
 
 			/**
+			- TODO: Split this up into Acceleration | Adjustment | Action
+			- note: return alias -> func definiton -> func call on globe
 			1. Update smooth_y_tuple
 			2. Update current Y coordinate to SmoothedY coordinate
 			3. Do acceleration Maths
 			4. adjust acceleration
 			5. update any leftover globes
 			6. create and return proper rotation action
-			note: return alias -> func definiton -> func call on globe
 			*/
 			func findRotationAction(current_y: CGFloat) -> SKAction {
 		
@@ -147,8 +144,8 @@ class GameScene: SKScene {
 					}
 				}
 				;
-				Global.XnY.y_tuple = setYTuple(globalYs: XY.y_tuple, currentY: current_y)
-				;
+				//Global.XnY.y_tuple = setYTuple(globalYs: XY.y_tuple, currentY: current_y)
+				//;
 				
 				
 			// MARK: 2:
@@ -214,7 +211,6 @@ class GameScene: SKScene {
 				// This is the new smoothed Y:
 				XY.y.current	= setSmoothedY(yt: XY.y_tuple, cur_y: current_y, real_jump: 2)
 				;
-			
 
 			// MARK: 3:
 				typealias CFTI = CFTimeInterval
@@ -230,7 +226,9 @@ class GameScene: SKScene {
 																  // Time values from globe
 				                          timeFPC time: 				FirstPrevCur,
 																  // Adjust to increase / decrease overall accel
-																  accel_slider: 				CGFloat
+																  accel_slider: 				CGFloat,
+																  // how fast we go (in distance)
+																	speedMinMax speed:		(min:CGFloat, max: CGFloat)
 																)
 					-> AngleAsSpeed
 				{
@@ -246,10 +244,9 @@ class GameScene: SKScene {
 					
 						PPS		= (delta.y / delta.t),								// pixels per second:
 					
-						rads  = absV (PPS * -0.0025),								// How far it spins (speed)
+						rads  = absV (PPS * -0.0025)							// How far it spins (speed)
 
-						speed = (min: CGFloat(0.001),								// The min/max speed is 100/400 PPS
-										 max: CGFloat(0.4))									// ...which is distance actuall
+					
 					;
 					
 					// Return logic based on math above:
@@ -273,7 +270,10 @@ class GameScene: SKScene {
 					= findAcceleratedAngle(currentY:  		XY.y.current,
 					                       prevY: 	 			XY.y.previous,
 					                       timeFPC: 			G.time,
-					                       accel_slider:	Global.Config.accel_slider)
+					                       accel_slider:	Global.Config.accel_strength,
+					                       speedMinMax:   G.Config.speed)
+				
+				printd(A.angle.next)
 				;
 				
 				
@@ -302,6 +302,7 @@ class GameScene: SKScene {
 					= adjustNextAnge(currentAngle: A.angle.current,
 					                 nextAngle: A.angle.next,
 					                 yFP: XY.y)
+				HPRoItNT THIS SHIT OUT LOLfix() { printd(A.angle.next)}
 				;
 				
 				
@@ -334,10 +335,10 @@ class GameScene: SKScene {
 		}
 	
 	override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-		
+					XY.y_tuple = ("refreshed", 0,0,0)
 	}
 	
-	}
+	
 	
 	override func update(currentTime: CFTimeInterval) {
 		

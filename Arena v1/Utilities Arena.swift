@@ -31,7 +31,7 @@
 		public func printl<t>(s: t) { print("LOG: \(s)")   }
 		public func printe<t>(s: t) { print("ERRAR: \(s)")   }
 		public func printt<t>(s: t) { print("TEST: \(s)")   }
-		public func printv<t>(s: t) { if G.Config.verbose == true {print("VERB: \(s)")   }}
+//		public func printv<t>(s: t) { if G.Config.verbose == true {print("VERB: \(s)")   }}
 		public var  v : String = ""
 		//didSet { vvc+=1; if very_verbose == true {print("V: \(vvc):  \(v)") }} }
 		
@@ -92,7 +92,7 @@
 		public struct Hotfix {	public init (_ block: ()->() ) { block() } }
 		
 		/// Allows me to turn on / off a block of code
-		public struct Debug{public init(_ block:()->()){if G.Config.exec==true{block()}}}
+		public struct Debug{public init(_ block:()->()){if Global.Config.exec==true{block()}}}
 		
 		
 		
@@ -222,7 +222,7 @@
 			}//guard/>
 			
 			// Let's get out of here safely ;)
-		 printv("SR -> Exit: Successfully Assigned lhs to \(value_to_return!)");
+		 //printv("SR -> Exit: Successfully Assigned lhs to \(value_to_return!)");
 			return value_to_return!
 			
 		}//safeAssign/>
