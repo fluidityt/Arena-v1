@@ -17,13 +17,18 @@ struct Global {
 		SELF = SKScene(),
 		first_drag   = Bool(),
 	
-		super_angle = CGFloat(),
-	
 		time = (first: CFTimeInterval(),
 						previous: CFTimeInterval(),
 						current: CFTimeInterval())
 	
 	;
+	
+	/// LET CONSTANTS :d
+	struct Config {
+		static let
+			accel_slider = CGFloat(.001),
+			real_jump = CGFloat(2)
+		;
 
 	
 	struct Nodes {
@@ -33,6 +38,13 @@ struct Global {
 		;
 	}
 	
+	struct Angles {
+		static var
+		angle = (current: CGFloat(),
+						previous: CGFloat(),
+						next: CGFloat())
+		;
+	}
 	
 	struct XnY {
 		typealias CGF = CGFloat

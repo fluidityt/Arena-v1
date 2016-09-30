@@ -16,6 +16,8 @@ func purFunc(mat:Void) -> String {
 ;
 something = purFunc(d)
 ;
+	
+	DONT I NEED TO FIGURE OUT A WAY TO GET PRAMS MORE EASILY DISTINCT?
 */
 }
 
@@ -84,14 +86,16 @@ class GameScene: SKScene {
 			
 
 			/**
-			--1. Update smooth_y_tuple
-			--2. Update current Y coordinate to SmoothedY coordinate
-			--3. Do acceleration Maths
-			--4. create and return proper rotation action
+			1. Update smooth_y_tuple
+			2. Update current Y coordinate to SmoothedY coordinate
+			3. Do acceleration Maths
+			4. create and return proper rotation action
+			
+			note: return alias -> func definiton -> func call on globe
 			*/
 			func findRotationAction(current_y: CGFloat) -> SKAction {
-			
-				/// 1: a tuple of 3 CGFloats, for C.y_tuple
+		
+			// MARK: 1:
 				typealias TripleFloat = (String, CGFloat,CGFloat,CGFloat)
 				
 				/// Update stacks, determine which new Y value to deflate and return
@@ -122,10 +126,9 @@ class GameScene: SKScene {
 				;
 				
 				
-				/// 2: Averaged / deflated y value
-				let smoothed_y: CGFloat?
-				
+			// MARK: 2:
 				typealias SmoothedY = CGFloat
+				
 				/**
 				... Uses y_tuple and all the above to give us a smoother Y value,-
 				-RJ # pix b4 active.. Logic algorythimg */
@@ -183,46 +186,19 @@ class GameScene: SKScene {
 					}
 				}
 				;
+				// This is the new smoothed Y:
 				XY.y.current	= setSmoothedY(yt: XY.y_tuple, cur_y: current_y, real_jump: 2)
-				// dont i need to update my globe?
 				;
 			
-				
-				func vs(){
-					/*zfindRotationAction( current_angle _current_angle	:CGFloat,
-				                                       
-				                                       _previous_y			:CGFloat,
-				                                       _current_y			:CGFloat,
-				                                       
-				                                       _previous_time	:NSTimeInterval,
-				                                       _current_time		:NSTimeInterval,
-				                                       
-				                                       ) -> SKAction {
-					*/
-					/*/// 3:
-					let
 
-					smoothed_y: CGFloat?, 					// Our current_y only deflated based on algorythinm
-					accelerated_angle: CGFloat?, 					// Needs smoothed_y:
-					
-					// Needs accelerated_angle:
-					next_angle: CGFloat?,
-					
-					// Needs next_angle; this is our return value:
-					fully_calibrated_action: SKAction?
-					
-					
-					
-					
-					print(smoothed_y)
-					*/
-				}
-				
+			// MARK: 3:
 				typealias FirstPrevCur = (first: CGFloat, previous: CGFloat, current: CGFloat)
-					// How fast we moved the cursor
+				typealias AngleAsSpeed = CGFloat
+				// How fast we moved the cursor
 					// findAccel() -> doLogic() -> (how far to move wheel)
+				
 				func findAcceleratedAngle(
-																	//smoothed Y value from above
+																	//smoothed Y value from above (now essentailly the curY)
 																	smoothedY smoothed_y: CGFloat,
 				                          // Y values from glboe:
 																  yFPC y: FirstPrevCur,
@@ -231,43 +207,46 @@ class GameScene: SKScene {
 																  // Adjust to increase / decrease overall accel
 																  accel_slider: CGFloat
 																)
-					-> CGFloat
+					-> AngleAsSpeed
 				{
+					/* 
+					1. Define math stuff
+					2. Do logic stuff with math stuff
+					*/
 					
-					/// Abs change in smoothY - prevY, and change in currentT - prevT; Math variables.
-					let delta = (y: absV(smoothed_y - y.previous),
-					             t: CGFloat(time.current - time.previous)
-					
-					/// pixels per second:
-					let PPS	= (delta.y / delta.t)
-					
-					/// How far it spins (speed)
-					let radians			= absV(PPS * -0.0025),
-					
-					// The min/max speed is 100/400 PPS
 					let
-					min_speed 	:CGFloat = 0.001,
-					max_speed 	:CGFloat = 0.4
+						delta = (y: absV    (smoothed_y - y.previous),			 // Delta Y (absv)
+										 t: CGFloat (time.current - time.previous)), // Delta Time
 					
+						PPS		= (delta.y / delta.t),								// pixels per second:
+					
+						rads  = absV (PPS * -0.0025),								// How far it spins (speed)
+
+						speed = (min: CGFloat(0.001),								// The min/max speed is 100/400 PPS
+										 max: CGFloat(0.4))									// ...which is distance actuall
+					;
 					
 					// Return logic based on math above:
 					Logic: do {
 						
-						if (radians + accel_slider) > max_speed	{
-							return max_speed
+						if (rads + accel_slider) > speed.max	{
+							return speed.max
 						}
 							
-						else if (radians + accel_slider) < min_speed {
-							return min_speed
+						else if (rads + accel_slider) < speed.min {
+							return speed.min
 						}
 							
 						else {
-							return (radians + accel_slider)
+							return (rads + accel_slider)
 						}
 					}
-				}()
-					print(accelerated_angle)
-					
+				}
+				;
+				Global.Angles.angle.next = findAcceleratedAngle(smoothedY: <#T##CGFloat#>, yFPC: <#T##FirstPrevCur#>, timeFPC: <#T##FirstPrevCur#>, accel_slider: <#T##CGFloat#>)
+				
+			// MARK 4:
+				
 					// Next angle
 					next_angle = {
 						printd("current angle: \(current_angle)")
