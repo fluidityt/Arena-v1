@@ -1,6 +1,10 @@
-//: [Previous](@previous)	 [Next](@next)
-import Foundation
-
-print (ed)
+print("hi")
 
 
+
+struct dog {
+
+	static 
+	
+	
+}

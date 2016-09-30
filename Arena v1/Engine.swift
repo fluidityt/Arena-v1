@@ -1,19 +1,25 @@
 import Foundation
 import SpriteKit
 
+/*													/*
+	System, Data, and Globes.
+			Stay procedural;
+				stay swifty!
+*/													*/
 
 /// Directory for Engine Structs and their instances, includes smoothing, nodes, etc.
-struct EngineData {
+struct Engina {
 	
 	/*
  		See bottom for list of constants with instances:
 	
-			nodes: Nodes, coords: Coords, angles: Angles, clock:	Clock, smoothing: Smoothing,
+			nodes: Nodes, coords: Coords, angles: Angles, clock:	Clock,
+ smoothing: Smoothing,
 			other:		Other
 	*/
 
 	/// Keeps track of Engine Nodes
-	struct Nodes:  {
+	struct Nodes  {
 		
 		let error_node = SKNode?()
 		let node_list = [SKNode()]
@@ -28,7 +34,7 @@ struct EngineData {
 		let
 		firstY: CGFloat = 0,
 		prevY: CGFloat = 0,
-		curY: CGFloat = 0,
+		curY: CGFloat = 0
 	}
 	
 	struct Angles {

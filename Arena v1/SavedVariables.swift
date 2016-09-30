@@ -1,4 +1,9 @@
-
+//
+//  SavedVariables.swift
+//  Arena v1
+//
+//  Created by Dude Guy  on 9/23/16.
+//  Copyright © 2016 Dude Guy . All rights reserved.
 import Foundation
 import SpriteKit
 
@@ -35,7 +40,7 @@ class	AllData {
 	}
 	
 
-var _current_data: ToJSON()
+var _current_data:	 ToJSON()
 	
 	
 	
