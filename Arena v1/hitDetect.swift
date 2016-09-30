@@ -12,5 +12,5 @@ import SpriteKit
 func hitDetect() {
 
 	
-	printd(_central!.zRotation)
+	printd(N.central.zRotation)
 }

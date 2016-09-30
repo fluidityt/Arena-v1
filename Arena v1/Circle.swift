@@ -25,9 +25,9 @@ final class Circle: SKNode {
 		// Supra!
 		super.init()
 		
-		self.position = CENTER_SCREEN
+		self.position = XY.CENTER_SCREEN
 		//small.position = getCenter(self)
-		big.position = getCenter(self)
+		big.position = F.getCenter(self)
 		
 		
 		addChild(big)

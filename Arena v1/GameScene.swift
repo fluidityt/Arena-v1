@@ -8,6 +8,7 @@
 // _ means global
 import SpriteKit
 
+protocol Static {}
 // Typealias
 func notafunc_conventions() {
 /*
@@ -30,8 +31,8 @@ class GameScene: SKScene {
 		genericInits: do {
 			
 			Global.SELF = self
-			XY.CENTER_SCREEN = CGPoint(x:CGRectGetMidX(SELF!.frame),
-			                           y:CGRectGetMidY(SELF!.frame))
+			XY.CENTER_SCREEN = CGPoint(x:CGRectGetMidX(G.SELF.frame),
+			                           y:CGRectGetMidY(G.SELF.frame))
 		}
 		
 		initCircles: do {
@@ -48,11 +49,13 @@ class GameScene: SKScene {
 	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		for touch in touches {
 			
-			G.first_drag   = true
-			XY.y.first 		 = touch.locationInNode(self).y
-			G.time.first = G.time.current
+			Hotfix(){
+				Global.first_drag  = true
+				Global.time2.atBegan  = G.time.current
+				
+				Global.XnY.y.current = touch.locationInNode(self).y
+			}
 		}
-		Hotfix(){}
 		return
 	}
 	
@@ -60,19 +63,38 @@ class GameScene: SKScene {
 	
 	override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		for touch in touches {
+		
+			updateGlobesWithNewInfo: do {
+				
+			typealias YValue = CGFloat
 			
-			FirstEntry: do {
-				// Initials for temporal naming sanity \\
-				Hotfix(){}// all of the below is junk
-				if G.first_drag == true {
-					XY.y.previous	= XY.y.first
-					G.first_drag	= false
-					G.time.previous 	= G.time.first
-				}
+			func noLongerCurrentY(currentY not_current_y: CGFloat) -> YValue {
+				return not_current_y
 			}
 			
+			func updateCurrentY(new_y_coords) -> YValue {
+				return new_y_coords
+			}
+			
+			XY.y.previous = noLongerCurrentY(currentY: XY.y.current)
+			XY.y.current  = updateCurrentY(touch.locationInNode(self).y)
+			
+			if Global.first_drag == true {
+				
+				Global.first_drag			= false
+				
+				// THis is basically time.entered compared with time.onMove
+				Global.time.previous 	= G.time.first
+					}
+				}
+				
+			}
+			
+			// Update our global Y
+			Hotfix() {
+				Global
 			// Paused (lateral)--no angle now--reset values
-			guard (XY.y.current == XY.y.previous) else {
+			guard (XY.y.current != XY.y.previous) else {
 				
 				// TODO: get rid of globalz
 				_=Hotfix() {
@@ -247,7 +269,6 @@ class GameScene: SKScene {
 					}
 				}
 				;
-				
 				Global.Angles.angle.next
 					= findAcceleratedAngle(currentY:  		XY.y.current,
 					                       prevY: 	 			XY.y.previous,
@@ -289,7 +310,7 @@ class GameScene: SKScene {
 						return current_time
 				}
 				;
-				G.time.previous = updatePrevTimeToCur(G.time.current)
+				Global.time.previous = updatePrevTimeToCur(G.time.current)
 				;
 				
 			// MARK: 6:
@@ -312,6 +333,11 @@ class GameScene: SKScene {
 			}
 		}
 	
+	override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+		
+	}
+	
+	}
 	
 	override func update(currentTime: CFTimeInterval) {
 		

@@ -10,6 +10,7 @@
 import SpriteKit
 
 struct Global {
+	typealias CFTI = CFTimeInterval
 	
 	/* Random shit that doesn't
 	fit anywhere else */
@@ -17,16 +18,22 @@ struct Global {
 	SELF = SKScene(),
 	first_drag   = Bool(),
 	
-	time = (first: CFTimeInterval(),
+	/// Maybe delete this
+	time = (first:    CFTimeInterval(),
 	        previous: CFTimeInterval(),
-	        current: CFTimeInterval())
+	        current:  CFTimeInterval()),
+	
+	/// Maybe refactor this to time
+	time2 = (atBegan: CFTI(), atMove: CFTI(), current: CFTI())
 	
 	;
 	
 	/// LET CONSTANTS :d
 	struct Config {
 		static let
-		accel_slider = CGFloat(0.001),
+		verbose = false,
+		exec = false,
+		accel_slider = CGFloat(0.01),
 		real_jump = CGFloat(2)
 		;
 	}

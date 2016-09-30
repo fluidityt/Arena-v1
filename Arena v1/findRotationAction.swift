@@ -22,5 +22,5 @@ extension F {
 		// tM() -> rotateIt() -> rIDWA() -> accelTimer() -> smoothY() -> rotate()
 
 	}
-}
+
 

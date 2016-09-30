@@ -31,7 +31,7 @@
 		public func printl<t>(s: t) { print("LOG: \(s)")   }
 		public func printe<t>(s: t) { print("ERRAR: \(s)")   }
 		public func printt<t>(s: t) { print("TEST: \(s)")   }
-		public func printv<t>(s: t) { if verbose == true {print("VERB: \(s)")   }}
+		public func printv<t>(s: t) { if G.Config.verbose == true {print("VERB: \(s)")   }}
 		public var  v : String = ""
 		//didSet { vvc+=1; if very_verbose == true {print("V: \(vvc):  \(v)") }} }
 		
@@ -92,7 +92,7 @@
 		public struct Hotfix {	public init (_ block: ()->() ) { block() } }
 		
 		/// Allows me to turn on / off a block of code
-		public struct Debug{public init(_ block:()->()){if exec==true{block()}}}
+		public struct Debug{public init(_ block:()->()){if G.Config.exec==true{block()}}}
 		
 		
 		
@@ -132,10 +132,10 @@
 		//<#MARK: - SKStuff#>:
 		//-----------------
 		/// Moving sprites
-		func moveSprite (named: SKSpriteNode? = player, to_the: CGVector,_ duration: NSTimeInterval = 0.25)
+		func moveSprite (named: SKSpriteNode?, to_the: CGVector,_ duration: NSTimeInterval = 0.25)
 		{	v="moveSprite";	named!.runAction (SKAction.moveBy (to_the, duration: duration))	}
 		
-		func moveSprite( name :SKSpriteNode? = player, to :CGPoint)
+		func moveSprite( name :SKSpriteNode?, to :CGPoint)
 		{ v="moveSprite2"; name!.runAction (SKAction.moveTo(to, duration: 0.5)) }
 		
 		//-TODO: Check for nil AFTER addNode returns
