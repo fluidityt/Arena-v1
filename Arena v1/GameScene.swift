@@ -22,10 +22,9 @@ class GameScene: SKScene {
 		initCircles: do {
 			
 			N.central = Circle()
-			Global.SELF.addChild(N.central)
-			
-			N.central.runAction(SKAction.rotateToAngle(0, duration: 0.5))
-			XY.super_angle = N.central.zRotation
+			 Global.SELF.addChild(N.central)
+			  N.central.runAction(SKAction.rotateToAngle(0, duration: 0.5))
+			   XY.super_angle = N.central.zRotation
 		}
 		return
 	}
@@ -113,49 +112,59 @@ class GameScene: SKScene {
 			/// Averaged / deflated y value
 			let smoothed_y: CGFloat?
 			
-			/// Uses y_tuple and all the above to give us a smoother Y value
 			typealias NewY = CGFloat
+			/**
+			... Uses y_tuple and all the above to give us a smoother Y value,-
+			-RJ # pix b4 active.. Logic algorythimg */
 			func setSmoothedY (globalYs ys: TripleFloat,
 			                            currentY cur_y: CGFloat,
-			                                     real_jump: CGFloat) -> NewY {
+			                                     real_jump: CGFloat)	-> NewY
+			{
+				/// delta-absolute-value of y2-y1
+				let dav = (y3y2: absV((ys.3 - ys.2)),
+				           y2y1: absV((ys.2 - ys.1)))
 				
-
-				// Determines how many pixels count as a real jump (accel), for use in Logic
-				printl("using RJ value \(real_jump)")
-				let rj = real_jump
 				
-				// Only first input
-				if y1 == current_y {
-					return y1
+				checkIfOnlyThreeInputs: do {
+					// See last function for values that are carried over or were 0
+					
+					// Only first input
+					if ys.1 == cur_y {
+						return ys.1
+					}
+						
+						// Only second input
+					else if ys.2 == ys.1 {
+						return average([ys.1,ys.2])
+					}
 				}
-					
-					// Only second input
-				else if y2 == y1 {
-					return average([y1,y2])
-				}
 				
-				// The acceleration is real:
-				if		 (absV(y2 - y3) > real_jump)
-					&&
-					(absV(y1 - y2) > real_jump)	{	return average([y1,y2,y3])}
-					
-					// Slowing down?
-				else if (absV(y2 - y3) > real_jump)
-					&&
-					(absV(y1 - y2) < real_jump) { return average([y2,y3]) }
-					
-					// Speeding up?
-				else if (absV(y2 - y3) < real_jump)
-					&&
-					(absV(y1 - y2) > real_jump) { return average([y1,y2]) }
-					
-					// No accel:
-				else if (absV(y2 - y3) < real_jump)
-					&&
-					(absV(y1 - y2) < real_jump) { return average([y1,y2,y3])}
-					
-					// IDK lol... need to add cases for y1 and y3 with y2 being outlier
-				else {  return average([y1,y2,y3]) }
+				smoothFourthInput: do {
+					// The acceleration is real:
+					if (dav.y3y2 > real_jump) && (dav.y2y1 > real_jump)	{
+						return average([ys.1,ys.2,ys.3])
+					}
+						
+						// Slowing down?
+					else if (dav.y3y2 > real_jump)	&& (dav.y2y1 < real_jump) {
+						return average([ys.2,ys.3])
+					}
+						
+						// Speeding up?
+					else if (dav.y3y2 < real_jump)	&&	(dav.y2y1 > real_jump) {
+						return average([ys.1,ys.2])
+					}
+						
+						// No accel:
+					else if (dav.y3y2 < real_jump)	&&	(dav.y2y1 < real_jump) {
+						return average([ys.1,ys.2,ys.3])
+					}
+						
+						// IDK lol... need to add cases for y1 and y3 with y2 being outlier
+					else {
+						return average([ys.1,ys.2,ys.3])
+					}
+				}
 			}
 
 			
