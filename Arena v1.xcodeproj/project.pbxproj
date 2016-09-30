@@ -29,6 +29,7 @@
 		C1AEC4FE1D7D8B8100821CDB /* hitDetect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AEC4FD1D7D8B8100821CDB /* hitDetect.swift */; };
 		C1B1C36D1D7BD31600739B36 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1C36C1D7BD31600739B36 /* Circle.swift */; };
 		C1CCD99B1D94EBA600738273 /* Globes protocols extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CCD99A1D94EBA600738273 /* Globes protocols extensions.swift */; };
+		C1CD07661D9E22810064F50E /* structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD07651D9E22810064F50E /* structs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		C1AEC4FD1D7D8B8100821CDB /* hitDetect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hitDetect.swift; sourceTree = "<group>"; };
 		C1B1C36C1D7BD31600739B36 /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
 		C1CCD99A1D94EBA600738273 /* Globes protocols extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Globes protocols extensions.swift"; sourceTree = "<group>"; };
+		C1CD07651D9E22810064F50E /* structs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = structs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 				C1422DE21D96552300D9EF54 /* SavedVariables.swift */,
 				C1CCD99A1D94EBA600738273 /* Globes protocols extensions.swift */,
 				C18B22951D7A25990008A65B /* GameScene.swift */,
+				C1CD07651D9E22810064F50E /* structs.swift */,
 			);
 			name = main;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				C1422DE31D96552300D9EF54 /* SavedVariables.swift in Sources */,
 				C1AEC4FE1D7D8B8100821CDB /* hitDetect.swift in Sources */,
 				C1422DCD1D962CB400D9EF54 /* Funcs.swift in Sources */,
+				C1CD07661D9E22810064F50E /* structs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
