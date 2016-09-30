@@ -7,6 +7,8 @@
 
 // _ means global
 import SpriteKit
+
+// Typealias
 func notafunc_conventions() {
 /*
 
@@ -37,7 +39,7 @@ class GameScene: SKScene {
 			N.central = Circle()
 			Global.SELF.addChild(N.central)
 			N.central.runAction(SKAction.rotateToAngle(0, duration: 0.5))
-			XY.super_angle = N.central.zRotation
+			G.Angles.super_angle = N.central.zRotation
 		}
 		return
 	}
@@ -46,9 +48,9 @@ class GameScene: SKScene {
 	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		for touch in touches {
 			
-			C.first_drag   = true
-			XY.first_y 		 = touch.locationInNode(self).y
-			C.first_time = C.time_now
+			G.first_drag   = true
+			XY.y.first 		 = touch.locationInNode(self).y
+			G.time.first = G.time.current
 		}
 		Hotfix(){}
 		return
@@ -62,15 +64,15 @@ class GameScene: SKScene {
 			FirstEntry: do {
 				// Initials for temporal naming sanity \\
 				Hotfix(){}// all of the below is junk
-				if C.first_drag == true {
-					XY.prev_y 			= XY.first_y
-					C.time_then 	= C.first_time
-					C.first_drag	= false
+				if G.first_drag == true {
+					XY.y.previous	= XY.y.first
+					G.first_drag	= false
+					G.time.previous 	= G.time.first
 				}
 			}
 			
 			// Paused (lateral)--no angle now--reset values
-			guard (XY.cur_y == XY.prev_y) else {
+			guard (XY.y.current == XY.y.previous) else {
 				
 				// TODO: get rid of globalz
 				_=Hotfix() {
@@ -89,8 +91,9 @@ class GameScene: SKScene {
 			1. Update smooth_y_tuple
 			2. Update current Y coordinate to SmoothedY coordinate
 			3. Do acceleration Maths
-			4. create and return proper rotation action
-			
+			4. adjust acceleration
+			5. update any leftover globes
+			6. create and return proper rotation action
 			note: return alias -> func definiton -> func call on globe
 			*/
 			func findRotationAction(current_y: CGFloat) -> SKAction {
@@ -192,30 +195,31 @@ class GameScene: SKScene {
 			
 
 			// MARK: 3:
-				typealias FirstPrevCur = (first: CGFloat, previous: CGFloat, current: CGFloat)
+				typealias CFTI = CFTimeInterval
+				typealias FirstPrevCur = (first: CFTI, previous: CFTI, current: CFTI)
 				typealias AngleAsSpeed = CGFloat
-				// How fast we moved the cursor
-					// findAccel() -> doLogic() -> (how far to move wheel)
 				
+				/// How fast we moved the cursor
 				func findAcceleratedAngle(
 																	//smoothed Y value from above (now essentailly the curY)
-																	smoothedY smoothed_y: CGFloat,
+																	currentY smoothed_y: CGFloat,
 				                          // Y values from glboe:
-																  yFPC y: FirstPrevCur,
+																  prevY previous_y:			CGFloat,
 																  // Time values from globe
-				                          timeFPC time: FirstPrevCur,
+				                          timeFPC time: 				FirstPrevCur,
 																  // Adjust to increase / decrease overall accel
-																  accel_slider: CGFloat
+																  accel_slider: 				CGFloat
 																)
 					-> AngleAsSpeed
 				{
-					/* 
+					/*
+					0. findAccel() -> doLogic() -> (how far to move wheel)
 					1. Define math stuff
 					2. Do logic stuff with math stuff
 					*/
 					
 					let
-						delta = (y: absV    (smoothed_y - y.previous),			 // Delta Y (absv)
+						delta = (y: absV    (smoothed_y		- previous_y),		 // Delta Y (absv)
 										 t: CGFloat (time.current - time.previous)), // Delta Time
 					
 						PPS		= (delta.y / delta.t),								// pixels per second:
@@ -243,76 +247,76 @@ class GameScene: SKScene {
 					}
 				}
 				;
-				Global.Angles.angle.next = findAcceleratedAngle(smoothedY: <#T##CGFloat#>, yFPC: <#T##FirstPrevCur#>, timeFPC: <#T##FirstPrevCur#>, accel_slider: <#T##CGFloat#>)
+				
+				Global.Angles.angle.next
+					= findAcceleratedAngle(currentY:  		XY.y.current,
+					                       prevY: 	 			XY.y.previous,
+					                       timeFPC: 			G.time,
+					                       accel_slider:	Global.Config.accel_slider)
+				;
+				
 				
 			// MARK 4:
+				typealias AngleToRotateTo = CGFloat
+				typealias YFirstPrev			= (first: CGFloat, previous: CGFloat, current: CGFloat)
 				
 					// Next angle
-					next_angle = {
-						printd("current angle: \(current_angle)")
+					func adjustNextAnge(currentAngle current_angle: 				CGFloat,
+														  nextAngle accelerated_angle:	CGFloat,
+														  yFP y: YFirstPrev)
+					-> AngleToRotateTo
+					{
 						// Dragged up (clockwise)
-						if (current_y > previous_y) {
-							return current_angle + accelerated_angle!
+						if (y.first > y.previous) {
+							return current_angle + accelerated_angle
 						}
 							
-							// Dragged down (counterclockwise)
+						// Dragged down (counterclockwise)
 						else {
-							return current_angle - accelerated_angle!
+							return current_angle - accelerated_angle
 						}
-						
-					}()
-					print(next_angle)
-					
-					
-					// Our final calculation:
-					fully_calibrated_action = SKAction.rotateToAngle(next_angle!, duration: 0.0)
-					print(fully_calibrated_action)
-					print("\n")
-					
-					
-					// Update globes for next entry
-					wrapUp: do {
-						
-						//_prevY = current_y
-						_curY  = smoothed_y!
-						
-						_curA  = next_angle!
-						
-						_timeThen = current_time
-					}
-					
-					// Annnd we're outta here!!
-					return fully_calibrated_action!
 				}
-				/*
-				
-				// Enter the massive func!
-				printd("going into wheelspin")
-				let fully_handled_rotation_action_with_acceleration_and_smoothing
-				
-				= findRotationAction(
-				current_angle:		W.cur_angle,
-				previous_y: 			C.prev_y,
-				current_y: 				C.cur_y,
-				previous_time:	C.time_then,
-				current_time: 	C.time_now
-				)
+				;
+				Global.Angles.angle.next
+					= adjustNextAnge(currentAngle: A.angle.current,
+					                 nextAngle: A.angle.next,
+					                 yFP: XY.y)
+				;
 				
 				
+			// MARK: 5:
+				func updatePrevTimeToCur(current_time: CFTI) -> CFTI {
+						return current_time
+				}
+				;
+				G.time.previous = updatePrevTimeToCur(G.time.current)
+				;
+				
+			// MARK: 6:
+				// Our final calculation:
+				let	fully_calibrated_action = SKAction.rotateToAngle(A.angle.next, duration: 0.0)
+
+				// Annnd we're outta here!!
+				return fully_calibrated_action
+			}
+			;
+			let fully_handled_rotation_action_with_acceleration_and_smoothing
+				= findRotationAction(XY.y.current)
+			;
+			
 				runFoundAction: do {
 				N.central.runAction(fully_handled_rotation_action_with_acceleration_and_smoothing)
 				}
 				
-				*/
-				return // From TM
+			return // From TM
 			}
 		}
-	}
+	
 	
 	override func update(currentTime: CFTimeInterval) {
 		
 		updateClock: do {
-			
+			/*
 			// Clocker...
 			_clock_count += 1
 			
@@ -331,17 +335,13 @@ class GameScene: SKScene {
 			}
 			
 			
-			
+			*/
 		}
 		
-		C.time_now = currentTime
+		G.time.current = currentTime
 		
 		
-	}//update
-	
-	
-	
-	
+	}//updat	
 }//EoC
 
 func shapeTex(node:SKShapeNode) {
