@@ -29,7 +29,8 @@
 		C1AEC4FE1D7D8B8100821CDB /* hitDetect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AEC4FD1D7D8B8100821CDB /* hitDetect.swift */; };
 		C1B1C36D1D7BD31600739B36 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1C36C1D7BD31600739B36 /* Circle.swift */; };
 		C1CCD99B1D94EBA600738273 /* Globes protocols extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CCD99A1D94EBA600738273 /* Globes protocols extensions.swift */; };
-		C1CD07661D9E22810064F50E /* structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD07651D9E22810064F50E /* structs.swift */; };
+		C1CD07661D9E22810064F50E /* GameStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD07651D9E22810064F50E /* GameStructs.swift */; };
+		C1CD07691D9E68BE0064F50E /* GameFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CD07681D9E68BE0064F50E /* GameFuncs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,7 +80,8 @@
 		C1AEC4FD1D7D8B8100821CDB /* hitDetect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hitDetect.swift; sourceTree = "<group>"; };
 		C1B1C36C1D7BD31600739B36 /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
 		C1CCD99A1D94EBA600738273 /* Globes protocols extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Globes protocols extensions.swift"; sourceTree = "<group>"; };
-		C1CD07651D9E22810064F50E /* structs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = structs.swift; sourceTree = "<group>"; };
+		C1CD07651D9E22810064F50E /* GameStructs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameStructs.swift; sourceTree = "<group>"; };
+		C1CD07681D9E68BE0064F50E /* GameFuncs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameFuncs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,8 @@
 		C1422DDE1D964E7A00D9EF54 /* experimental */ = {
 			isa = PBXGroup;
 			children = (
+				C1CCD99A1D94EBA600738273 /* Globes protocols extensions.swift */,
+				C1422DE21D96552300D9EF54 /* SavedVariables.swift */,
 				C1422DCC1D962CB400D9EF54 /* Funcs.swift */,
 				C18B22C61D7A26CB0008A65B /* Engine.swift */,
 			);
@@ -147,10 +151,9 @@
 			children = (
 				C1422DD01D96419600D9EF54 /* TODO AND IDEAS.swift */,
 				C1422DCE1D96327F00D9EF54 /* HEY READ THIS FILE.swift */,
-				C1422DE21D96552300D9EF54 /* SavedVariables.swift */,
-				C1CCD99A1D94EBA600738273 /* Globes protocols extensions.swift */,
 				C18B22951D7A25990008A65B /* GameScene.swift */,
-				C1CD07651D9E22810064F50E /* structs.swift */,
+				C1CD07651D9E22810064F50E /* GameStructs.swift */,
+				C1CD07681D9E68BE0064F50E /* GameFuncs.swift */,
 			);
 			name = main;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				C1CCD99B1D94EBA600738273 /* Globes protocols extensions.swift in Sources */,
 				C18B22961D7A25990008A65B /* GameScene.swift in Sources */,
 				C18B22981D7A25990008A65B /* GameViewController.swift in Sources */,
+				C1CD07691D9E68BE0064F50E /* GameFuncs.swift in Sources */,
 				C18B22921D7A25990008A65B /* AppDelegate.swift in Sources */,
 				C18B22C51D7A25CD0008A65B /* Utilities Arena.swift in Sources */,
 				C18B22C71D7A26CB0008A65B /* Engine.swift in Sources */,
@@ -394,7 +398,7 @@
 				C1422DE31D96552300D9EF54 /* SavedVariables.swift in Sources */,
 				C1AEC4FE1D7D8B8100821CDB /* hitDetect.swift in Sources */,
 				C1422DCD1D962CB400D9EF54 /* Funcs.swift in Sources */,
-				C1CD07661D9E22810064F50E /* structs.swift in Sources */,
+				C1CD07661D9E22810064F50E /* GameStructs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
