@@ -9,6 +9,15 @@
 import SpriteKit
 
 protocol Static {}
+
+/* Shortcuts */
+typealias G 	= Global
+typealias N 	= G.Nodes
+typealias A 	= G.Angles
+typealias XY 	= G.XnY
+
+typealias Sanity = G.Funcs.Sanity
+
 // Typealias
 func notafunc_conventions() {
 /*
@@ -27,15 +36,6 @@ something = purFunc(d)
 
 class GameScene: SKScene {
 
-	/* Shortcuts */
-	typealias G 	= Global
-	typealias N 	= G.Nodes
-	typealias A 	= G.Angles
-	typealias XY 	= G.XnY
-	
-	typealias Sanity = G.Funcs.Sanity
-
-	
 
 	override func didMoveToView(view: SKView) {
 		
