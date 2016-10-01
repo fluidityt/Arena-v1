@@ -18,7 +18,7 @@ struct GameStuff {
 }
 
 /**
-- TODO: Split this up into Acceleration | Adjustment | Action
+- TODO: Split this up into Acceleration | Adjustment | Actions
 - TODO: Reset numbers (velocity) when change in direction detected
 - note: return alias -> func definiton -> func call on globe
 1. Update smooth_y_tuple
