@@ -107,12 +107,12 @@ class GameScene: SKScene {
 			Hotfix() {
 				
 				if XY.y.current > XY.y.previous {
-					A.angle.next = A.angle.current + 0.3
+					A.angle.next = A.angle.current + 0.5
 					N.central.runAction(SKAction.rotateToAngle(A.angle.next, duration: 0.0))
 					A.angle.current = A.angle.next
 				}
 				else {
-					A.angle.next = A.angle.current - 0.3
+					A.angle.next = A.angle.current - 0.5
 					N.central.runAction(SKAction.rotateToAngle(A.angle.next, duration: 0.0))
 					A.angle.current = A.angle.next
 				}
