@@ -104,6 +104,22 @@ class GameScene: SKScene {
 				return // From guard
 			}
 			
+			Hotfix() {
+				
+				if XY.y.current > XY.y.previous {
+					A.angle.next = A.angle.current + 0.3
+					N.central.runAction(SKAction.rotateToAngle(A.angle.next, duration: 0.0))
+					A.angle.current = A.angle.next
+				}
+				else {
+					A.angle.next = A.angle.current - 0.3
+					N.central.runAction(SKAction.rotateToAngle(A.angle.next, duration: 0.0))
+					A.angle.current = A.angle.next
+				}
+			}
+			
+			return
+			
 
 			/**
 			- TODO: Split this up into Acceleration | Adjustment | Action
@@ -302,7 +318,8 @@ class GameScene: SKScene {
 					= adjustNextAnge(currentAngle: A.angle.current,
 					                 nextAngle: A.angle.next,
 					                 yFP: XY.y)
-				HPRoItNT THIS SHIT OUT LOLfix() { printd(A.angle.next)}
+				
+//				HPRoItNT THIS SHIT OUT LOLfix() { printd(A.angle.next)}
 				;
 				
 				
