@@ -73,17 +73,27 @@ class GameScene: SKScene {
 	override func touchesBegan (touches: Set<UITouch>, withEvent event: UIEvent?) {
 
 		for touch in touches {
-
+			Hotfix() {
 			// The time NOW (basically) when started TB
-			Global.time2.atBegan = G.time.current
-
+				//Global.time2.atBegan = G.time.current
+			}
+			
 			// The next input (TM) will be our 'first drag' | error checking is good!
 			Global.first_drag == false ? G.first_drag = true : printd ("first drag was f\\ked")
 
 			// Where we just clicked is our new y.current
 			Global.XnY.y.current = Sanity.updateCurrentY (touch.locationInNode (self).y)
+			
+		
 		}
-
+		Hotfix() {
+			/* 
+			FIXME: 
+			I can't figure out the timing on this... the first drag is going to
+			be too fast or too slow...
+			*/
+			see the breakpoints
+		}
 
 		return // from TB
 	}
@@ -128,16 +138,18 @@ class GameScene: SKScene {
 			}
 
 			let fully_handled_rotation_action_with_acceleration_and_smoothing
-			= FindRotationAction.implement1thru7(globalYTuple: &G.XnY.y_tuple,
-			                                     globalCurrentY: &G.XnY.y.current,
-			                                     globalPreviousY: G.XnY.y.previous,
-			                                     globalYFirstPrev: G.XnY.y,
-			                                     globalRealJump: G.Config.real_jump,
-			                                     globalTimeFPC: G.time,
-			                                     globalAccelSlider: G.Config.accel_strength,
-			                                     globalSpeedMinMax: G.Config.speed,
-			                                     globalCurrentAngle: G.Angles.angle.current,
-			                                     globalNextAngle: &G.Angles.angle.next)
+			= FindRotationAction.implement1thru7(globalYTuple: 				&G.XnY.y_tuple,
+			                                     globalCurrentY: 			&G.XnY.y.current,
+			                                     globalPreviousY: 		G.XnY.y.previous,
+			                                     globalYFirstPrev: 		G.XnY.y,
+			                                     globalRealJump: 			G.Config.real_jump,
+
+			                                     globalTimeEE:				G.time3,
+			                                     
+			                                     globalAccelSlider: 	G.Config.accel_strength,
+			                                     globalSpeedMinMax: 	G.Config.speed,
+			                                     globalCurrentAngle:	G.Angles.angle.current,
+			                                     globalNextAngle: 		&G.Angles.angle.next)
 			
 
 			runFoundAction:do {
@@ -145,7 +157,10 @@ class GameScene: SKScene {
 				N.central.runAction (fully_handled_rotation_action_with_acceleration_and_smoothing)
 				
 				// Our current angle is now something else to be something different
-				Global.Angles.angle.current = Sanity.updatePreviousAngle(nextAngle: Global.Angles.angle.next)
+				Global.Angles.angle.current
+					= Sanity.updatePreviousAngle(nextAngle: G.Angles.angle.next)
+				
+				
 			}
 		}
 		

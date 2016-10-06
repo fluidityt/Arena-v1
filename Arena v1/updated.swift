@@ -211,12 +211,15 @@ struct FindRotationAction: Static {
 													 // Y values from glboe:
 													 prevY previous_y: CGFloat,
 													 // Time values from globe
-													 timeFPC time: TimeFirstPrevCur
+													 timeEE time: TimeEntryExit
 	) -> DeltaYAndTime {
 
+		Hotfix() {
+		// We kind of need the most recent data from Update
+		}
 		let
-		delta = (y: absV (smoothed_y - previous_y), // Delta Y (absv)
-						 t: CGFloat (time.current - time.previous)) // Delta Time
+		delta = (y: absV (smoothed_y - previous_y), 				// Delta Y (absv)
+						 t: CGFloat (time.at_this_entry - time.at_last_exit)) // Delta Time
 
 		return delta
 	}
@@ -335,7 +338,7 @@ struct FindRotationAction: Static {
 
 				globalRealJump 				_G__real_jump: 			CGFloat,
 															
-				globalTimeFPC					_G__time_fpc: 			TimeFirstPrevCur,
+				globalTimeEE					_G__time_ee: 			TimeEntryExit,
 															
 				globalAccelSlider		 	_G__accel_slider: 	CGFloat,
 															
@@ -364,7 +367,7 @@ struct FindRotationAction: Static {
 		// 3:
 		let _L__delta_yt = findDeltaYT( currentY: _L__y_current,
 		                                prevY: 		_G__previous_y,
-		                                timeFPC: 	_G__time_fpc
+		                                timeEE: 	_G__time_ee
 		)
 		
 		// 4:
@@ -382,7 +385,7 @@ struct FindRotationAction: Static {
 		// 6:
 		let _L__final_action = makeAction( nextAngle: _L__next_angle
 		)
-				
+			
 		// 7:
 		_G__current_y 	= _L__y_current
 		_G__y_tuple 		= _L__y_tuple

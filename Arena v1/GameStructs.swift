@@ -9,12 +9,13 @@
 
 import SpriteKit
 
+typealias CFTI = CFTimeInterval
+typealias CGF = CGFloat
+typealias YValue = CGFloat // Cause we use it a lot
+
+typealias TimeEntryExit = (at_this_entry: CFTI, at_last_exit: CFTI)
+
 struct Global: Static {
-
-  typealias CFTI = CFTimeInterval
-  typealias CGF = CGFloat
-  typealias YValue = CGFloat // Cause we use it a lot
-
 
   /// LET CONSTANTS :d
   struct Config: Static {
@@ -42,7 +43,9 @@ struct Global: Static {
                 current: CFTimeInterval ()),
 
   /// Maybe refactor this to time
-  time2      = (atBegan: CFTI (), atMove: CFTI (), current: CFTI ())
+  time2      = (atBegan: CFTI (), atMove: CFTI (), current: CFTI ()),
+	
+	time3			 = (at_this_entry: CFTI(), at_last_exit: CFTI())
 ;
 
   struct Nodes: Static {
