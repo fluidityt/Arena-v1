@@ -25,6 +25,7 @@
 		C18B22B61D7A259A0008A65B /* Arena_v1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22B51D7A259A0008A65B /* Arena_v1UITests.swift */; };
 		C18B22C51D7A25CD0008A65B /* Utilities Arena.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22C41D7A25CD0008A65B /* Utilities Arena.swift */; };
 		C18B22C71D7A26CB0008A65B /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22C61D7A26CB0008A65B /* Engine.swift */; };
+		C19EA8B01DA5F4BE00749240 /* updated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19EA8AF1DA5F4BE00749240 /* updated.swift */; };
 		C1AEC4FA1D7D811A00821CDB /* enemySpawner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AEC4F91D7D811A00821CDB /* enemySpawner.swift */; };
 		C1AEC4FE1D7D8B8100821CDB /* hitDetect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AEC4FD1D7D8B8100821CDB /* hitDetect.swift */; };
 		C1B1C36D1D7BD31600739B36 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1C36C1D7BD31600739B36 /* Circle.swift */; };
@@ -76,6 +77,7 @@
 		C18B22B71D7A259A0008A65B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C18B22C41D7A25CD0008A65B /* Utilities Arena.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Utilities Arena.swift"; sourceTree = "<group>"; };
 		C18B22C61D7A26CB0008A65B /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
+		C19EA8AF1DA5F4BE00749240 /* updated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = updated.swift; sourceTree = "<group>"; };
 		C1AEC4F91D7D811A00821CDB /* enemySpawner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = enemySpawner.swift; sourceTree = "<group>"; };
 		C1AEC4FD1D7D8B8100821CDB /* hitDetect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hitDetect.swift; sourceTree = "<group>"; };
 		C1B1C36C1D7BD31600739B36 /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			children = (
 				C1422DD01D96419600D9EF54 /* TODO AND IDEAS.swift */,
 				C1422DCE1D96327F00D9EF54 /* HEY READ THIS FILE.swift */,
+				C19EA8AF1DA5F4BE00749240 /* updated.swift */,
 				C18B22951D7A25990008A65B /* GameScene.swift */,
 				C1CD07651D9E22810064F50E /* GameStructs.swift */,
 				C1CD07681D9E68BE0064F50E /* GameFuncs.swift */,
@@ -399,6 +402,7 @@
 				C1AEC4FE1D7D8B8100821CDB /* hitDetect.swift in Sources */,
 				C1422DCD1D962CB400D9EF54 /* Funcs.swift in Sources */,
 				C1CD07661D9E22810064F50E /* GameStructs.swift in Sources */,
+				C19EA8B01DA5F4BE00749240 /* updated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

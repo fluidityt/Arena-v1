@@ -26,16 +26,22 @@ struct GameStuff {
 		- note: return alias -> func definiton -> func call on globe
 
 		1. Update smooth_y_tuple
+
 		2. Update current Y coordinate to SmoothedY coordinate
+
 		3. Do acceleration Maths (find delta Y and T, then find accelerated angle)
+
 		4. adjust acceleration
+		
 		5. update any leftover globes
+		
 		6. create and return proper rotation action
 */
 func findRotationAction (current_y: CGFloat) -> SKAction {
 
-	// MARK: 1:
-	mark1:do {
+	// setYTuple
+	mark1:do {										// MARK: 1:
+		
 		typealias TripleFloat = (String, CGFloat, CGFloat, CGFloat)
 
 		/// Update stacks, determine which new Y value to deflate and return
@@ -63,17 +69,18 @@ func findRotationAction (current_y: CGFloat) -> SKAction {
 			}
 		}
 
-		// setYTuple:
+		
 		setYTuple:do {
 			let y_tuple = G.XnY.y_tuple
 			Global.XnY.y_tuple = setYTuple (globalYs: y_tuple, currentY: current_y)
 		}
 	}
 
-	
-	
-	// MARK: 2:
-	mark2:do {
+
+
+	// setSmoothedY
+	mark2:do { 	// MARK: 2:
+		
 		typealias TripleFloat = (String, CGFloat, CGFloat, CGFloat)
 		typealias SmoothedY = CGFloat
 
@@ -135,6 +142,7 @@ func findRotationAction (current_y: CGFloat) -> SKAction {
 			}
 		}
 
+		
 		setSmoothedY:do {
 			let y_tuple2 = G.XnY.y_tuple
 			Global.XnY.y.current = setSmoothedY (yt: y_tuple2, cur_y: current_y, real_jump: 2)
@@ -143,8 +151,9 @@ func findRotationAction (current_y: CGFloat) -> SKAction {
 
 
 
-	// MARK: 3:
-	mark3:do {
+	// deltaYT and accelAngle
+	mark3:do { 	// MARK: 3:
+		
 		typealias CFTI = CFTimeInterval
 		typealias TimeFirstPrevCur = (first:CFTI, previous:CFTI, current:CFTI)
 		typealias DeltaYAndTime = (y:CGFloat, t:CGFloat)
@@ -168,22 +177,21 @@ func findRotationAction (current_y: CGFloat) -> SKAction {
 
 
 		// MARK: 3.5:
-		mark35:do {
-			typealias AngleAsSpeed = CGFloat
+		typealias AngleAsSpeed = CGFloat
 
-			/// How fast we moved the cursor
-			func findAcceleratedAngle (deltaYT delta: (y:CGFloat, t:CGFloat),
-																 // Adjust to increase / decrease overall accel
-																 accelSlider accel_slider: CGFloat,
-																 // how fast we go (in distance)
-																 speedMinMax speed: (min:CGFloat, max:CGFloat)
-			) -> AngleAsSpeed {
+		/// How fast we moved the cursor
+		func findAcceleratedAngle (deltaYT delta: (y:CGFloat, t:CGFloat),
+															 // Adjust to increase / decrease overall accel
+															 accelSlider accel_slider: CGFloat,
+															 // how fast we go (in distance)
+															 speedMinMax speed: (min:CGFloat, max:CGFloat)
+		) -> AngleAsSpeed {
 
-				/*
-					0. findAccel() -> doLogic() -> (how far to move wheel)
-					1. Define math stuff
-					2. Do logic stuff with math stuff																														`-f
-				*/
+			/*
+				0. findAccel() -> doLogic() -> (how far to move wheel)
+				1. Define math stuff
+				2. Do logic stuff with math stuff																														`-f
+			*/
 		
 		let
 		
@@ -192,58 +200,59 @@ func findRotationAction (current_y: CGFloat) -> SKAction {
 		rads  = absV (PPS * -0.0025)                         // How far it spins
 		; 																																														//`f
 
-				// Return logic based on math above:
-				returnLogic:do {
+			// Return logic based on math above:
+			returnLogic:do {
 
-					if (rads + accel_slider) > speed.max {
-						return speed.max
-					}
+				if (rads + accel_slider) > speed.max {
+					return speed.max
+				}
 
-					else if (rads + accel_slider) < speed.min {
-						return speed.min
-					}
+				else if (rads + accel_slider) < speed.min {
+					return speed.min
+				}
 
-					else {
-						return (rads + accel_slider)
-					}
+				else {
+					return (rads + accel_slider)
 				}
 			}
+		}
+		
 
-			findDeltaAndAcceleratedAngle:do {
+		findDeltaAndAcceleratedAngle:do {
 
-				// Find deltaYT:
-				let
-				current_y  = G.XnY.y.current,
-				previous_y = G.XnY.y.previous,
-				time_fpc   = G.time
+			// Find deltaYT:
+			let
+			current_y  = G.XnY.y.current,
+			previous_y = G.XnY.y.previous,
+			time_fpc   = G.time
 
-				let delta_yt      = findDeltaYT (currentY: current_y,
-																				 prevY: previous_y,
-																				 timeFPC: time_fpc)
-
-
-				// Find accelerateAngle:
-				let
-						accel_slider  = G.Config.accel_strength,
-						speed_min_max = G.Config.speed
-
-				Global.Angles.angle.next
-				= findAcceleratedAngle (deltaYT: delta_yt,
-																accelSlider: accel_slider,
-																speedMinMax: speed_min_max)
+			let delta_yt      = findDeltaYT (currentY: current_y,
+																			 prevY: previous_y,
+																			 timeFPC: time_fpc)
 
 
-				// Debugging:
-				let next_angle = G.Angles.angle.next
-				printd (next_angle)
-			}
+			// Find accelerateAngle:
+			let
+					accel_slider  = G.Config.accel_strength,
+					speed_min_max = G.Config.speed
+
+			Global.Angles.angle.next
+			= findAcceleratedAngle (deltaYT: delta_yt,
+															accelSlider: accel_slider,
+															speedMinMax: speed_min_max)
+
+
+			// Debugging:
+			let next_angle = G.Angles.angle.next
+			printd (next_angle)
 		}
 	}
 
 
+	
+	// adjustNextAngle
+	mark4: do { 	// MARK: 4:
 
-	// MARK 4:
-	mark4:do {
 		typealias AngleToRotateTo = CGFloat
 		typealias YFirstPrev = (first:CGFloat, previous:CGFloat, current:CGFloat)
 
@@ -263,6 +272,7 @@ func findRotationAction (current_y: CGFloat) -> SKAction {
 				return current_angle - accelerated_angle
 			}
 		}
+		
 
 		adjustNextAngle:do {
 
@@ -279,7 +289,7 @@ func findRotationAction (current_y: CGFloat) -> SKAction {
 		// FIXME:				HPRoItNT THIS SHIT OUT LOLfix() { printd(A.angle.next)}
 	}
 
-	
+
 
 	// MARK: 5:																																										`-f
 	typealias CFTI = CFTimeInterval
