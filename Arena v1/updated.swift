@@ -322,6 +322,7 @@ struct FindRotationAction: Static {
 */
 	static func implement1thru7(
 		
+		
 				inout globalYTuple		_G__y_tuple: 				TripleFloat,
 				
 				inout globalCurrentY 	_G__current_y: 			CGFloat,
@@ -329,6 +330,7 @@ struct FindRotationAction: Static {
 				globalPreviousY				_G__previous_y: 		CGFloat,
 																		
 				globalYFirstPrev 			_G__y_firstprev: 		YFirstPrev,
+				
 				                 			
 
 				globalRealJump 				_G__real_jump: 			CGFloat,
@@ -340,6 +342,7 @@ struct FindRotationAction: Static {
 				globalSpeedMinMax 		_G__speed_minmax: 	MinMax,
 															
 				
+				                  		
 				globalCurrentAngle 		_G__current_angle: 	CGFloat,
 				
 				inout globalNextAngle	_G__next_angle:			CGFloat )

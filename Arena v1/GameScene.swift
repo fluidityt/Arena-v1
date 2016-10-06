@@ -128,7 +128,16 @@ class GameScene: SKScene {
 			}
 
 			let fully_handled_rotation_action_with_acceleration_and_smoothing
-			= findRotationAction (y_current)
+			= FindRotationAction.implement1thru7(globalYTuple: &G.XnY.y_tuple,
+			                                     globalCurrentY: &G.XnY.y.current,
+			                                     globalPreviousY: G.XnY.y.previous,
+			                                     globalYFirstPrev: G.XnY.y,
+			                                     globalRealJump: G.Config.real_jump,
+			                                     globalTimeFPC: G.time,
+			                                     globalAccelSlider: G.Config.accel_strength,
+			                                     globalSpeedMinMax: G.Config.speed,
+			                                     globalCurrentAngle: G.Angles.angle.current,
+			                                     globalNextAngle: &G.Angles.angle.next)
 			
 
 			runFoundAction:do {
