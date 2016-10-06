@@ -8,6 +8,8 @@
 
 import SpriteKit
 
+
+
 /// Test out stuff so it doesn't get too big...
 struct GameStuff {
 
@@ -59,9 +61,11 @@ func findRotationAction (current_y: CGFloat) -> SKAction {
 			return ("new_vals:", cur_y, ys.1, ys.2)        // y3 = y2; y2 = y1; y1 = current_y
 		}
 	}
-	
-	Global.XnY.y_tuple = setYTuple (globalYs: XY.y_tuple, currentY: current_y)
 
+	do {
+		let y_tuple = G.XnY.y_tuple
+		Global.XnY.y_tuple = setYTuple (globalYs: y_tuple, currentY: current_y)
+	}
 
 
 	// MARK: 2:
@@ -73,7 +77,7 @@ func findRotationAction (current_y: CGFloat) -> SKAction {
 	func setSmoothedY (yt yt: TripleFloat,
 										 cur_y: CGFloat,
 										 real_jump: CGFloat
-	)	-> SmoothedY {
+	) -> SmoothedY {
 
 		//FIXME:
 		let ys  = yt
@@ -125,15 +129,17 @@ func findRotationAction (current_y: CGFloat) -> SKAction {
 		}
 	}
 
-	Global.XnY.y.current = setSmoothedY (yt: XY.y_tuple, cur_y: current_y, real_jump: 2)
-
+	do {
+		let y_tuple2 = G.XnY.y_tuple
+		Global.XnY.y.current = setSmoothedY (yt: y_tuple2, cur_y: current_y, real_jump: 2)
+	}
 
 	// MARK: 3:
 	typealias CFTI = CFTimeInterval
 	typealias FirstPrevCur = (first:CFTI, previous:CFTI, current:CFTI)
 	typealias AngleAsSpeed = CGFloat
 
-	/// How fast we moved the cursor
+	/// How fast we moved the cursor - FIXME: split into two funcs
 	func findAcceleratedAngle (//smoothed Y value from above (now essentailly the curY)
 														 currentY smoothed_y: CGFloat,
 														 // Y values from glboe:
@@ -141,7 +147,7 @@ func findRotationAction (current_y: CGFloat) -> SKAction {
 														 // Time values from globe
 														 timeFPC time: FirstPrevCur,
 														 // Adjust to increase / decrease overall accel
-														 accel_slider: CGFloat,
+														 accelSlider accel_slider: CGFloat,
 														 // how fast we go (in distance)
 														 speedMinMax speed: (min:CGFloat, max:CGFloat)
 	) -> AngleAsSpeed {
@@ -178,14 +184,25 @@ func findRotationAction (current_y: CGFloat) -> SKAction {
 		}
 	}
 
-	Global.Angles.angle.next
-	= findAcceleratedAngle (currentY: XY.y.current,
-													prevY: XY.y.previous,
-													timeFPC: G.time,
-													accel_slider: G.Config.accel_strength,
-													speedMinMax: G.Config.speed)
+	do {
+		let
+		current_y     = G.XnY.y.current,
+		previous_y    = G.XnY.y.previous,
 
-	printd (A.angle.next)
+		time_fpc      = G.time,
+		accel_slider  = G.Config.accel_strength,
+		speed_min_max = G.Config.speed
+
+		Global.Angles.angle.next
+		= findAcceleratedAngle (currentY: current_y,
+														prevY: previous_y,
+														timeFPC: time_fpc,
+														accelSlider: accel_slider,
+														speedMinMax: speed_min_max)
+
+		let next_angle = G.Angles.angle.next
+		printd (next_angle)
+	}
 
 
 
@@ -210,23 +227,35 @@ func findRotationAction (current_y: CGFloat) -> SKAction {
 		}
 	}
 
-	Global.Angles.angle.next
-	= adjustNextAngle (currentAngle: A.angle.current,
-										 nextAngle: A.angle.next,
-										 yFP: XY.y)
+	do {
+		let
+		current_angle = G.Angles.angle.current,
+		next_angle    = G.Angles.angle.next,
+		first_prev_y  = G.XnY.y
 
+		Global.Angles.angle.next
+		= adjustNextAngle (currentAngle: current_angle,
+											 nextAngle: next_angle,
+											 yFP: first_prev_y)
+	}
 	//				HPRoItNT THIS SHIT OUT LOLfix() { printd(A.angle.next)}
 
 
 
-	// MARK: 5:																																									`-f
-	func updatePrevTimeToCur (current_time: CFTI) -> CFTI {	return current_time	}								//`f
-	Global.time.previous = updatePrevTimeToCur (G.time.current)
+	// MARK: 5:																																										`-f
+	func updatePrevTimeToCur (current_time: CFTI) -> CFTI {	return current_time	}									//`f
+	do {
+		let current_time = G.time.current
+		Global.time.previous = updatePrevTimeToCur (current_time)
+	}
 
 
 
 	// MARK: 6:
-	let fully_calibrated_action = SKAction.rotateToAngle (A.angle.next, duration: 0.0)
+	let next_angle              = G.Angles.angle.next
+	let fully_calibrated_action = SKAction.rotateToAngle (next_angle, duration: 0.0)
+
+
 	return fully_calibrated_action
 }
 
