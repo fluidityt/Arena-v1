@@ -6,14 +6,6 @@
 //  Copyright © 2016 Dude Guy . All rights reserved.
 //
 
-//
-//  GameFuncs.swift
-//  Arena v1 (spinnycolor)
-//
-//  Created by Dude Guy  on 9/30/16.
-//  Copyright © 2016 Dude Guy . All rights reserved.
-//
-
 import SpriteKit
 
 /** FindRotationAction is a dir for 7 static funcs
@@ -119,8 +111,6 @@ struct FindRotationAction: Static {
 
 
 
-
-
 /**		2 of 6
 - note: Uses y_tuple and all the above to give us a smoother Y value,
 	RJ # pix b4 active.. Logic algorythimg
@@ -215,6 +205,7 @@ struct FindRotationAction: Static {
 	}
 
 
+	
 /** 4 of 7
 - note: How fast we moved the cursor
 	
@@ -225,7 +216,7 @@ struct FindRotationAction: Static {
 			accelSlider: G.Config.accel_strength,
 			speedMinMax: G.Config.speed)
 */
-	func findAcceleratedAngle (deltaYT delta: (y:CGFloat, t:CGFloat),
+	static func findAcceleratedAngle (deltaYT delta: (y:CGFloat, t:CGFloat),
 														 // Adjust to increase / decrease overall accel
 														 accelSlider accel_slider: CGFloat,
 														 // how fast we go (in distance)
@@ -254,7 +245,7 @@ struct FindRotationAction: Static {
 				printd (G.Angles.angle.next)
 			}
 	}
-
+	}
 
 
 
@@ -269,7 +260,7 @@ struct FindRotationAction: Static {
 			yFP:						Global.XnY.y)
 	
 */
-	func adjustNextAngle (currentAngle current_angle: CGFloat,
+	static func adjustNextAngle (currentAngle current_angle: CGFloat,
 												nextAngle accelerated_angle: CGFloat,
 												yFP y: YFirstPrev
 	) -> AngleToRotateTo {
@@ -285,6 +276,7 @@ struct FindRotationAction: Static {
 		}
 	}
 
+		
 	
 /** 6 of 7
 - note: Update
@@ -293,7 +285,7 @@ struct FindRotationAction: Static {
 	
 		Global.time.previous = updatePrevTimeToCur (current_time)
 */
-	func updatePrevTimeToCur (current_time: CFTI) -> CFTI {
+	static func updatePrevTimeToCur (current_time: CFTI) -> CFTI {
 
 		return current_time
 	}
@@ -306,11 +298,12 @@ struct FindRotationAction: Static {
 #### Usage:
 		let rotation_action = makeAction(Global.Angles.angle.next)
 */
-	func makeAction (next_angle: CGFloat) -> SKAction {
+	static func makeAction (next_angle: CGFloat) -> SKAction {
 
 		let fully_calibrated_action = SKAction.rotateToAngle (next_angle, duration: 0.0)
 
 		return fully_calibrated_action
 	}
-
+	
+	
 }
