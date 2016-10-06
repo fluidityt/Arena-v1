@@ -9,11 +9,11 @@
 
 import SpriteKit
 
+typealias PrivateInit = Void
 
 
-// fun
-protocol Static {
-}
+/// Can't force a `private init() {}` ={
+protocol Static {}
 
 /* Shortcuts */
 typealias G = Global
@@ -132,7 +132,11 @@ class GameScene: SKScene {
 			
 
 			runFoundAction:do {
+				// Rotate to the nextAngle
 				N.central.runAction (fully_handled_rotation_action_with_acceleration_and_smoothing)
+				
+				// Our current angle is now something else to be something different
+				Global.Angles.angle.current = Sanity.updatePreviousAngle(nextAngle: Global.Angles.angle.next)
 			}
 		}
 		

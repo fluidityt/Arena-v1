@@ -91,6 +91,11 @@ struct Global: Static {
 
         return not_current_y
       }
+			
+			static func updatePreviousAngle (nextAngle next_angle: CGFloat) -> CGFloat {
+				
+				return next_angle
+			}
 
       /// for sanity reasons of updatin G currenty
       static func updateCurrentY (new_y_coords: YValue) -> YValue {
@@ -100,6 +105,7 @@ struct Global: Static {
     }
   }
 }
+
 
 //
 //  structs.swift

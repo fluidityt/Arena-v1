@@ -5,8 +5,11 @@
 //  Created by Dude Guy  on 10/5/16.
 //  Copyright © 2016 Dude Guy . All rights reserved.
 //
-
 import SpriteKit
+
+/*
+	struct FindRotationAction: Static {
+*/
 
 /** FindRotationAction is a dir for 7 static funcs
 
@@ -54,9 +57,12 @@ import SpriteKit
 
 
 		- YFirstPrev = (first:CGFloat, previous:CGFloat, current: CGFloat)
+
+		- MinMax = (min: CGFloat, max: CGFloat)
+
 */
 struct FindRotationAction: Static {
-
+	
 	// Aliases:
 	typealias AngleAsSpeed = CGFloat
 	typealias AngleToRotateTo = CGFloat
@@ -68,7 +74,9 @@ struct FindRotationAction: Static {
 	typealias TimeFirstPrevCur = (first:CFTI, previous:CFTI, current:CFTI)
 	typealias DeltaYAndTime = (y:CGFloat, t:CGFloat)
 
-	
+	typealias FRA = FindRotationAction
+	typealias MinMax = (min: CGFloat, max: CGFloat)
+
 	
 /** Func 1 of 6
 	
@@ -122,7 +130,7 @@ struct FindRotationAction: Static {
 			realJump: Global.Config.real_jump)
 	
 */
-	static func setSmoothedY (yTuple yt: TripleFloat,
+	static func smoothCurrentY (yTuple yt: TripleFloat,
 														currentY cur_y: CGFloat,
 														realJump real_jump: CGFloat
 	) -> SmoothedY {
@@ -241,10 +249,7 @@ struct FindRotationAction: Static {
 				return (rads + accel_slider)
 			}
 			
-			defer {
-				printd (G.Angles.angle.next)
-			}
-	}
+		}
 	}
 
 
@@ -261,8 +266,8 @@ struct FindRotationAction: Static {
 	
 */
 	static func adjustNextAngle (currentAngle current_angle: CGFloat,
-												nextAngle accelerated_angle: CGFloat,
-												yFP y: YFirstPrev
+												accelAngle accelerated_angle: CGFloat,
+												yFirstPrev y: YFirstPrev
 	) -> AngleToRotateTo {
 
 		// Dragged up (clockwise)
@@ -279,16 +284,12 @@ struct FindRotationAction: Static {
 		
 	
 /** 6 of 7
-- note: Update
+- note: requires mutability in prams
 	
 #### Usage:
 	
 		Global.time.previous = updatePrevTimeToCur (current_time)
 */
-	static func updatePrevTimeToCur (current_time: CFTI) -> CFTI {
-
-		return current_time
-	}
 
 	
 
@@ -306,4 +307,102 @@ struct FindRotationAction: Static {
 	}
 	
 	
+	
+/** Call this on the action you want to run in touchesMoved()
+
+- note:
+	
+#### Usage:
+	
+		let fully_handled_action = FindRotationAction(initialY: tloc.y)
+		
+		runAction(fully_handled_action)
+*/
+	static func implement1thru7(
+			inout globalCurrentY 	  		_G__current_y: 			CGFloat,
+
+			// This updates in touchesMoved()
+			globalPreviousY				_G__previous_y: 		CGFloat,
+			               				
+			inout globalYTuple				 	_G__y_tuple: 				TripleFloat,
+			            				 	
+			globalRealJump 				_G__real_jump: 			CGFloat,
+			               				
+			globalTimeFPC					_G__time_fpc: 			TimeFirstPrevCur,
+			             					
+			globalAccelSlider		 	_G__accel_slider: 	CGFloat,
+			                 		 	
+			globalSpeedMinMax 		_G__speed_minmax: 	MinMax,
+			                  		
+			globalCurrentAngle 		_G__current_angle: 	CGFloat,
+
+			inout globalNextAngle				_G__next_angle:			CGFloat,
+			                   		
+			globalYFirstPrev 			_G__y_firstprev: 		YFirstPrev)
+		
+		-> SKAction {
+			
+		// 1:
+		let _L__y_tuple = setTupleY(
+			globalYs: _G__y_tuple,
+			currentY: _G__current_y
+		)
+		
+		// 2:
+		let _L__y_current = smoothCurrentY(
+			yTuple:   _L__y_tuple,
+			currentY: _G__current_y,
+			realJump: _G__real_jump
+		)
+		
+		// 3:
+		let _L__delta_yt = findDeltaYT(
+			currentY: _L__y_current,
+			prevY: _G__previous_y,
+			timeFPC: _G__time_fpc
+		)
+		
+		// 4:
+		let _L__accel_angle = findAcceleratedAngle(
+			deltaYT: _L__delta_yt,
+		  accelSlider: _G__accel_slider,
+		  speedMinMax: _G__speed_minmax
+		)
+		
+		// 5:
+		let _L__next_angle = adjustNextAngle(
+			currentAngle: _G__current_angle,
+			accelAngle:  _L__accel_angle,
+			yFirstPrev: _G__y_firstprev
+		)
+		
+		
+		// 6:
+		let _L__final_action = makeAction(_L__next_angle)
+		
+		
+		// 7:
+		let globes_successfully_updated = true //updatedglobes
+		
+		// Update globes with _L_ values
+		updateGlobes: do {
+		
+			_G__current_y = _L__y_current
+			_G__y_tuple = _L__y_tuple
+
+			// update CurrentAngle in touchesMoved()
+			_G__next_angle = _L__next_angle
+		}
+		// End:
+		if globes_successfully_updated == true {
+			return _L__final_action
+		}
+		else {
+			printl("Prabrems in findaction")
+			return SKAction.moveTo(CGPoint(x: 0, y: 0), duration: 0)
+		}
+	}
+	
+	/// This is a static struct
+	private init() {}
 }
