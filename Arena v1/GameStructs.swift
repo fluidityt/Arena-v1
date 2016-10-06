@@ -30,7 +30,6 @@ struct Global: Static {
     // ...which is distance actuall
   }
 
-
   /* Random shit that doesn't
   fit anywhere else */
   static var

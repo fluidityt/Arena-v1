@@ -47,6 +47,8 @@ class GameScene: SKScene {
 		genericInits:do {
 
 			Global.SELF = self
+			Global.first_drag = false // Confusing
+			
 			XY.CENTER_SCREEN = CGPoint (x: CGRectGetMidX (G.SELF.frame),
 										y: CGRectGetMidY (G.SELF.frame))
 		}
@@ -57,8 +59,7 @@ class GameScene: SKScene {
 			G.SELF.addChild (N.central)
 
 			N.central.runAction (SKAction.rotateToAngle (0, duration: 0.5))
-			G.Angles.super_angle = N.central.zRotation
-			G.Angles.angle.current = G.Angles.super_angle
+			G.Angles.angle.current = N.central.zRotation
 		}
 		return // from DMtV
 	}
@@ -85,19 +86,21 @@ class GameScene: SKScene {
 
 	override func touchesMoved (touches: Set<UITouch>, withEvent event: UIEvent?) {
 
+		// Shouldnt this be outside for loop..
+		if G.first_drag == true {
+
+			G.first_drag = false    // This has to be false after first_entry
+
+			G.time.previous = G.time.first // time.atTB compared with time.atMove
+		}
+				
+				
 		for touch in touches {
 
-			updateGlobesWithNewInfo:do {
+			updateGlobesWithNewTouchInfo:do {
 
 				XY.y.previous = Sanity.updatePreviousY (currentY: XY.y.current)
-				XY.y.current = Sanity.updateCurrentY (touch.locationInNode (self).y)
-
-				if G.first_drag == true {
-
-					toggle (&G.first_drag)     // This has to be false after first_entry
-
-					G.time.previous = G.time.first // time.atTB compared with time.atMove
-				}
+				XY.y.current  = Sanity.updateCurrentY  (touch.locationInNode (self).y)
 			}
 
 
@@ -111,34 +114,17 @@ class GameScene: SKScene {
 				return // From guard
 			}
 
-			Hotfix () {
-
-				if XY.y.current > XY.y.previous {
-					A.angle.next = A.angle.current + 0.5
-					N.central.runAction (SKAction.rotateToAngle (A.angle.next, duration: 0.0))
-					A.angle.current = A.angle.next
-				}
-				else {
-					A.angle.next = A.angle.current - 0.5
-					N.central.runAction (SKAction.rotateToAngle (A.angle.next, duration: 0.0))
-					A.angle.current = A.angle.next
-				}
-			}
-
-			return
-
-
-			;
+			
 			let fully_handled_rotation_action_with_acceleration_and_smoothing
 			= findRotationAction (XY.y.current)
-			;
+			
 
 			runFoundAction:do {
 				N.central.runAction (fully_handled_rotation_action_with_acceleration_and_smoothing)
 			}
-
-			return // From TM
 		}
+		
+		return // From TM
 	}
 
 	override func touchesEnded (touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -166,24 +152,14 @@ class GameScene: SKScene {
 
 			  enemySpawner()
 			  _seconds = 0
-			}
-
-
+			 }
 			*/
-		}
-
-//		
-//		A.angle.next = A.angle.current + 0.25
-//		
-//		N.central.runAction(SKAction.rotateToAngle(A.angle.next, duration: 0.0))
-//		A.angle.current = A.angle.next
-//
-//		G.time.current = currentTime
-//		
-
-	}//updat
-}
-//EoC
+        }
+        
+		G.time.current = currentTime
+		return // from update
+	}
+}//EoC
 
 func shapeTex (node: SKShapeNode) {
 
