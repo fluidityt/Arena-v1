@@ -49,17 +49,22 @@ class GameScene: SKScene {
 			Global.SELF = self
 			Global.first_drag = false // Confusing
 			
-			XY.CENTER_SCREEN = CGPoint (x: CGRectGetMidX (G.SELF.frame),
-										y: CGRectGetMidY (G.SELF.frame))
+			let frame = Global.SELF.frame
+			XY.CENTER_SCREEN = CGPoint (x: CGRectGetMidX (frame),
+																	y: CGRectGetMidY (frame))
 		}
 
 		initCircles:do {
 
 			Global.Nodes.central = Circle ()
-			G.SELF.addChild (N.central)
+			
+			let central_node = G.Nodes.central
+			Global.SELF.addChild (central_node)
 
-			N.central.runAction (SKAction.rotateToAngle (0, duration: 0.5))
-			G.Angles.angle.current = N.central.zRotation
+			Global.Nodes.central.runAction (SKAction.rotateToAngle (0, duration: 0.5))
+			
+			let central_rotation = G.Nodes.central.zRotation
+			Global.Angles.angle.current = central_rotation
 		}
 		return // from DMtV
 	}
@@ -87,36 +92,43 @@ class GameScene: SKScene {
 	override func touchesMoved (touches: Set<UITouch>, withEvent event: UIEvent?) {
 
 		// Shouldnt this be outside for loop..
-		if G.first_drag == true {
+		let first_drag = G.first_drag
+		if first_drag == true {
 
-			G.first_drag = false    // This has to be false after first_entry
+			Global.first_drag = false    // This has to be false after first_entry
 
-			G.time.previous = G.time.first // time.atTB compared with time.atMove
+			let time_first = G.time.first
+			Global.time.previous = time_first // time.atTB compared with time.atMove
 		}
 				
 				
 		for touch in touches {
 
 			updateGlobesWithNewTouchInfo:do {
-
-				XY.y.previous = Sanity.updatePreviousY (currentY: XY.y.current)
-				XY.y.current  = Sanity.updateCurrentY  (touch.locationInNode (self).y)
+				
+				let y_current = G.XnY.y.current
+				
+				Global.XnY.y.previous = Sanity.updatePreviousY (currentY: y_current)
+				Global.XnY.y.current  = Sanity.updateCurrentY  (touch.locationInNode (self).y)
 			}
 
 
 			// Paused (lateral)--no angle now--reset values
-			guard (XY.y.current != XY.y.previous) else {
+			let y_current = G.XnY.y.current
+			let y_previous = G.XnY.y.previous
+			
+			guard (y_current != y_previous) else {
 
 				printl ("paused but didn't release")
-				N.central.removeAllActions ()
-				XY.y_tuple = ("refreshed", 0, 0, 0)
+				
+				Global.Nodes.central.removeAllActions ()
+				Global.XnY.y_tuple = ("refreshed", 0, 0, 0)
 
 				return // From guard
 			}
 
-			
 			let fully_handled_rotation_action_with_acceleration_and_smoothing
-			= findRotationAction (XY.y.current)
+			= findRotationAction (y_current)
 			
 
 			runFoundAction:do {
@@ -128,7 +140,7 @@ class GameScene: SKScene {
 	}
 
 	override func touchesEnded (touches: Set<UITouch>, withEvent event: UIEvent?) {
-
+		Global2.xy.y_tuple = ("refreshed", 0, 0, 0)
 		XY.y_tuple = ("refreshed", 0, 0, 0)
 	}
 
@@ -156,7 +168,7 @@ class GameScene: SKScene {
 			*/
         }
         
-		G.time.current = currentTime
+		Global.time.current = currentTime
 		return // from update
 	}
 }//EoC
