@@ -16,21 +16,24 @@ import SpriteKit
 #### TODO: Split this up into Acceleration | Adjustment | Actions
 #### TODO: Reset numbers (velocity) when change in direction detected
 
+- note: The farther the rotation (in rads) from the current zRot, the faster the spin
+
 #### Overview:
 
-	1. Use currentY to Update smooth_y_tuple
+	1. Use currentY to updated the y_tuple coord history
 
 	2. Use yTuple to smooth currentY
 
-	3. use (the new) currentY to find delta Y and T
+	3. use (the newly smoothed) currentY to find delta Y and T
 
 	4. Use deltaYT to find find accelerated angle
 
-	5. Use acceleratedAngle to tweak acceleration
+	5. Use acceleratedAngle to tweak acceleration (finds the next angle)
 
-	6. Update globes to reflect changes in 1-5
+	6. Use nextAngle to create the proper SKAction
 
-	7. Use 1-6 to create and return the proper SKAction
+	7. Update globes to reflect changes in 1-6 then return the action
+
 
 
 #### typealiase:
@@ -76,8 +79,11 @@ struct FindRotationAction: Static {
 
 	typealias FRA = FindRotationAction
 	typealias MinMax = (min: CGFloat, max: CGFloat)
+	
+	
 
 	
+																	// MARK: 1
 /** Func 1 of 6
 	
 	- note: Update stacks, determine which new Y value to deflate and return
@@ -118,7 +124,9 @@ struct FindRotationAction: Static {
 	}
 
 
+	
 
+															// MARK: 2
 /**		2 of 6
 - note: Uses y_tuple and all the above to give us a smoother Y value,
 	RJ # pix b4 active.. Logic algorythimg
@@ -185,8 +193,9 @@ struct FindRotationAction: Static {
 		}
 	}
 	
+	
 
-
+														// MARK: 3
 /** 3 of 7
 - note: Find the change in Y and Time since last move/drag
 	
@@ -214,6 +223,7 @@ struct FindRotationAction: Static {
 
 
 	
+													// MARK: 4
 /** 4 of 7
 - note: How fast we moved the cursor
 	
@@ -254,6 +264,7 @@ struct FindRotationAction: Static {
 
 
 
+																// MARK: 5
 /** 5 of 7
 - note: Next angle
 	
@@ -265,8 +276,9 @@ struct FindRotationAction: Static {
 			yFP:						Global.XnY.y)
 	
 */
-	static func adjustNextAngle (currentAngle current_angle: CGFloat,
+	static func adjustNextAngle (
 												accelAngle accelerated_angle: CGFloat,
+											  currentAngle current_angle: CGFloat,
 												yFirstPrev y: YFirstPrev
 	) -> AngleToRotateTo {
 
@@ -281,25 +293,16 @@ struct FindRotationAction: Static {
 		}
 	}
 
-		
-	
+
+
+																// MARK: 6
 /** 6 of 7
-- note: requires mutability in prams
-	
-#### Usage:
-	
-		Global.time.previous = updatePrevTimeToCur (current_time)
-*/
-
-	
-
-/** 7 of 7
 - note: Return action
 
 #### Usage:
 		let rotation_action = makeAction(Global.Angles.angle.next)
 */
-	static func makeAction (next_angle: CGFloat) -> SKAction {
+	static func makeAction (nextAngle next_angle: CGFloat) -> SKAction {
 
 		let fully_calibrated_action = SKAction.rotateToAngle (next_angle, duration: 0.0)
 
@@ -308,101 +311,86 @@ struct FindRotationAction: Static {
 	
 	
 	
-/** Call this on the action you want to run in touchesMoved()
-
-- note:
+																// MARK: 7
+/** 7 of 7
+	
+- note: Call this on the action you want to run in touchesMoved()
 	
 #### Usage:
 	
 		let fully_handled_action = FindRotationAction(initialY: tloc.y)
-		
-		runAction(fully_handled_action)
 */
 	static func implement1thru7(
-			inout globalCurrentY 	  		_G__current_y: 			CGFloat,
-
-			// This updates in touchesMoved()
-			globalPreviousY				_G__previous_y: 		CGFloat,
-			               				
-			inout globalYTuple				 	_G__y_tuple: 				TripleFloat,
-			            				 	
-			globalRealJump 				_G__real_jump: 			CGFloat,
-			               				
-			globalTimeFPC					_G__time_fpc: 			TimeFirstPrevCur,
-			             					
-			globalAccelSlider		 	_G__accel_slider: 	CGFloat,
-			                 		 	
-			globalSpeedMinMax 		_G__speed_minmax: 	MinMax,
-			                  		
-			globalCurrentAngle 		_G__current_angle: 	CGFloat,
-
-			inout globalNextAngle				_G__next_angle:			CGFloat,
-			                   		
-			globalYFirstPrev 			_G__y_firstprev: 		YFirstPrev)
 		
+				inout globalYTuple		_G__y_tuple: 				TripleFloat,
+				
+				inout globalCurrentY 	_G__current_y: 			CGFloat,
+
+				globalPreviousY				_G__previous_y: 		CGFloat,
+																		
+				globalYFirstPrev 			_G__y_firstprev: 		YFirstPrev,
+				                 			
+
+				globalRealJump 				_G__real_jump: 			CGFloat,
+															
+				globalTimeFPC					_G__time_fpc: 			TimeFirstPrevCur,
+															
+				globalAccelSlider		 	_G__accel_slider: 	CGFloat,
+															
+				globalSpeedMinMax 		_G__speed_minmax: 	MinMax,
+															
+				
+				globalCurrentAngle 		_G__current_angle: 	CGFloat,
+				
+				inout globalNextAngle	_G__next_angle:			CGFloat )
+				                     	
+	
 		-> SKAction {
 			
 		// 1:
-		let _L__y_tuple = setTupleY(
-			globalYs: _G__y_tuple,
-			currentY: _G__current_y
+		let _L__y_tuple = setTupleY(	globalYs: _G__y_tuple,
+		                            	currentY: _G__current_y
 		)
 		
 		// 2:
-		let _L__y_current = smoothCurrentY(
-			yTuple:   _L__y_tuple,
-			currentY: _G__current_y,
-			realJump: _G__real_jump
+		let _L__y_current = smoothCurrentY(	yTuple:   _L__y_tuple,
+		                                   	currentY: _G__current_y,
+		                                   	realJump: _G__real_jump
 		)
 		
 		// 3:
-		let _L__delta_yt = findDeltaYT(
-			currentY: _L__y_current,
-			prevY: _G__previous_y,
-			timeFPC: _G__time_fpc
+		let _L__delta_yt = findDeltaYT( currentY: _L__y_current,
+		                                prevY: 		_G__previous_y,
+		                                timeFPC: 	_G__time_fpc
 		)
 		
 		// 4:
-		let _L__accel_angle = findAcceleratedAngle(
-			deltaYT: _L__delta_yt,
-		  accelSlider: _G__accel_slider,
-		  speedMinMax: _G__speed_minmax
+		let _L__accel_angle = findAcceleratedAngle(	deltaYT: 		 _L__delta_yt,
+		                                           	accelSlider: _G__accel_slider,
+		                                           	speedMinMax: _G__speed_minmax
 		)
 		
 		// 5:
-		let _L__next_angle = adjustNextAngle(
-			currentAngle: _G__current_angle,
-			accelAngle:  _L__accel_angle,
-			yFirstPrev: _G__y_firstprev
+		let _L__next_angle = adjustNextAngle(	accelAngle:  	_L__accel_angle,
+		                                     	currentAngle: _G__current_angle,
+		                                     	yFirstPrev: 	_G__y_firstprev
 		)
 		
-		
 		// 6:
-		let _L__final_action = makeAction(_L__next_angle)
-		
-		
+		let _L__final_action = makeAction( nextAngle: _L__next_angle
+		)
+				
 		// 7:
-		let globes_successfully_updated = true //updatedglobes
+		_G__current_y 	= _L__y_current
+		_G__y_tuple 		= _L__y_tuple
+		_G__next_angle 	= _L__next_angle
 		
-		// Update globes with _L_ values
-		updateGlobes: do {
-		
-			_G__current_y = _L__y_current
-			_G__y_tuple = _L__y_tuple
-
-			// update CurrentAngle in touchesMoved()
-			_G__next_angle = _L__next_angle
-		}
-		// End:
-		if globes_successfully_updated == true {
-			return _L__final_action
-		}
-		else {
-			printl("Prabrems in findaction")
-			return SKAction.moveTo(CGPoint(x: 0, y: 0), duration: 0)
-		}
+		return _L__final_action
 	}
 	
+	
+	
+																// MARK: End
 	/// This is a static struct
 	private init() {}
 }
