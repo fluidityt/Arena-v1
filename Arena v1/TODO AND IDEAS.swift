@@ -45,6 +45,19 @@ ok so it looks like it's only in the middle of the screen that works...
 I dont even need hit detection.. can precompute or use .position! or can have a trailing
 skaction (code block)
 
+			... touchesMoved FindAction:
+			i dont think that the timer values are going to be different before / after the func
+			
+			.. I need to look at NSTimer().. and Jareds Udemy
+			
+			bug: ..fuck.. still only spawning on top right... and speed is fucked
+			
+			bug: .. as framerate drops, wheel spin slows...
+			
+			bug.. not spawning to side 4.. looks like circle aggro
+					also.. not printing from case statement
+			
+			
 */
 		}
 	}

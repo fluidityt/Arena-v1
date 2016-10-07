@@ -72,7 +72,10 @@
 			
 			let min = UInt32(range_min)
 			let max = UInt32(range_max)
-			
+Hotfix() {
+	printd("float min: ", min)
+	printd("float max: ", max)
+}
 			errorChecking: do {
 				if min > max {
 					print("random error, min greater than max")
@@ -88,12 +91,14 @@
 			let middle = (max - min)
 			
 			let result: UInt32 = {
-				let rand = arc4random_uniform(middle)
 				
-				if rand == (max - 1) { return max }
-				else								 { return rand }
+				let rand = arc4random_uniform(middle)
+printd("cgfloat rand: ", rand)
+				if rand == (max - 1) { printd("bingo, returning max", rand); return max }
+				else								 { return rand + min }
 			}()
 			
+printd(" cgfloat result: ", result)
 			return CGFloat(result)
 		}
 		
@@ -103,6 +108,10 @@
 			let min = UInt32(range_min)
 			let max = UInt32(range_max)
 			
+Hotfix() {
+	printd("int min: ", min)
+	printd("int max: ", max)
+}
 			errorChecking: do {
 				if min > max {
 					print("random error, min greater than max")
@@ -119,11 +128,11 @@
 			
 			let result: UInt32 = {
 				let rand = arc4random_uniform(middle)
-				
-				if rand == (max - 1) { return max }
-				else								 { return rand }
+printd("cgfloat rand", rand)
+				if rand == (max - 1) { printd(" bingo int ret max"); return max }
+				else								 { return (rand + min) }
 			}()
-			
+printd("int result: ", result)
 			return Int(result)
 		}
 

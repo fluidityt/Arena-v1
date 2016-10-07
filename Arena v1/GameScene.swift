@@ -29,7 +29,9 @@ func notafunc_conventions () {
 // MARK: Top
 // MARK: Move to other file
 /// Its ok to have a singular globe that isn't funcy... right? it's thread independent
-var _current_time = CFTimeInterval()
+var _current_time = CFTimeInterval(0)
+var _time_stamp = CFTI(0)
+var _seconds = 0
 
 typealias PrivateInit = Void
 struct Note {
@@ -121,7 +123,7 @@ class GameScene: SKScene {
 			// All is well :)
 		}
 		else {
-			G.first_drag = true // correct msitake
+			Global.first_drag = true // correct msitake
 			printd ("first drag was f\\ked") // alert to logic error
 		}
 		
@@ -229,36 +231,39 @@ class GameScene: SKScene {
 			
 				// No crazy angles
 				Global.Angles.angle.next = 0
-			
-			
-			
 		}
 	}
 
 	override func update (currentTime: CFTimeInterval) {
 
-		updateClock:do {
-			/*
-			// Clocker...
-			_clock_count += 1
-
-			// Seconder...
-			if _clock_count == 60 {
-
-			  _clock_count = 0
-			  _seconds += 1
+		handleFirstRun: do {
+			if _current_time == 0 {
+				_current_time = currentTime
+				_time_stamp = currentTime
 			}
-
-			// Spawner...
-			if _seconds == 3 {
-
-			  enemySpawner()
-			  _seconds = 0
-			 }
-			*/
-        }
-		// Breaking procedure for something that should be built in
+		}
+		
 		_current_time = currentTime
+		
+		Tryout {
+			// If one second has passed since last timestamp..
+			if _current_time >= (_time_stamp + 1) {
+				// Then increase seconds, and set stamp to current time
+				_seconds += 1
+				_time_stamp = _current_time
+			}
+			
+			// Check for enemy spawn..
+			if _seconds == Global.Config.spawn_timer {
+				// Spawn enemy
+				Enemy.enemySpawner(sceneToAddTo: Global.SELF,
+													 difficultyLvl: Global.Config.difficulty)
+				
+				// Reset timer for next enemy
+				_seconds = 0
+			}
+		}
+
 		return // from update
 	}
 

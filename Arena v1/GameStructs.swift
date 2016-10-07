@@ -27,8 +27,11 @@ struct Global: Static {
 
     accel_strength = CGFloat (0.001),
     speed          = (min: CGFloat (0.01), // The min/max speed is 100/400 PPS
-                      max: CGFloat (0.4))
-    // ...which is distance actuall
+                      max: CGFloat (0.4)),
+		
+		// TODO: These should probably be var...
+		spawn_timer		 = 2,
+		difficulty 		 = NSTimeInterval(3)
   }
 
   /* Random shit that doesn't

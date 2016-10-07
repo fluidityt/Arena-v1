@@ -9,106 +9,127 @@
 import Foundation
 import SpriteKit
 
-extension F {
+// Declaration
+/// BUllets spawn.. only in a local scope
+struct Enemy {
 	
-	struct Enemy {
-		private init() {}
+	//Vector from / to a point in coord-distance
+	typealias MagXY = (x: CGFloat, y: CGFloat)
+	
+	// Explanation... see extension for config
+	let
+	radius: CGFloat, 	  // how big the circle enemy is
+	node: SKShapeNode, // what is used to do all the OOP stuff
+	difficulty: NSTimeInterval,	// How fast it moves towards teh center
+	
+	offset: MagXY, // Offsets of bounds (maybe set to .5 of enemy diameter?)
+	bounds: MagXY // Boundaries of the fram
+}
+
+// Config
+extension Enemy {
+	
+	// Config the enemy here... possibly put it in Global.Config.EnemyConfig?
+	private init(difficultyLvl difficulty_level: NSTimeInterval,
+							 sceneToAddTo scene: SKScene )	{
 		
-		/**
-		#### Usage: 
-			let did_spawn = enemySpanwer() // will be true
-*/
-		static func enemySpawner(sideToSpawnOn side: Int,
-														 sceneToAddTo scene: SKScene) -> Bool {
-			
-			// Size of our enemy (used later too)
-			let enemy_radius = CGFloat(10)
-			
-			// make our toon
-			let		enemy 			 = SKShapeNode.init(circleOfRadius: enemy_radius)
-			
-			// Give it a color
-			let random_color = random(1,3)
-			
-			// Match the color
-			switch random_color {
-			case 1:
-				//blue
-				enemy.fillColor = UIColor.blueColor()
-			case 2:
-				//green
-				enemy.fillColor = UIColor.greenColor()
-			case 3:
-				//red
-				enemy.fillColor = UIColor.redColor()
-			default:
-				()
-			}
-			
-			// 1 top 2 right 3 bottom 4 left
-			func spawnSideDecider() -> Int {
-				return randy(4)
-			}
-			
-			// TODO: do this right with a decent random method
-			/// 1 top; 2 right; 3 bottom; 4 left
-			func randomPosition( spawnOnSide side: Int = side,
-													 enemyRadius radius: CGFloat = enemy_radius)
-				
-				-> CGPoint {
-					
-					// Offsets of bounds (maybe set to .5 of enemy diameter?)
-					// TODO: Move this to config file?
-					let
-					x_offset = radius * 0.5,
-					y_offset = radius * 0.5
-					
-					// Boundaries of the fram
-					// TODO: subtract the offset from the bounds
-					let
-					x_bounds = (Global.SELF.frame.width - x_offset),
-					y_bounds = (Global.SELF.frame.height - y_offset)
-					
-					// Coords to spawn:
-					let
-					x : CGFloat?,
-					y : CGFloat?
-					
-					// set coords:
-					switch side {
-					case 1:		// top
-						x = random(x_offset, x_bounds)
-						y = y_bounds
-					case 2:		// right
-						x = x_bounds
-						y = random(y_offset, y_bounds)
-					case 3:		// bottom
-						x = random(x_offset, x_bounds)
-						y = y_offset
-					case 4:		// left
-						x = x_offset
-						y = random(y_offset, y_bounds)
-					default:
-						printl("problem in randysidepick")
-						x = 99999; y = 0
-					}
-					
-					return CGPoint(x: x!, y: y!)
-			}
-			
-			
-			// do stuff
-			enemy.position = randomPosition(spawnOnSide: side, enemyRadius: enemy_radius)
-			
-			// Error check:
-			guard (enemy.position.x != 99999) else {	return false		}
-			
-			// on success:
-			scene.addChild(enemy)
-			
-			// more stuff
-			enemy.runAction(SKAction.moveTo(Global.Nodes.central.position, duration: 3))
-			
-		}
+		radius 			= 10
+		node 	 			= SKShapeNode.init(circleOfRadius: self.radius)
+		difficulty 	= difficulty_level
+		
+		offset 			= (x: radius*0.5, y: radius*0.5)
+		bounds 			= (x: (scene.frame.width - offset.x),
+		       			   y: (scene.frame.height - offset.x))
 	}
 }
+
+// Spawner
+extension Enemy {
+	
+/**
+	#### Usage:
+	let did_spawn: Bool = enemySpanwer()
+	
+	#### TODO:
+	- add more prams
+*/
+	static func enemySpawner( sceneToAddTo scene: SKScene,
+													  difficultyLvl difficulty: NSTimeInterval)
+		-> Bool {
+			
+			/// Our enemy instance!!
+			let enemy = Enemy(difficultyLvl: difficulty, sceneToAddTo: scene)
+			
+			// Give it a color
+			findAColor: do {
+print("entering color.. ignore")
+				let random_color = random(1,3)
+				
+				// Match the color
+				switch random_color {
+				case 1:
+					//blue
+					enemy.node.fillColor = UIColor.blueColor()
+				case 2:
+					//green
+					enemy.node.fillColor = UIColor.greenColor()
+				case 3:
+					//red
+					enemy.node.fillColor = UIColor.redColor()
+				default:
+					printl("problem in enemy color pick \(random_color)")
+					return false	// early exit
+				}
+			}
+			
+			// Give it a position
+			findAPosition: do {
+				// 1 top; 2 right; 3 bottom; 4 left
+print("should be 1-4")
+				let side_to_spawn_on = random(1, 4)
+				// Coords to spawnon (return):
+				let 	x : CGFloat?
+				let 	y : CGFloat?
+
+				// set coords:
+				switch side_to_spawn_on {
+			
+				case 1:		// top
+					x = random(enemy.offset.x, enemy.bounds.x)
+					y = enemy.bounds.y
+					
+				case 2:		// right
+					x = enemy.bounds.x
+					y = random(enemy.offset.y, enemy.bounds.y)
+					
+				case 3:		// bottom
+					x = random(enemy.offset.x, enemy.bounds.x)
+					y = enemy.offset.y
+					
+				case 4:		// left
+					x = enemy.offset.x
+					y = random(enemy.offset.y, enemy.bounds.y)
+					
+				default:
+					printl("problem in randysidepick")
+					return false // early exit
+				}
+				
+
+				// Set the enemy!
+				enemy.node.position = CGPoint(x: x!, y: y!)
+print(enemy.node.position)
+			}
+			
+			// Add to scene
+			scene.addChild(enemy.node)
+			
+			// Run it towards the wheel!
+			enemy.node.runAction(
+				SKAction.moveTo(
+					Global.Nodes.central.position, duration: enemy.difficulty))
+			
+			// No problems :)
+			return true
+	}
+}// EoC

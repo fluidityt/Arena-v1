@@ -1,70 +1,25 @@
 import Foundation
 import SpriteKit
 
-// Float
-func random(range_min: CGFloat,_ range_max: CGFloat) -> CGFloat {
+class Enemys {
+	// TODO: Possibly give some members, then instance inside the funcs
 	
-	let min = UInt32(range_min)
-	let max = UInt32(range_max)
+	// Config:
+	var wtf = 5
 	
-	errorChecking: do {
-	if min > max {
-		print("random error, min greater than max")
-		return 999999999
-	}
+	var	radiuss = 0
 	
-	if min == max {
-		print("random error, min == max")
-		return CGFloat(min)
-	}
-	}
-	
-	let middle = (max - min)
-	
-	let result: UInt32 = {
-		let rand = arc4random_uniform(middle)
-		
-		if rand == (max - 1) { return max }
-		else								 { return rand }
-	}()
-	
-	return CGFloat(result)
+	//let	node 		= SKShapeNode(circleOfRadius: radiuss)
+	//private init() {}
 }
 
-// Int
-func random(range_min: Int,_ range_max: Int) -> Int {
+class cat {
+	var name = "fluffy"
+	var age = 4
 	
-	let min = UInt32(range_min)
-	let max = UInt32(range_max)
+	var ok: Int
 	
-	errorChecking: do {
-		if min > max {
-			print("random error, min greater than max")
-			return 999999999
-		}
-		
-		if min == max {
-			print("random error, min == max")
-			return Int(min)
-		}
+	init() {
+		ok = self.age
 	}
-	
-	let middle = (max - min)
-	
-	let result: UInt32 = {
-		let rand = arc4random_uniform(middle)
-		
-		if rand == (max - 1) { return max }
-		else								 { return rand }
-	}()
-	
-	return Int(result)
-}
-
-var counter = 0
-
-while counter != 8 {
-	counter += 1
-	print(random(7,4))
-
 }
