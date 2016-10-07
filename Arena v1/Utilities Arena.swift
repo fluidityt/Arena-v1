@@ -26,8 +26,11 @@
 		//---------------
 		//<#MARK: - MWINS#>:
 		//---------------
-		
-		public func printd<t>(s: t) { print("DEBUG: \(s)") }
+		var _debug_counter = 0
+
+		public func printd<t>(s: t) {
+			_debug_counter += 1; print("DEBUG: \(s) \(_debug_counter)")
+		}
 		public func printl<t>(s: t) { print("LOG: \(s)")   }
 		public func printe<t>(s: t) { print("ERRAR: \(s)")   }
 		public func printt<t>(s: t) { print("TEST: \(s)")   }

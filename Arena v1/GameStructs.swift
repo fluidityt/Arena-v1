@@ -23,7 +23,7 @@ struct Global: Static {
     verbose        = false,
     exec           = false,
 
-    real_jump      = CGFloat (20),
+    real_jump      = CGFloat (2),
 
     accel_strength = CGFloat (0.001),
     speed          = (min: CGFloat (0.01), // The min/max speed is 100/400 PPS

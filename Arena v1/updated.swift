@@ -289,7 +289,7 @@ struct FindRotationAction: Static {
 	) -> AngleToRotateTo {
 
 		// Dragged up (clockwise)
-		if (y.first > y.previous) {
+		if (y.current > y.previous) {
 			return current_angle + accelerated_angle
 		}
 
@@ -297,6 +297,7 @@ struct FindRotationAction: Static {
 		else {
 			return current_angle - accelerated_angle
 		}
+		
 	}
 
 
