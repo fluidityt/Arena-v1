@@ -13,10 +13,15 @@ import SpriteKit
 
 /** FindRotationAction is a dir for 7 static funcs
 
-#### TODO: Split this up into Acceleration | Adjustment | Actions
-#### TODO: Reset numbers (velocity) when change in direction detected
+#### TODO: Implement time funcs
 
 - note: The farther the rotation (in rads) from the current zRot, the faster the spin
+- note: right now, we need time variables updated outside of this func.
+
+#### Usage:
+		timefunc(enter)
+		let rotation_action = FindRotationAction.implement1thru7(current_y)
+		timefunc(exit)
 
 #### Overview:
 
@@ -214,14 +219,12 @@ struct FindRotationAction: Static {
 													 timeEE time: TimeEntryExit
 	) -> DeltaYAndTime {
 
-		Hotfix() {
-		// We kind of need the most recent data from Update
-		}
-		let
-		delta = (y: absV (smoothed_y - previous_y), 				// Delta Y (absv)
-						 t: CGFloat (time.at_this_entry - time.at_last_exit)) // Delta Time
-
-		return delta
+		// Delta values
+		let dy = absV ( smoothed_y - previous_y )
+		let dt = absV ( CGFloat(time.at_this_entry) - CGFloat(time.at_last_exit) )
+		
+		return  (y: dy,	// Delta Y (touch movement)
+						 t: dt) // Delta Time (passed)
 	}
 
 

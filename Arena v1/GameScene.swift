@@ -9,8 +9,43 @@
 
 import SpriteKit
 
+
+/// Its ok to have a singular globe that isn't funcy... right? it's thread independent
+var _current_time = CFTimeInterval()
+
 typealias PrivateInit = Void
 
+struct Note {
+	
+	init(code: ()->()) {
+		code()
+	}
+	
+}
+struct DontRun {
+	init(code: ()->()) {}
+}
+struct Placeholder {
+	
+	init(code: ()->()) {
+		code()
+	}
+	
+}
+struct Tryout {
+	
+	init(code: ()->()) {
+		code()
+	}
+	
+}
+struct NeedsWork {
+	
+	init(code: ()->()) {
+		code()
+	}
+	
+}
 
 /// Can't force a `private init() {}` ={
 protocol Static {}
@@ -73,9 +108,12 @@ class GameScene: SKScene {
 	override func touchesBegan (touches: Set<UITouch>, withEvent event: UIEvent?) {
 
 		for touch in touches {
-			Hotfix() {
-			// The time NOW (basically) when started TB
-				//Global.time2.atBegan = G.time.current
+
+			old: do {
+//			Hotfix() {
+//			// The time NOW (basically) when started TB
+//				//Global.time2.atBegan = G.time.current
+//			}
 			}
 			
 			// The next input (TM) will be our 'first drag' | error checking is good!
@@ -86,14 +124,7 @@ class GameScene: SKScene {
 			
 		
 		}
-		Hotfix() {
-			/* 
-			FIXME: 
-			I can't figure out the timing on this... the first drag is going to
-			be too fast or too slow...
-			*/
-			see the breakpoints
-		}
+
 
 		return // from TB
 	}
@@ -101,66 +132,81 @@ class GameScene: SKScene {
 
 	override func touchesMoved (touches: Set<UITouch>, withEvent event: UIEvent?) {
 
-		// Shouldnt this be outside for loop..
-		let first_drag = G.first_drag
-		if first_drag == true {
+		handleFirstEntry: do {
+			// TODO: Figure out the timing problem (hold TB then 5 sec later TM will minspeed
+			
+		if Global.first_drag == true {
 
 			Global.first_drag = false    // This has to be false after first_entry
 
 			let time_first = G.time.first
 			Global.time.previous = time_first // time.atTB compared with time.atMove
+			}
 		}
 				
-				
+		// Main entry:
 		for touch in touches {
 
-			updateGlobesWithNewTouchInfo:do {
+			// Update the globes with the new touch and time info
+			do {
 				
-				let y_current = G.XnY.y.current
-				
-				Global.XnY.y.previous = Sanity.updatePreviousY (currentY: y_current)
+				// Y values are different now:
+				Global.XnY.y.previous = Sanity.updatePreviousY (currentY: G.XnY.y.current)
 				Global.XnY.y.current  = Sanity.updateCurrentY  (touch.locationInNode (self).y)
 			}
 
 
-			// Paused (lateral)--no angle now--reset values
-			let y_current = G.XnY.y.current
-			let y_previous = G.XnY.y.previous
-			
-			guard (y_current != y_previous) else {
+			// Handle the case where we need to pause...
+			// Lateral--no angle now--reset values
+			Tryout { do {
 
-				printl ("paused but didn't release")
-				
-				Global.Nodes.central.removeAllActions ()
-				Global.XnY.y_tuple = ("refreshed", 0, 0, 0)
-
-				return // From guard
+				guard (G.XnY.y.current != G.XnY.y.previous) else {
+					printl ("paused but didn't release")
+					
+					// Reset values
+					Global.Nodes.central.removeAllActions ()
+					Global.XnY.y_tuple = ("refreshed", 0, 0, 0)
+					
+					return
+				}}
 			}
-
+			
+			// Update our timer (start)
+			Tryout {
+				// Timing values for the acceleration pipeline:
+				Global.time3.at_this_entry = _current_time
+			}
+			
+			// If no lateral movement, let's find our rotation action:
 			let fully_handled_rotation_action_with_acceleration_and_smoothing
-			= FindRotationAction.implement1thru7(globalYTuple: 				&G.XnY.y_tuple,
-			                                     globalCurrentY: 			&G.XnY.y.current,
-			                                     globalPreviousY: 		G.XnY.y.previous,
-			                                     globalYFirstPrev: 		G.XnY.y,
-			                                     globalRealJump: 			G.Config.real_jump,
+				= FindRotationAction.implement1thru7(globalYTuple: 				&G.XnY.y_tuple,
+				                                     globalCurrentY: 			&G.XnY.y.current,
+				                                     globalPreviousY: 		G.XnY.y.previous,
+				                                     globalYFirstPrev: 		G.XnY.y,
+				                                     globalRealJump: 			G.Config.real_jump,
 
-			                                     globalTimeEE:				G.time3,
+				                                     globalTimeEE:				G.time3,
 			                                     
-			                                     globalAccelSlider: 	G.Config.accel_strength,
-			                                     globalSpeedMinMax: 	G.Config.speed,
-			                                     globalCurrentAngle:	G.Angles.angle.current,
-			                                     globalNextAngle: 		&G.Angles.angle.next)
+				                                     globalAccelSlider: 	G.Config.accel_strength,
+				                                     globalSpeedMinMax: 	G.Config.speed,
+				                                     globalCurrentAngle:	G.Angles.angle.current,
+				                                     globalNextAngle: 		&G.Angles.angle.next)
 			
 
-			runFoundAction:do {
+			// Update our timer (exit)
+			Tryout {
+				// timing value for accel
+				Global.time3.at_last_exit = _current_time
+			}
+			
+			// Run the found rotation action
+			do {
 				// Rotate to the nextAngle
 				N.central.runAction (fully_handled_rotation_action_with_acceleration_and_smoothing)
 				
 				// Our current angle is now something else to be something different
 				Global.Angles.angle.current
 					= Sanity.updatePreviousAngle(nextAngle: G.Angles.angle.next)
-				
-				
 			}
 		}
 		
@@ -195,8 +241,8 @@ class GameScene: SKScene {
 			 }
 			*/
         }
-        
-		Global.time.current = currentTime
+		// Breaking procedure for something that should be built in
+		_current_time = currentTime
 		return // from update
 	}
 }//EoC
