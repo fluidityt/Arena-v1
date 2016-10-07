@@ -29,7 +29,7 @@
 		var _debug_counter = 0
 
 		public func printd<t>(s: t) {
-			_debug_counter += 1; print("DEBUG: \(s) \(_debug_counter)")
+			_debug_counter += 1; print("DEBUG: \(s)    ___ \(_debug_counter)")
 		}
 		public func printl<t>(s: t) { print("LOG: \(s)")   }
 		public func printe<t>(s: t) { print("ERRAR: \(s)")   }
@@ -94,7 +94,7 @@ Hotfix() {
 				
 				let rand = arc4random_uniform(middle)
 printd("cgfloat rand: ", rand)
-				if rand == (max - 1) { printd("bingo, returning max", rand); return max }
+				if rand == (max - 2) { return max }
 				else								 { return rand + min }
 			}()
 			
@@ -128,8 +128,8 @@ Hotfix() {
 			
 			let result: UInt32 = {
 				let rand = arc4random_uniform(middle)
-printd("cgfloat rand", rand)
-				if rand == (max - 1) { printd(" bingo int ret max"); return max }
+printd("int rand", rand)
+				if rand == (max - 2) {  return max }
 				else								 { return (rand + min) }
 			}()
 printd("int result: ", result)

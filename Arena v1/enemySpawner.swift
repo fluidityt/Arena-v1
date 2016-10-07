@@ -85,7 +85,7 @@ print("entering color.. ignore")
 			// Give it a position
 			findAPosition: do {
 				// 1 top; 2 right; 3 bottom; 4 left
-print("should be 1-4")
+print("\n should be 1-4")
 				let side_to_spawn_on = random(1, 4)
 				// Coords to spawnon (return):
 				let 	x : CGFloat?
@@ -119,6 +119,7 @@ print("should be 1-4")
 				// Set the enemy!
 				enemy.node.position = CGPoint(x: x!, y: y!)
 print(enemy.node.position)
+print("\n")
 			}
 			
 			// Add to scene
