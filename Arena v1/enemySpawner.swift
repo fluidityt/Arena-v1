@@ -8,6 +8,8 @@
 
 import Foundation
 import SpriteKit
+var _enems: SKShapeNode?
+var _first_run = true
 
 // Declaration
 /// BUllets spawn.. only in a local scope
@@ -60,33 +62,37 @@ extension Enemy {
 			/// Our enemy instance!!
 			let enemy = Enemy(difficultyLvl: difficulty, sceneToAddTo: scene)
 			
+			if _first_run {
+				// Update!
+				_enems = enemy.node
+			}
+			
 			// Give it a color
 			findAColor: do {
-print("entering color.. ignore")
 				let random_color = random(1,3)
 				
 				// Match the color
 				switch random_color {
 				case 1:
 					//blue
-					enemy.node.fillColor = UIColor.blueColor()
+					_enems!.fillColor = UIColor.blueColor()
 				case 2:
 					//green
-					enemy.node.fillColor = UIColor.greenColor()
+					_enems!.fillColor = UIColor.greenColor()
 				case 3:
 					//red
-					enemy.node.fillColor = UIColor.redColor()
+					_enems!.fillColor = UIColor.redColor()
 				default:
 					printl("problem in enemy color pick \(random_color)")
 					return false	// early exit
 				}
 			}
+		
 			
 			// Give it a position
 			findAPosition: do {
 				// 1 top; 2 right; 3 bottom; 4 left
 				let side_to_spawn_on = random(1, 4)
-print(side_to_spawn_on)
 				// Coords to spawnon (return):
 				let 	x : CGFloat?
 				let 	y : CGFloat?
@@ -115,20 +121,25 @@ print(side_to_spawn_on)
 					return false // early exit
 				}
 
+				
+				
 				// Set the enemy!
-				//enemy.node.position = CGPoint(x: x!, y: y!)
-				enemy.node.position = CGPoint(x: x!, y: y!)
+				_enems!.removeAllActions()
+				_enems!.runAction(SKAction.moveTo(CGPoint(x: x!, y: y!), duration: 0))
+				
+				// Add to scene
+				if _first_run { scene.addChild(_enems!) }
+				
+				// Run it towards the wheel!
+				_enems!.runAction(
+					SKAction.moveTo(
+						Global.Nodes.central.position, duration: enemy.difficulty))
+				
+				// No longer the firstrun
+				_first_run = false
+				
+				// No problems :)
+				return true
 			}
-			
-			// Add to scene
-			scene.addChild(enemy.node)
-			
-			// Run it towards the wheel!
-			enemy.node.runAction(
-				SKAction.moveTo(
-					Global.Nodes.central.position, duration: enemy.difficulty))
-			
-			// No problems :)
-			return true
 	}
 }// EoC

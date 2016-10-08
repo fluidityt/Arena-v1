@@ -16,7 +16,7 @@ final class Circle: SKNode {
 	
 	override init() {
 		
-		big = SKSpriteNode(imageNamed: "twistycenter")
+		big = Global.SELF.childNodeWithName("bigger") as! SKSpriteNode //SKSpriteNode(imageNamed: "twistycenter")
 		big.size = CGSize(width: 300, height: 300)
 		
 		//small = SKShapeNode.init(circleOfRadius: 10)
@@ -30,7 +30,7 @@ final class Circle: SKNode {
 		big.position = F.getCenter(self)
 		
 		
-		addChild(big)
+		//addChild(big)
 		//addChild(small)
 		
 		//let MOVE_UP = CGVector(dx: 0, dy: 100)

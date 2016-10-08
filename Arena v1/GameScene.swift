@@ -104,8 +104,8 @@ class GameScene: SKScene {
 
 			Global.Nodes.central = Circle ()
 			
-			let central_node = G.Nodes.central
-			Global.SELF.addChild (central_node)
+			//	let central_node = G.Nodes.central
+			//Global.SELF.addChild (central_node)
 
 			Global.Nodes.central.runAction (SKAction.rotateToAngle (0, duration: 0.5))
 			

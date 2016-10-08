@@ -26,12 +26,12 @@ struct Global: Static {
     real_jump      = CGFloat (2),
 
     accel_strength = CGFloat (0.001),
-    speed          = (min: CGFloat (0.01), // The min/max speed is 100/400 PPS
-                      max: CGFloat (0.4)),
+    speed          = (min: CGFloat (0.005), // The min/max speed is 100/400 PPS
+                      max: CGFloat (0.3)),
 		
 		// TODO: These should probably be var...
 		spawn_timer		 = 2,
-		difficulty 		 = NSTimeInterval(3)
+		difficulty 		 = NSTimeInterval(2.5)
   }
 
   /* Random shit that doesn't
