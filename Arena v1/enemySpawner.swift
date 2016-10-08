@@ -38,8 +38,8 @@ extension Enemy {
 		difficulty 	= difficulty_level
 		
 		offset 			= (x: radius*0.5, y: radius*0.5)
-		bounds 			= (x: (scene.frame.width - offset.x),
-		       			   y: (scene.frame.height - offset.x))
+		bounds 			= (x: ( scene.frame.width - offset.x ),
+		       			   y: ( scene.frame.height - offset.x ))
 	}
 }
 
@@ -85,8 +85,8 @@ print("entering color.. ignore")
 			// Give it a position
 			findAPosition: do {
 				// 1 top; 2 right; 3 bottom; 4 left
-print("\n should be 1-4")
 				let side_to_spawn_on = random(1, 4)
+print(side_to_spawn_on)
 				// Coords to spawnon (return):
 				let 	x : CGFloat?
 				let 	y : CGFloat?
@@ -95,31 +95,29 @@ print("\n should be 1-4")
 				switch side_to_spawn_on {
 			
 				case 1:		// top
-					x = random(enemy.offset.x, enemy.bounds.x)
-					y = enemy.bounds.y
+					x = random(enemy.offset.x, enemy.bounds.x)  - (0.5 * scene.frame.width)
+					y = enemy.bounds.y 													- (0.5 * scene.frame.height)
 					
 				case 2:		// right
-					x = enemy.bounds.x
-					y = random(enemy.offset.y, enemy.bounds.y)
+					x = enemy.bounds.x 													- (0.5 * scene.frame.width)
+					y = random(enemy.offset.y, enemy.bounds.y)	- (0.5 * scene.frame.height)
 					
 				case 3:		// bottom
-					x = random(enemy.offset.x, enemy.bounds.x)
-					y = enemy.offset.y
+					x = random(enemy.offset.x, enemy.bounds.x) 	- (0.5 * scene.frame.width)
+					y = enemy.offset.y													- (0.5 * scene.frame.height)
 					
 				case 4:		// left
-					x = enemy.offset.x
-					y = random(enemy.offset.y, enemy.bounds.y)
+					x = enemy.offset.x 													- (0.5 * scene.frame.width)
+					y = random(enemy.offset.y, enemy.bounds.y)	- (0.5 * scene.frame.height)
 					
 				default:
 					printl("problem in randysidepick")
 					return false // early exit
 				}
-				
 
 				// Set the enemy!
+				//enemy.node.position = CGPoint(x: x!, y: y!)
 				enemy.node.position = CGPoint(x: x!, y: y!)
-print(enemy.node.position)
-print("\n")
 			}
 			
 			// Add to scene

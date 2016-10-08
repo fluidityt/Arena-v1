@@ -9,6 +9,8 @@ protocol OOP {}
 // TODO: Should I use nil for basic inits, or something else?, or perhaps make a init(default: Void) for each? but one that actually instantiateds something good
 // todo applewatch tower defense circular
 
+func funcystuff () {} /*{
+	
 /// Data management: (Fuck OOP)
 struct MyData {
 
@@ -202,3 +204,12 @@ testStuff: do {
 	
 }
 print("\n***** PG Success!! *******")
+
+}*/
+
+func stringy<t> (a: t,_ b: t) {
+	print(a, b)
+}
+let aa = "hi"
+let bb = "hi"
+stringy(aa, bb)

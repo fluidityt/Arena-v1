@@ -261,7 +261,7 @@ class GameScene: SKScene {
 				
 				// Reset timer for next enemy
 				_seconds = 0
-			}
+	 		}
 		}
 
 		return // from update

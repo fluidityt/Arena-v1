@@ -60,6 +60,15 @@ skaction (code block)
 			
 */
 		}
+		
+		check3: do {
+			/*
+			ok so I fixed no green.. still spawning in top half of screen though
+			
+			
+			
+			*/
+		}
 	}
 
 

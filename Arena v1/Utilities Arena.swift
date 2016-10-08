@@ -67,74 +67,93 @@
 			return result
 		}
 		
-		// Float
-		func random(range_min: CGFloat,_ range_max: CGFloat) -> CGFloat {
+		/// Random int
+		func random(min: Int,_ max: Int) -> Int {
 			
-			let min = UInt32(range_min)
-			let max = UInt32(range_max)
-Hotfix() {
-	printd("float min: ", min)
-	printd("float max: ", max)
-}
-			errorChecking: do {
-				if min > max {
-					print("random error, min greater than max")
-					return 999999999
-				}
-				
-				if min == max {
-					print("random error, min == max")
-					return CGFloat(min)
-				}
+			// Make sure we can progress the program (true = found error)
+			func foundIntError (min2: Int,_
+				max2: Int)
+				-> Bool {
+					
+					if min2 > max2 {
+						print("random INT error, min (\(min2)) greater than max (\(max2))")
+						return true
+					}
+						
+					else if min2 == max2 {
+						print("random INT error, min == max  (\(min2))")
+						return true
+					}
+					
+					return false
 			}
 			
-			let middle = (max - min)
+			if foundIntError(min, max)  {
+				// Should cause problems!
+				print ("random: returning (\(min) -1")
+				return min - 1
+			}
 			
-			let result: UInt32 = {
-				
-				let rand = arc4random_uniform(middle)
-printd("cgfloat rand: ", rand)
-				if rand == (max - 2) { return max }
-				else								 { return rand + min }
-			}()
+			// Trash values for math:
+			let
+			min3 = UInt32(min),
+			max3 = UInt32(max),
+			new_max = ((max3 - min3) + 1)
 			
-printd(" cgfloat result: ", result)
-			return CGFloat(result)
+			// Random value to return:
+			let
+			result  = arc4random_uniform(new_max),
+			result2 = result + min3,
+			result3 = Int(result2)
+			
+			return result3
 		}
 		
-		// Int
-		func random(range_min: Int,_ range_max: Int) -> Int {
+		/// Rnadom float (no decimals)
+		func random(min: CGFloat,_ max: CGFloat) -> CGFloat {
 			
-			let min = UInt32(range_min)
-			let max = UInt32(range_max)
-			
-Hotfix() {
-	printd("int min: ", min)
-	printd("int max: ", max)
-}
-			errorChecking: do {
-				if min > max {
-					print("random error, min greater than max")
-					return 999999999
-				}
-				
-				if min == max {
-					print("random error, min == max")
-					return Int(min)
-				}
+			// Make sure we can progress the program (true = found error)
+			func foundCGFloatError (min2: CGFloat,_
+				max2: CGFloat)
+				-> Bool {
+					
+					if min2 > max2 {
+						print("random CGFloat error, min (\(min2)) greater than max (\(max2))")
+						return true
+					}
+						
+					else if min2 == max2 {
+						print("random CGFloat error, min == max  (\(min2))")
+						return true
+					}
+					
+					return false
 			}
 			
-			let middle = (max - min)
+			if foundCGFloatError(min, max)  {
+				// Should cause problems!
+				print ("random: returning (\(min) -1")
+				return min - 1
+			}
 			
-			let result: UInt32 = {
-				let rand = arc4random_uniform(middle)
-printd("int rand", rand)
-				if rand == (max - 2) {  return max }
-				else								 { return (rand + min) }
-			}()
-printd("int result: ", result)
-			return Int(result)
+			// Trash values for math:
+			let
+			min3 = UInt32(min),
+			max3 = UInt32(max),
+			new_max = ((max3 - min3) + 1)
+			
+			// Random value to return:
+			let
+			result  = arc4random_uniform(new_max),
+			result2 = result + min3,
+			result3 = CGFloat(result2)
+			
+			return result3
 		}
+		
+		
+		
+
 
 
 		//---------------
