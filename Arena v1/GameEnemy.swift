@@ -8,30 +8,33 @@
 
 import Foundation
 import SpriteKit
-var _enems: SKShapeNode?
-var _first_run = true
+
 
 // Declaration
+
 /// BUllets spawn.. only in a local scope
 struct Enemy {
 	
-	//Vector from / to a point in coord-distance
-	typealias MagXY = (x: CGFloat, y: CGFloat)
+	// Vector from / to a point in coord-distance
+	typealias MagnitudeXY = (x: CGFloat, y: CGFloat)
+	
+	// Oop..
+	private static var first_run = true
 	
 	// Explanation... see extension for config
 	private let
-	radius: CGFloat, 	  // how big the circle enemy is
-	node: SKShapeNode, // what is used to do all the OOP stuff
+	radius: CGFloat, 	  					// how big the circle enemy is
+	node: SKShapeNode, 					 // what is used to do all the OOP stuff
 	difficulty: NSTimeInterval,	// How fast it moves towards teh center
 	
-	offset: MagXY, // Offsets of bounds (maybe set to .5 of enemy diameter?)
-	bounds: MagXY // Boundaries of the fram
+	offset: MagnitudeXY, 			// Offsets of bounds (maybe set to .5 of enemy diameter?)
+	bounds: MagnitudeXY 		 // Boundaries of the fram
 }
 
 // Config
 extension Enemy {
 	
-	// Config the enemy here... possibly put it in Global.Config.EnemyConfig?
+	/// Config the enemy here... possibly put it in Global.Config.EnemyConfig?
 	private init(difficultyLvl difficulty_level: NSTimeInterval,
 							 sceneToAddTo scene: SKScene )	{
 		
@@ -39,15 +42,17 @@ extension Enemy {
 		node 	 			= SKShapeNode.init(circleOfRadius: self.radius)
 		difficulty 	= difficulty_level
 		
-		offset 			= (x: radius*0.5, y: radius*0.5)
+		offset 			= (x: radius/2, y: radius/2)
 		bounds 			= (x: ( scene.frame.width - offset.x ),
 		       			   y: ( scene.frame.height - offset.x ))
 	}
 }
 
+
 // Spawner
 extension Enemy {
 	
+	// Enemy -> member config info -> 
 /**
 	#### Usage:
 	let did_spawn: Bool = enemySpanwer()
@@ -56,15 +61,18 @@ extension Enemy {
 	- add more prams
 */
 	static func enemySpawner( sceneToAddTo scene: SKScene,
-													  difficultyLvl difficulty: NSTimeInterval)
-		-> Bool {
+													  difficultyLvl difficulty: NSTimeInterval
+														persistentEnemyNode _G__enemy: SKShapeNode)
+		-> DidSucceed {
 			
 			/// Our enemy instance!!
-			let enemy = Enemy(difficultyLvl: difficulty, sceneToAddTo: scene)
+			let enemy = Enemy.init(difficultyLvl: difficulty, sceneToAddTo: scene)
 			
-			if _first_run {
-				// Update!
-				_enems = enemy.node
+			// Breaking protocol...
+			if self.first_run {
+				_G__enemy = enemy.node
+				scene.addChild(_enems!)
+				self.first_run = false
 			}
 			
 			// Give it a color
@@ -83,7 +91,7 @@ extension Enemy {
 					//red
 					_enems!.fillColor = UIColor.redColor()
 				default:
-					printl("problem in enemy color pick \(random_color)")
+					printError("problem in enemy color pick \(random_color)")
 					return false	// early exit
 				}
 			}
@@ -117,18 +125,13 @@ extension Enemy {
 					y = random(enemy.offset.y, enemy.bounds.y)	- (0.5 * scene.frame.height)
 					
 				default:
-					printl("problem in randysidepick")
+					printError("problem in randysidepick")
 					return false // early exit
 				}
 
-				
-				
 				// Set the enemy!
 				_enems!.removeAllActions()
 				_enems!.runAction(SKAction.moveTo(CGPoint(x: x!, y: y!), duration: 0))
-				
-				// Add to scene
-				if _first_run { scene.addChild(_enems!) }
 				
 				// Run it towards the wheel!
 				_enems!.runAction(

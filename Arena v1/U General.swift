@@ -15,6 +15,12 @@ public func printToLog<t>(s: t) {
 	}
 }
 
+public func printError<t>(s: t) {
+		print("ERROR: \(s)")
+
+}
+
+
 /// Makes safe extensions array[safe: index]
 extension Array {
 	subscript(safe index: Int) -> Element? {

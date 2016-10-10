@@ -19,3 +19,5 @@ typealias CFTI = CFTimeInterval
 // Describers:
 typealias CoordX = CGFloat
 typealias CoordY = CGFloat
+
+typealias DidSucceed = Bool
