@@ -6,32 +6,42 @@
 //  Copyright © 2016 Dude Guy . All rights reserved.
 //
 
-import Foundation
 import SpriteKit
 
+// mostly for oop nonsense
 
-/// OOP killer:
+// OOP killer:
 extension SKNode {
+
 	func removeFromParent(node: SKNode?){
 		nilno(node) {
 			node?.removeFromParent()
 		}
 	}
+
+	func runAction(action: SKAction, on node: SKNode) {
+		node.runAction(action)
+	}
 }
 
 /// For formatting reasons
 extension SKAction {
-	public class func colorizeWithColor(color color: UIColor, colorBlendFactor: CGFloat, duration sec: NSTimeInterval) -> SKAction
-	{return (SKAction.colorizeWithColor(
+	public class func colorizeWithColor(color color: UIColor, colorBlendFactor: CGFloat, duration sec: NSTimeInterval)
+		-> SKAction	{
+			return (SKAction.colorizeWithColor(
 		color,
 		colorBlendFactor: colorBlendFactor,
 		duration: sec))}
 }
 
-/// Moving sprites
-func moveSprite (named: SKSpriteNode?, to_the: CGVector,_ duration: NSTimeInterval = 0.25)
-{	named!.runAction (SKAction.moveBy (to_the, duration: duration))	}
+/// Return CGPoint
+func getCenter(node:SKNode) -> CGPoint {
+	return (CGPoint(x:CGRectGetMidX(node.frame),
+		y:CGRectGetMidY(node.frame)))
+}
 
-func moveSprite( name :SKSpriteNode?, to :CGPoint)
-{ name!.runAction (SKAction.moveTo(to, duration: 0.5)) }
+/// Moving sprites
+func moveSprite( name :SKSpriteNode?, to :CGPoint)	{
+	name!.runAction (SKAction.moveTo(to, duration: 0.5))
+}
 	

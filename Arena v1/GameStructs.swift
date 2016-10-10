@@ -9,15 +9,7 @@
 
 import SpriteKit
 
-
-
- typealias CFTI = CFTimeInterval
- typealias CGF = CGFloat
- typealias YValue = CGFloat // Cause we use it a lot
- typealias TimeEntryExit = (at_this_entry: CFTI, at_last_exit: CFTI)
-
-protocol Singleton {}
-
+  typealias TimeEntryExit = (at_this_entry: CFTI, at_last_exit: CFTI)
 
 
 // Base structure:
@@ -28,7 +20,8 @@ struct Global: Static {
 
 // General static stuff:
 extension Global {
-	
+	typealias YValue = CGFloat // Cause we use it a lot
+
 	// Random shit that doesn't fit anywhere else
 	static var
 	
@@ -129,12 +122,13 @@ extension Global {
 			
 			/// for sanity reasons of updatin G currenty
 			static func updateCurrentY (new_y_coords: YValue) -> YValue {
-				
+			
 				return new_y_coords
 			}
 		}
 	}
 }
+
 
 // Members:
 extension Global {

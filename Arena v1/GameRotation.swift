@@ -7,11 +7,11 @@
 //
 import SpriteKit
 
-/*
-	struct FindRotationAction: Static {
-*/
+															// MARK: Declaration
+struct FindRotationAction: Static {
+	private init() {}
 
-/** FindRotationAction is a dir for 7 static funcs
+/** FindRotationAction is a directory for 7 static funcs
 
 #### TODO: Implement time funcs
 
@@ -45,50 +45,47 @@ import SpriteKit
 
 		- AngleAsSpeed = CGFloat
 
-
 		- AngleToRotateTo = CGFloat
-
 
 		- TripleFloat = (String, CGFloat, CGFloat, CGFloat)
 
-
 		- SmoothedY = CGFloat
-
 
 		- CFTI = CFTimeInterval
 
-
 		- DeltaYAndTime = (y:CGFloat, t:CGFloat)
 
-
 		- TimeFirstPrevCur = (first: CFTI, previous: CFTI, current: CFTI)
-
 
 		- YFirstPrev = (first:CGFloat, previous:CGFloat, current: CGFloat)
 
 		- MinMax = (min: CGFloat, max: CGFloat)
 
 */
-struct FindRotationAction: Static {
-	
-	// Aliases:
-	typealias AngleAsSpeed = CGFloat
-	typealias AngleToRotateTo = CGFloat
-	typealias YFirstPrev = (first:CGFloat, previous:CGFloat, current:CGFloat)
+	static func documentation() {}
+}
 
-	typealias TripleFloat = (String, CGFloat, CGFloat, CGFloat)
-	typealias SmoothedY = CGFloat
-	typealias CFTI = CFTimeInterval
-	typealias TimeFirstPrevCur = (first:CFTI, previous:CFTI, current:CFTI)
-	typealias DeltaYAndTime = (y:CGFloat, t:CGFloat)
 
-	typealias FRA = FindRotationAction
-	typealias MinMax = (min: CGFloat, max: CGFloat)
-	
-	
+															// MARK: Aliases
+extension FindRotationAction {
+// Aliases:
 
-	
-																	// MARK: 1
+typealias AngleAsSpeed = CGFloat
+typealias AngleToRotateTo = CGFloat
+typealias YFirstPrev = (first:CGFloat, previous:CGFloat, current:CGFloat)
+
+typealias TripleFloat = (String, CGFloat, CGFloat, CGFloat)
+typealias SmoothedY = CGFloat
+typealias TimeFirstPrevCur = (first:CFTI, previous:CFTI, current:CFTI)
+typealias DeltaYAndTime = (y:CGFloat, t:CGFloat)
+
+typealias FRA = FindRotationAction
+typealias MinMax = (min: CGFloat, max: CGFloat)
+}
+
+
+															// MARK: 1
+extension FindRotationAction {
 /** Func 1 of 6
 	
 	- note: Update stacks, determine which new Y value to deflate and return
@@ -103,7 +100,7 @@ struct FindRotationAction: Static {
 			globalYs: Global.XnY.y_tuple,
 			currentY: touch.locationInNode(self).y)
 */
-	static func setTupleY (
+	private static func setTupleY (
 			globalYs ys: TripleFloat,
 			currentY cur_y: CGFloat
 	) -> TripleFloat {
@@ -127,11 +124,11 @@ struct FindRotationAction: Static {
 			return ("new_vals:", cur_y, ys.1, ys.2)        // y3 = y2; y2 = y1; y1 = current_y
 		}
 	}
-
+}
 
 	
-
 															// MARK: 2
+extension FindRotationAction {
 /**		2 of 6
 - note: Uses y_tuple and all the above to give us a smoother Y value,
 	RJ # pix b4 active.. Logic algorythimg
@@ -143,7 +140,7 @@ struct FindRotationAction: Static {
 			realJump: Global.Config.real_jump)
 	
 */
-	static func smoothCurrentY (yTuple yt: TripleFloat,
+	private static func smoothCurrentY (yTuple yt: TripleFloat,
 														currentY cur_y: CGFloat,
 														realJump real_jump: CGFloat
 	) -> SmoothedY {
@@ -197,10 +194,11 @@ struct FindRotationAction: Static {
 			}
 		}
 	}
-	
+}
 	
 
-														// MARK: 3
+															// MARK: 3
+extension FindRotationAction {
 /** 3 of 7
 - note: Find the change in Y and Time since last move/drag
 	
@@ -211,7 +209,7 @@ struct FindRotationAction: Static {
 			prevY: G.XnY.y.previous,
 			timeFPC: G.time)
 */
-	static func findDeltaYT (//smoothed Y value from above (now essentailly the curY)
+	private static func findDeltaYT (//smoothed Y value from above (now essentailly the curY)
 													 currentY smoothed_y: CGFloat,
 													 // Y values from glboe:
 													 prevY previous_y: CGFloat,
@@ -226,10 +224,11 @@ struct FindRotationAction: Static {
 		return  (y: dy,	// Delta Y (touch movement)
 						 t: dt) // Delta Time (passed)
 	}
-
+}
 
 	
-													// MARK: 4
+															// MARK: 4
+extension FindRotationAction {
 /** 4 of 7
 - note: How fast we moved the cursor
 	
@@ -240,7 +239,7 @@ struct FindRotationAction: Static {
 			accelSlider: G.Config.accel_strength,
 			speedMinMax: G.Config.speed)
 */
-	static func findAcceleratedAngle (deltaYT delta: (y:CGFloat, t:CGFloat),
+	private static func findAcceleratedAngle (deltaYT delta: (y:CGFloat, t:CGFloat),
 														 // Adjust to increase / decrease overall accel
 														 accelSlider accel_slider: CGFloat,
 														 // how fast we go (in distance)
@@ -267,10 +266,11 @@ struct FindRotationAction: Static {
 			
 		}
 	}
+}
 
 
-
-																// MARK: 5
+															// MARK: 5
+extension FindRotationAction {
 /** 5 of 7
 - note: Next angle
 	
@@ -282,7 +282,7 @@ struct FindRotationAction: Static {
 			yFP:						Global.XnY.y)
 	
 */
-	static func adjustNextAngle (
+	private static func adjustNextAngle (
 												accelAngle accelerated_angle: CGFloat,
 											  currentAngle current_angle: CGFloat,
 												yFirstPrev y: YFirstPrev
@@ -299,33 +299,37 @@ struct FindRotationAction: Static {
 		}
 		
 	}
+}
 
 
-
-																// MARK: 6
+															// MARK: 6
+extension FindRotationAction {
 /** 6 of 7
 - note: Return action
 
 #### Usage:
 		let rotation_action = makeAction(Global.Angles.angle.next)
 */
-	static func makeAction (nextAngle next_angle: CGFloat) -> SKAction {
+	private static func makeAction (nextAngle next_angle: CGFloat) -> SKAction {
 
 		let fully_calibrated_action = SKAction.rotateToAngle (next_angle, duration: 0.0)
 
 		return fully_calibrated_action
 	}
+}
+
 	
-	
-	
-																// MARK: 7
+															// MARK: 7
+extension FindRotationAction {
 /** 7 of 7
 	
-- note: Call this on the action you want to run in touchesMoved()
+- note:
+	This executes 1 - 6 using a mix of local and global variables:
+	
+			firstvar = 1(global); secondvar = 2(firstvar, global)
 	
 #### Usage:
-	
-		let fully_handled_action = FindRotationAction(initialY: tloc.y)
+		let fully_handled_action = FindRotationAction.implement1thru7(prams)
 */
 	static func implement1thru7(
 		
@@ -342,7 +346,7 @@ struct FindRotationAction: Static {
 
 				globalRealJump 				_G__real_jump: 			CGFloat,
 															
-				globalTimeEE					_G__time_ee: 			TimeEntryExit,
+				globalTimeEE					_G__time_ee: 				TimeEntryExit,
 															
 				globalAccelSlider		 	_G__accel_slider: 	CGFloat,
 															
@@ -358,36 +362,36 @@ struct FindRotationAction: Static {
 		-> SKAction {
 			
 		// 1:
-		let _L__y_tuple = setTupleY(	globalYs: _G__y_tuple,
-		                            	currentY: _G__current_y
+		let _L__y_tuple 			= setTupleY (						globalYs: _G__y_tuple,
+		                			             						currentY: _G__current_y
 		)
 		
 		// 2:
-		let _L__y_current = smoothCurrentY(	yTuple:   _L__y_tuple,
-		                                   	currentY: _G__current_y,
-		                                   	realJump: _G__real_jump
+		let _L__y_current 		= smoothCurrentY (			yTuple:   _L__y_tuple,
+		                  		                  			currentY: _G__current_y,
+		                  		                  			realJump: _G__real_jump
 		)
 		
 		// 3:
-		let _L__delta_yt = findDeltaYT( currentY: _L__y_current,
-		                                prevY: 		_G__previous_y,
-		                                timeEE: 	_G__time_ee
+		let _L__delta_yt 			= findDeltaYT ( 				currentY: _L__y_current,
+		                 			               					prevY: 		_G__previous_y,
+		                 			               					timeEE: 	_G__time_ee
 		)
 		
 		// 4:
-		let _L__accel_angle = findAcceleratedAngle(	deltaYT: 		 _L__delta_yt,
-		                                           	accelSlider: _G__accel_slider,
-		                                           	speedMinMax: _G__speed_minmax
+		let _L__accel_angle 	= findAcceleratedAngle ( deltaYT: 		_L__delta_yt,
+		                    	                         accelSlider: _G__accel_slider,
+		                    	                         speedMinMax: _G__speed_minmax
 		)
 		
 		// 5:
-		let _L__next_angle = adjustNextAngle(	accelAngle:  	_L__accel_angle,
-		                                     	currentAngle: _G__current_angle,
-		                                     	yFirstPrev: 	_G__y_firstprev
+		let _L__next_angle		= adjustNextAngle (			accelAngle:  	_L__accel_angle,
+		                  		                   			currentAngle: _G__current_angle,
+		                  		                   			yFirstPrev: 	_G__y_firstprev
 		)
 		
 		// 6:
-		let _L__final_action = makeAction( nextAngle: _L__next_angle
+		let _L__final_action	= makeAction ( 					nextAngle: _L__next_angle
 		)
 			
 		// 7:
@@ -395,12 +399,9 @@ struct FindRotationAction: Static {
 		_G__y_tuple 		= _L__y_tuple
 		_G__next_angle 	= _L__next_angle
 		
+		// Action to run back in TM
 		return _L__final_action
 	}
-	
-	
-	
-																// MARK: End
-	/// This is a static struct
-	private init() {}
 }
+
+															// MARK: End

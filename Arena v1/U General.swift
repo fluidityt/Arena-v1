@@ -8,6 +8,12 @@
 
 import Foundation
 
+/// Must have Debugging.logging to true.. for when u want visible in code
+public func printToLog<t>(s: t) {
+	if Debugging.logging {
+		print("LOG: \(s)")
+	}
+}
 
 /// Makes safe extensions array[safe: index]
 extension Array {

@@ -19,7 +19,7 @@ struct Enemy {
 	typealias MagXY = (x: CGFloat, y: CGFloat)
 	
 	// Explanation... see extension for config
-	let
+	private let
 	radius: CGFloat, 	  // how big the circle enemy is
 	node: SKShapeNode, // what is used to do all the OOP stuff
 	difficulty: NSTimeInterval,	// How fast it moves towards teh center

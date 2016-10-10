@@ -20,8 +20,6 @@ var _seconds = 0
 
 typealias PrivateInit = Void
 
-/// Can't force a `private init() {}` ={
-protocol Static {}
 
 /* Shortcuts */
 typealias G = Global
@@ -44,18 +42,13 @@ class GameScene: SKScene {
 			Global.SELF = self
 			Global.first_drag = false // Confusing
 			
-			let frame = Global.SELF.frame
-			XY.CENTER_SCREEN = CGPoint (x: CGRectGetMidX (frame),
-																	y: CGRectGetMidY (frame))
+			Global.xy.CENTER_SCREEN = <-Global.SELF.frame
 		}
 
 		initCircles:do {
 			
-			
-		
-			
 			// Supra!
-			Global.Nodes.central = self.childNodeWithName("bigger") as! SKSpriteNode
+			Global.nodes.central = self.childNodeWithName("bigger") as! SKSpriteNode
 			N.central.size = CGSize(width: 300, height: 300)
 			N.central.position = Global.XnY.CENTER_SCREEN
 			N.central.runAction (SKAction.rotateToAngle (0, duration: 0.5))
