@@ -12,13 +12,33 @@ import SpriteKit
 // Declaration
 
 /// BUllets spawn.. only in a local scope
-class Enemy: SKShapeNode {
+struct Enemy: Static {
+typealias EnemyNode = SKShapeNode
+	
+	static func makeNewEnemy(oldEnemy old_enemy: EnemyNode? = nil,
+														sceneToAddTo scene: SKScene)
+ -> EnemyNode {
 
-	init( sceneToAddTo scene: SKScene) {
-		super.init()
+		// on first run:
+		if old_enemy == nil {
+			
+			let new_enemy = SKShapeNode()
+			scene.addChild(new_enemy)
 		
+			Tryout() {
+			
+				// Can this actually work? am I recursion god?
+				return	makeNewEnemy(oldEnemy: new_enemy,
+														 sceneToAddTo: scene)
+			}
+		}
+	
+		// our return bitch:
+		let new_enemy = old_enemy!
+	
 			// Give it a color
 			findAColor: do {
+				
 				let random_color = random(1,3)
 				
 				// Match the color
@@ -26,15 +46,15 @@ class Enemy: SKShapeNode {
 				
 				case 1:
 					//blue
-					self.fillColor = UIColor.blueColor()
+					new_enemy.fillColor = UIColor.blueColor()
 				
 				case 2:
 					//green
-					self.fillColor = UIColor.greenColor()
+					new_enemy.fillColor = UIColor.greenColor()
 				
 				case 3:
 					//red
-					self.fillColor = UIColor.redColor()
+					new_enemy.fillColor = UIColor.redColor()
 				
 				// TODO: Add a unit test for this
 				default:
@@ -84,11 +104,10 @@ class Enemy: SKShapeNode {
 				y = 0
 			}
 			
-			self.position = CGP(x: x!, y: y!) // Positioning
+			new_enemy.position = CGP(x: x!, y: y!) // Positioning
 		}
+	
+		return new_enemy
 	}
 	
-	required init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
 }// EoC

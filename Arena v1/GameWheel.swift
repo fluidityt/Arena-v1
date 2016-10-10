@@ -9,39 +9,39 @@
 import SpriteKit
 
 /// The wheel
-class Wheel: SKSpriteNode {
+struct Wheel: Static {
+	private init() {}
 	
 	/// Make a new SpriteNode wheel and return it
-	init(editorNodeName name: String = "",
-			sceneName scene: SKScene)
-	{
-
+	static func makeNewWheel(editorNodeName name: String = "",
+	                  sceneName scene: SKScene) -> SKSpriteNode	{
+		
+		
 		// Load our config data from file
 		let config = ConfigFile.WheelConfig()
 		
 		// Copy stuff
-		if name != "" {
-			let wheel_to_copy = scene.childNodeWithName(name) as! SKSN
-			self.texture = wheel_to_copy.texture
-		}
+		//		if name != "" {
+		//			let wheel_to_copy = scene.childNodeWithName(name) as! SKSN
+		//			self.texture = wheel_to_copy.texture
+		//		}
 		
-		self.size	= config.size
+		// Our return bitch
+		let new_wheel = scene.childNodeWithName("wheel") as! SKSpriteNode
+		new_wheel.size	= config.size
 		
 		// Translate member data into a CGPoint
-		self.position = setPosition(config.starting_position,
+		new_wheel.position = setPosition(config.starting_position,
 		                            scene: scene)
 		
-		OOP --> scene.addChild(self)			// Add to scene...
+		OOP --> scene.addChild(new_wheel)			// Add to scene...
 		
 		// Sets the wheel to its starting angle
-		OOP --> self.runAction(SKAction.rotateToAngle (0, duration: 0))
+		OOP --> new_wheel.runAction(SKAction.rotateToAngle (0, duration: 0))
 		
 		printToLog("new wheel made")
 		
-	}
-	
-	required init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
+		return new_wheel
 	}
 	
 }
