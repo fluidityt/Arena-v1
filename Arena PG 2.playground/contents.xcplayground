@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <playground version='6.0' target-platform='osx' display-mode='rendered'>
     <pages>
-        <page name='page 1'/>
-        <page name='page 2'/>
         <page name='page 3'/>
+        <page name='setCurrents'/>
+        <page name='MyData'/>
     </pages>
 </playground>
