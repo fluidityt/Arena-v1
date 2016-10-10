@@ -19,42 +19,6 @@ var _time_stamp = CFTI(0)
 var _seconds = 0
 
 typealias PrivateInit = Void
-struct Note {
-	
-	init(code: ()->()) {
-		code()
-	}
-	
-}
-struct DontRun {
-	init(code: ()->()) {}
-}
-struct Backup {
-	init(code: ()->()) {}
-}
-
-struct Placeholder {
-	
-	init(code: ()->()) {
-		code()
-	}
-	
-}
-struct Tryout {
-	
-	
-	init(code: ()->()) {
-		code()
-	}
-	
-}
-struct NeedsWork {
-	
-	init(code: ()->()) {
-		code()
-	}
-	
-}
 
 /// Can't force a `private init() {}` ={
 protocol Static {}

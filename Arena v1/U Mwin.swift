@@ -6,8 +6,9 @@
 //  Copyright © 2016 Dude Guy . All rights reserved.
 //
 
-
-public func printl<t>(s: t) { print("LOG: \(s)")   }
-public func printe<t>(s: t) { print("ERRAR: \(s)")   }
-public func printt<t>(s: t) { print("TEST: \(s)")   }
-		
+/// Must have Debugging.logging to true
+public func printToLog<t>(s: t) {
+	if Debugging.logging {
+	print("LOG: \(s)")
+	}
+}

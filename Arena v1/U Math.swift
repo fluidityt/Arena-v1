@@ -15,13 +15,16 @@ func absV(num:CGFloat) -> CGFloat {
 }
 
 /// Slope
-func slope(y1 y1: CGFloat, y2: CGFloat, x1:CGFloat, x2:CGFloat) -> CGFloat {
-	let dY = (y2 - y1), dX = (x2 - x1), slope = (dY / dX); return slope
+func slope(y1 y1: CGFloat, y2: CGFloat,
+              x1:CGFloat, x2:CGFloat)  -> CGFloat {	let	dY = (y2 - y1),
+																												dX = (x2 - x1),
+																												slope = (dY / dX)
+	return slope
 }
 
-/// Averages
-func average (nums: [CGFloat]) -> CGFloat {
-	var total = CGFloat(0);	for num in nums {total += num}
+/// Averages cgfloat
+func average (nums: [CGFloat]) -> CGFloat {	var total = CGFloat(0)
+																						for num in nums {total += num}
 	return (total / CGFloat(nums.count))
 }
 

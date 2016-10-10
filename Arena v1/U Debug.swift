@@ -10,8 +10,12 @@
 import Foundation
 
 
-/// Utility with some oop becuase why not
+/** Utility with some oop becuase why not
+#### See also: 
+		- U Xcode.swift
+*/
 struct Debugging: Static {
+	var z:() = link2xcode()
 	
 	static var counter_off = true
 	
@@ -19,13 +23,19 @@ struct Debugging: Static {
 	
 	static var 
 	globe_verbose = false,
+	code_group = false,
+	logging = false,
 	
 	one_star = false,
 	two_star = false
 	
+
 	/// Oop
 	static func allOn() {
 		globe_verbose = true
+		code_group = true
+		logging = true
+		
 		one_star = true
 		two_star = true
 	}
@@ -33,6 +43,9 @@ struct Debugging: Static {
 	/// Oop
 	static func allOff() {
 		globe_verbose = false
+		code_group = false
+		logging = false
+		
 		one_star = false
 		two_star = false
 	}

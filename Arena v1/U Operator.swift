@@ -41,3 +41,9 @@ postfix func +**<T> (data: T) -> T {
 	return data
 }
 
+								/* MARK: OOP nonsense */
+/// Signals that we are doing some bullshit.
+var OOP: Any = 0
+infix operator --> {}
+func --> (l: Any, r: Any) {}
+
