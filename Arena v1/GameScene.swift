@@ -11,21 +11,6 @@ import SpriteKit
 
 
 
-
-func notafunc_conventions () {
-	/*
-	
-	func purFunc(mat:Void) -> String {
-	stuff()
-	}
-	;
-	something = purFunc(d)
-	;
-	
-	DONT I NEED TO FIGURE OUT A WAY TO GET PRAMS MORE EASILY DISTINCT?
-	*/
-}
-
 // MARK: Top
 // MARK: Move to other file
 /// Its ok to have a singular globe that isn't funcy... right? it's thread independent
@@ -207,8 +192,8 @@ class GameScene: SKScene {
 				N.central.runAction (fully_handled_rotation_action_with_acceleration_and_smoothing)
 				
 				// Our current angle is now something else to be something different
-				Global.Angles.angle.current
-					= Sanity.updatePreviousAngle(nextAngle: G.Angles.angle.next)
+				Global.angles.angle.current
+					= <-Global.Funcs.Sanity.updatePreviousAngle(nextAngle: G.Angles.angle.next)
 			}
 		}
 		
@@ -223,7 +208,7 @@ class GameScene: SKScene {
 		resetEverything: do {
 			
 				// What harm could this do?
-				Global.XnY.y.current = 0
+				Global.xy.y.current = 0
 				
 				// Resets for TB entry
 				Global.first_drag = true
@@ -232,7 +217,7 @@ class GameScene: SKScene {
 				XY.y_tuple = ("refreshed", 0, 0, 0)
 			
 				// No crazy angles
-				Global.Angles.angle.next = 0
+			Global.angles.angle.next = 0
 		}
 	}
 
@@ -256,10 +241,11 @@ class GameScene: SKScene {
 			}
 			
 			// Check for enemy spawn..
-			if _seconds == Global.Config.spawn_timer {
+			if _seconds == Global.config.spawn_timer {
 				// Spawn enemy
-				Enemy.enemySpawner(sceneToAddTo: Global.SELF,
-													 difficultyLvl: Global.Config.difficulty)
+				
+				Enemy.enemySpawner(sceneToAddTo: <-Global.SELF,
+													 difficultyLvl: <-Global.config.difficulty)
 				
 				// Reset timer for next enemy
 				_seconds = 0

@@ -13,6 +13,10 @@
 		C1422DDC1D964CAC00D9EF54 /* tester test.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1422DDA1D964CAC00D9EF54 /* tester test.swift */; };
 		C1422DE31D96552300D9EF54 /* SavedVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1422DE21D96552300D9EF54 /* SavedVariables.swift */; };
 		C153039B1DA92A4F008C8C0C /* OMFG.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C153039A1DA92A4F008C8C0C /* OMFG.mp3 */; };
+		C165904C1DABA18F0042C8FF /* U Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C165904B1DABA18F0042C8FF /* U Operator.swift */; };
+		C165904E1DABA20D0042C8FF /* U Mwin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C165904D1DABA20D0042C8FF /* U Mwin.swift */; };
+		C16590501DABA2660042C8FF /* U Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = C165904F1DABA2660042C8FF /* U Math.swift */; };
+		C16590521DABA3CA0042C8FF /* U Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16590511DABA3CA0042C8FF /* U Debug.swift */; };
 		C18B22921D7A25990008A65B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22911D7A25990008A65B /* AppDelegate.swift */; };
 		C18B22941D7A25990008A65B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C18B22931D7A25990008A65B /* GameScene.sks */; };
 		C18B22961D7A25990008A65B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22951D7A25990008A65B /* GameScene.swift */; };
@@ -57,6 +61,10 @@
 		C1422DDA1D964CAC00D9EF54 /* tester test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "tester test.swift"; sourceTree = "<group>"; };
 		C1422DE21D96552300D9EF54 /* SavedVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedVariables.swift; sourceTree = "<group>"; };
 		C153039A1DA92A4F008C8C0C /* OMFG.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = OMFG.mp3; sourceTree = "<group>"; };
+		C165904B1DABA18F0042C8FF /* U Operator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "U Operator.swift"; sourceTree = "<group>"; };
+		C165904D1DABA20D0042C8FF /* U Mwin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "U Mwin.swift"; sourceTree = "<group>"; };
+		C165904F1DABA2660042C8FF /* U Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "U Math.swift"; sourceTree = "<group>"; };
+		C16590511DABA3CA0042C8FF /* U Debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "U Debug.swift"; sourceTree = "<group>"; };
 		C18B228E1D7A25990008A65B /* Arena v1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Arena v1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18B22911D7A25990008A65B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Arena v1/AppDelegate.swift"; sourceTree = "<group>"; };
 		C18B22931D7A25990008A65B /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -110,8 +118,6 @@
 		C1422DD81D964BC100D9EF54 /* finished */ = {
 			isa = PBXGroup;
 			children = (
-				C1B1C36C1D7BD31600739B36 /* GameCircle.swift */,
-				C18B22C41D7A25CD0008A65B /* GameUtilities.swift */,
 			);
 			name = finished;
 			sourceTree = "<group>";
@@ -144,17 +150,21 @@
 			name = experimental;
 			sourceTree = "<group>";
 		};
-		C1422DDF1D964E9E00D9EF54 /* main */ = {
+		C1422DDF1D964E9E00D9EF54 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				C1422DD01D96419600D9EF54 /* TODO AND IDEAS.swift */,
 				C19EA8AF1DA5F4BE00749240 /* GameRotation.swift */,
 				C18B22951D7A25990008A65B /* GameScene.swift */,
 				C1CD07651D9E22810064F50E /* GameStructs.swift */,
+				C18B22C41D7A25CD0008A65B /* GameUtilities.swift */,
 				C1AEC4F91D7D811A00821CDB /* GameEnemy.swift */,
+				C1B1C36C1D7BD31600739B36 /* GameCircle.swift */,
 				C1CD07681D9E68BE0064F50E /* GameFuncs.swift */,
+				C1422DE01D964EC100D9EF54 /* do later */,
+				C1422DD81D964BC100D9EF54 /* finished */,
 			);
-			name = main;
+			name = Main;
 			sourceTree = "<group>";
 		};
 		C1422DE01D964EC100D9EF54 /* do later */ = {
@@ -172,6 +182,17 @@
 				C18B229C1D7A25990008A65B /* Assets.xcassets */,
 			);
 			name = "Scene Editor";
+			sourceTree = "<group>";
+		};
+		C165904A1DABA15C0042C8FF /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				C165904B1DABA18F0042C8FF /* U Operator.swift */,
+				C16590511DABA3CA0042C8FF /* U Debug.swift */,
+				C165904D1DABA20D0042C8FF /* U Mwin.swift */,
+				C165904F1DABA2660042C8FF /* U Math.swift */,
+			);
+			name = Utility;
 			sourceTree = "<group>";
 		};
 		C18B22851D7A25990008A65B = {
@@ -197,11 +218,10 @@
 		C18B22901D7A25990008A65B /* Arena v1 */ = {
 			isa = PBXGroup;
 			children = (
-				C1422DDF1D964E9E00D9EF54 /* main */,
+				C165904A1DABA15C0042C8FF /* Utility */,
+				C1422DDF1D964E9E00D9EF54 /* Main */,
 				C1422DDE1D964E7A00D9EF54 /* experimental */,
-				C1422DD81D964BC100D9EF54 /* finished */,
 				C1B1C36B1D7BD2EE00739B36 /* in progress */,
-				C1422DE01D964EC100D9EF54 /* do later */,
 				C1422DDD1D964E1A00D9EF54 /* misc */,
 				C1422DE11D96548B00D9EF54 /* Scene Editor */,
 			);
@@ -388,12 +408,16 @@
 				C18B22921D7A25990008A65B /* AppDelegate.swift in Sources */,
 				C18B22C51D7A25CD0008A65B /* GameUtilities.swift in Sources */,
 				C18B22C71D7A26CB0008A65B /* Engine.swift in Sources */,
+				C16590521DABA3CA0042C8FF /* U Debug.swift in Sources */,
 				C1B1C36D1D7BD31600739B36 /* GameCircle.swift in Sources */,
 				C1422DD11D96419600D9EF54 /* TODO AND IDEAS.swift in Sources */,
 				C1AEC4FA1D7D811A00821CDB /* GameEnemy.swift in Sources */,
 				C1422DCF1D96327F00D9EF54 /* HEY READ THIS FILE.swift in Sources */,
+				C165904C1DABA18F0042C8FF /* U Operator.swift in Sources */,
 				C1422DE31D96552300D9EF54 /* SavedVariables.swift in Sources */,
 				C1CD07661D9E22810064F50E /* GameStructs.swift in Sources */,
+				C16590501DABA2660042C8FF /* U Math.swift in Sources */,
+				C165904E1DABA20D0042C8FF /* U Mwin.swift in Sources */,
 				C19EA8B01DA5F4BE00749240 /* GameRotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
