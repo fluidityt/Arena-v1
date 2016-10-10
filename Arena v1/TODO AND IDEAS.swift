@@ -20,6 +20,11 @@
 - how to destroy a node
 - trailing skaction
 
+
+#### OTHERTODOS:
+- figure out where to store class info in configs
+
+
 */
 
 func checkmytodolist() {

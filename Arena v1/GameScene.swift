@@ -91,7 +91,7 @@ class GameScene: SKScene {
 	override func didMoveToView (view: SKView) {
 
 		genericInits:do {
-
+			
 			Global.SELF = self
 			Global.first_drag = false // Confusing
 			
@@ -101,14 +101,16 @@ class GameScene: SKScene {
 		}
 
 		initCircles:do {
-
-			Global.Nodes.central = Circle ()
 			
-			//	let central_node = G.Nodes.central
-			//Global.SELF.addChild (central_node)
-
-			Global.Nodes.central.runAction (SKAction.rotateToAngle (0, duration: 0.5))
 			
+		
+			
+			// Supra!
+			Global.Nodes.central = self.childNodeWithName("bigger") as! SKSpriteNode
+			N.central.size = CGSize(width: 300, height: 300)
+			N.central.position = Global.XnY.CENTER_SCREEN
+			N.central.runAction (SKAction.rotateToAngle (0, duration: 0.5))
+		
 			let central_rotation = G.Nodes.central.zRotation
 			Global.Angles.angle.current = central_rotation
 		}

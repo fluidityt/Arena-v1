@@ -9,6 +9,19 @@
 import SpriteKit
 
 
+// Extended with funcs in proper fiels
+struct Funcs: Static {
+	
+	static func getCenter(node:SKNode) -> CGPoint {
+		return (CGPoint(x:CGRectGetMidX(node.frame),
+			y:CGRectGetMidY(node.frame)))
+	}
+	
+	
+}
+typealias F = Funcs
+
+
 
 /// Test out stuff so it doesn't get too big...
 struct GameStuff {

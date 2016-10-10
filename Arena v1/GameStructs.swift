@@ -54,7 +54,7 @@ struct Global: Static {
   struct Nodes: Static {
 
     static var
-    central = Circle ()
+    central = SKSpriteNode ()
   ;
   }
 
