@@ -40,6 +40,17 @@ func getCenter(node:SKNode) -> CGPoint {
 		y:CGRectGetMidY(node.frame)))
 }
 
+func setPosition( position: Position, scene: SKScene) -> CGPoint {
+	switch position {
+		
+	case .center:
+		return CGPoint( x: scene.frame.midX,
+		                y: scene.frame.midY)
+	default:
+		()
+	}
+}
+
 /// Moving sprites
 func moveSprite( name :SKSpriteNode?, to :CGPoint)	{
 	name!.runAction (SKAction.moveTo(to, duration: 0.5))

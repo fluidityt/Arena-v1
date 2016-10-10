@@ -24,7 +24,6 @@ struct Enemy {
 	// Explanation... see extension for config
 	private let
 	radius: CGFloat, 	  					// how big the circle enemy is
-	node: SKShapeNode, 					 // what is used to do all the OOP stuff
 	difficulty: NSTimeInterval,	// How fast it moves towards teh center
 	
 	offset: MagnitudeXY, 			// Offsets of bounds (maybe set to .5 of enemy diameter?)
@@ -39,7 +38,6 @@ extension Enemy {
 							 sceneToAddTo scene: SKScene )	{
 		
 		radius 			= 10
-		node 	 			= SKShapeNode.init(circleOfRadius: self.radius)
 		difficulty 	= difficulty_level
 		
 		offset 			= (x: radius/2, y: radius/2)
@@ -52,10 +50,9 @@ extension Enemy {
 // Spawner
 extension Enemy {
 	
-	// Enemy -> member config info -> 
+	// Enemy -> member config info ->
 /**
 	#### Usage:
-	let did_spawn: Bool = enemySpanwer()
 	
 	#### TODO:
 	- add more prams

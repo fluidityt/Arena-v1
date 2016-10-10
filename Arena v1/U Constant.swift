@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-
+										/* MARK: Aliases */
 // General:
 typealias Block = ()->()
 
@@ -21,3 +21,12 @@ typealias CoordX = CGFloat
 typealias CoordY = CGFloat
 
 typealias DidSucceed = Bool
+
+
+										/* MARK: Enums */
+enum Position { case center }
+
+
+										/* MARK: Protocols */
+protocol Singleton {}
+protocol Static {}

@@ -20,11 +20,9 @@ struct Global: Static {
 
 // General static stuff:
 extension Global {
-	typealias YValue = CGFloat // Cause we use it a lot
 
 	// Random shit that doesn't fit anywhere else
 	static var
-	
 	SELF       = SKScene (),
 	
 	first_drag = Bool (),
@@ -36,6 +34,7 @@ extension Global {
 	
 	/// Maybe refactor this to time
 	time2      = (atBegan: CFTI (), atMove: CFTI (), current: CFTI ())
+	
 }
 
 // Config:

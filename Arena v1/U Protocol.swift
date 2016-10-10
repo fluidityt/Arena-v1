@@ -7,7 +7,4 @@
 //
 
 
-protocol Singleton {}
-
 /// Can't force a `private init() {}` ={
-protocol Static {}

@@ -11,6 +11,7 @@ import SpriteKit
 
 struct Func: Static {
 	private init(){}
-
-
+	
+	
 }
+
