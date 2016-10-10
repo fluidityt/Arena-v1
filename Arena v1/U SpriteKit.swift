@@ -19,9 +19,10 @@ extension SKNode {
 		}
 	}
 
-	func runAction(action: SKAction, on node: SKNode) {
-		node.runAction(action)
-	}
+}
+
+func runAction(action: SKAction, on node: SKNode) {
+	node.runAction(action)
 }
 
 /// For formatting reasons
@@ -47,12 +48,20 @@ func setPosition( position: Position, scene: SKScene) -> CGPoint {
 		return CGPoint( x: scene.frame.midX,
 		                y: scene.frame.midY)
 	default:
-		()
+		return CGPoint( x: 0, y: 0)
 	}
 }
 
 /// Moving sprites
 func moveSprite( name :SKSpriteNode?, to :CGPoint)	{
 	name!.runAction (SKAction.moveTo(to, duration: 0.5))
+}
+
+/// Because WTFAIL
+func copyNode ( inout lhsNode lhs_node: SKSN, rhsNode rhs_node: SKSN) {
+	 lhs_node.alpha = rhs_node.alpha
+		 lhs_node.texture = rhs_node.texture
+		 lhs_node.lightingBitMask = rhs_node.lightingBitMask
+		 lhs_node.color = rhs_node.color
 }
 	

@@ -13,19 +13,15 @@ import SpriteKit
 
 // MARK: Top
 // MARK: Move to other file
-/// Its ok to have a singular globe that isn't funcy... right? it's thread independent
-var _current_time = CFTimeInterval(0)
-var _time_stamp = CFTI(0)
-var _seconds = 0
-
 typealias PrivateInit = Void
 
 
 /* Shortcuts */
 typealias G = Global
-typealias N = G.Nodes
-typealias A = G.Angles
-typealias XY = G.XnY
+let N = G.nodes
+let A = G.angles
+let XY = G.xy
+var time = G.time
 
 typealias Sanity = G.Funcs.Sanity
 
@@ -48,13 +44,13 @@ class GameScene: SKScene {
 		initCircles:do {
 			
 			// Supra!
-			Global.nodes.central = self.childNodeWithName("bigger") as! SKSpriteNode
-			N.central.size = CGSize(width: 300, height: 300)
-			N.central.position = Global.XnY.CENTER_SCREEN
-			N.central.runAction (SKAction.rotateToAngle (0, duration: 0.5))
+			Global.nodes.wheel = self.childNodeWithName("bigger") as! SKSpriteNode
+			N.wheel.size = CGSize(width: 300, height: 300)
+			N.wheel.position = Global.xy.CENTER_SCREEN
+			N.wheel.runAction (SKAction.rotateToangle (0, duration: 0.5))
 		
-			let central_rotation = G.Nodes.central.zRotation
-			Global.Angles.angle.current = central_rotation
+			let wheel_rotation = G.nodes.wheel.zRotation
+			Global.angles.angle.current = wheel_rotation
 		}
 		return // from DMtV
 	}
@@ -68,11 +64,11 @@ class GameScene: SKScene {
 		}
 		else {
 			Global.first_drag = true // correct msitake
-			printd ("first drag was f\\ked") // alert to logic error
+			printError ("first drag was f\\ked") // alert to logic error
 		}
 		
 		// Where we just clicked is our new y.current
-		Global.XnY.y.current = touches.first!.locationInNode (self).y
+		Global.xy.y.current = touches.first!.locationInNode (self).y
 		
 		return // from TB
 	}
@@ -101,19 +97,19 @@ class GameScene: SKScene {
 			updateGlobes: do {
 				
 				// Y values are different now:
-				Global.XnY.y.previous = Sanity.updatePreviousY (currentY: G.XnY.y.current)
-				Global.XnY.y.current  = Sanity.updateCurrentY  (touch.locationInNode (self).y)
+				Global.xy.y.previous = Sanity.updatePreviousY (currentY: G.xy.y.current)
+				Global.xy.y.current  = Sanity.updateCurrentY  (touch.locationInNode (self).y)
 			}
 
 			// Handle the case where we need to pause... Lateral--no angle now--reset values
 			guardLateral: do {
 				
-				guard (G.XnY.y.current != G.XnY.y.previous) else {
-					printd ("paused but didn't release")
+				guard (G.xy.y.current != G.xy.y.previous) else {
+					printError ("paused but didn't release")
 					
 					// Reset values
-					Global.Nodes.central.removeAllActions ()
-					Global.XnY.y_tuple = ("refreshed", 0, 0, 0)
+					Global.nodes.wheel.removeAllActions ()
+					Global.xy.y_tuple = ("refreshed", 0, 0, 0)
 					
 					return
 					
@@ -124,33 +120,32 @@ class GameScene: SKScene {
 			doRotation: do {
 				
 				// Update our timer (start)
-				Global.time3.at_this_entry = _current_time
+				time.at_this_entry = time.current
 				
 				// If no lateral movement, let's find our rotation action:
 				let fully_handled_rotation_action_with_acceleration_and_smoothing
 					= FindRotationAction.implement1thru7(
-						globalYTuple: 				&G.XnY.y_tuple,
-						globalCurrentY: 			&G.XnY.y.current,
-						globalPreviousY: 			G.XnY.y.previous,
-						globalYFirstPrev: 		G.XnY.y,
+						globalYTuple: 				&G.xy.y_tuple,
+						globalCurrentY: 			&G.xy.y.current,
+						globalPreviousY: 			G.xy.y.previous,
+						globalYFirstPrev: 		G.xy.y,
 						globalRealJump: 			G.Config.real_jump,
 						
 						globalTimeEE:					G.time3,
 						
 						globalAccelSlider: 		G.Config.accel_strength,
 						globalSpeedMinMax: 		G.Config.speed,
-						globalCurrentAngle:		G.Angles.angle.current,
-						globalNextAngle: 			&G.Angles.angle.next)
+						globalCurrentAngle:		G.angles.angle.current,
+						globalNextAngle: 			&G.angles.angle.next)
 				
 				// Update our timer (exit)
-				Global.time3.at_last_exit = _current_time
+				time.at_last_exit = time.current
 
-				// Rotate to the nextAngle
-				N.central.runAction (fully_handled_rotation_action_with_acceleration_and_smoothing)
+				// Rotate to the nextangle
+				N.wheel.runAction (fully_handled_rotation_action_with_acceleration_and_smoothing)
 				
 				// Our current angle is now something else to be something different
-				Global.angles.angle.current
-					= <-Global.Funcs.Sanity.updatePreviousAngle(nextAngle: G.Angles.angle.next)
+				Global.angles.angle.current	= <-Global.angles.angle.next
 			}
 		}
 		
@@ -178,37 +173,37 @@ class GameScene: SKScene {
 		}
 	}
 
+
+
+	
 	override func update (currentTime: CFTimeInterval) {
-
-		handleFirstRun: do {
-			if _current_time == 0 {
-				_current_time = currentTime
-				_time_stamp = currentTime
-			}
+		
+		if time.current == 0 {		time.stamp  = currentTime		}
+		
+		time.current = currentTime
+	
+		// If one second has passed since last timestamp..
+		if time.current >= (time.stamp + 1) {
+			// Then increase seconds, and set stamp to current time
+			time.seconds 		+= 1
+			time.stamp = time.current
 		}
 		
-		_current_time = currentTime
-		
-		Tryout {
-			// If one second has passed since last timestamp..
-			if _current_time >= (_time_stamp + 1) {
-				// Then increase seconds, and set stamp to current time
-				_seconds += 1
-				_time_stamp = _current_time
-			}
+		// Check for enemy spawn..
+		if time.seconds >= ConfigFile.spawn_timer {
 			
-			// Check for enemy spawn..
-			if _seconds == Global.config.spawn_timer {
-				// Spawn enemy
-				
-				Enemy.enemySpawner(sceneToAddTo: <-Global.SELF,
-													 difficultyLvl: <-Global.config.difficulty)
-				
-				// Reset timer for next enemy
-				_seconds = 0
-	 		}
+			Global.nodes.enemy = Enemy()		// Spawn enemy
+			
+			// Run it towards the wheel!
+			let attack_circle = SKAction.moveTo(Global.nodes.wheel,
+			                                    duration: ConfigFile.difficulty)
+			
+			OOP --> runAction( attack_circle, on: Global.nodes.wheel)
+			
+			time.seconds = 0	// Reset timer for next enemy
 		}
-
+		
+		
 		return // from update
 	}
 

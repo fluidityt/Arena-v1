@@ -9,103 +9,64 @@
 
 import SpriteKit
 
-  typealias TimeEntryExit = (at_this_entry: CFTI, at_last_exit: CFTI)
+typealias TimeEntryExit = (at_this_entry: CFTI, at_last_exit: CFTI)
 
 
 // Base structure:
 struct Global: Static {
 	func goToMembers() {	seeMembers()	}
 	private init() {}
-}
 
-// General static stuff:
-extension Global {
-
+	
 	// Random shit that doesn't fit anywhere else
-	static var
-	SELF       = SKScene (),
+	static var SELF       = SKScene ()
 	
-	first_drag = Bool (),
-	
-	/// Maybe delete this
-	time       = (first: CFTimeInterval (),
-	              previous: CFTimeInterval (),
-	              current: CFTimeInterval ()),
-	
-	/// Maybe refactor this to time
-	time2      = (atBegan: CFTI (), atMove: CFTI (), current: CFTI ())
-	
-}
+	static var first_drag = Bool ()
 
-// Config:
-extension Global {
-	/// LET CONSTANTS :d
-	struct Config: Singleton {
-		
-		let
-		verbose        = false,
-		exec           = false,
-		
-		real_jump      = CGFloat (20),
-		
-		accel_strength = CGFloat (0.001),
-		speed          = (min: CGFloat (0.01), // The min/max speed is 100/400 PPS
-											max: CGFloat (0.4))		// ...which is distance actuall
-		
-		private init() {}
-	}
-}
+	static var time = ( current: CFTI(0),
+	                    stamp: CFTI(0),
+	                    seconds: Double(0.0),
+	                    at_this_entry: CFTI(0),
+	                    at_last_exit: CFTI(0))
+	
+	static var angle = ( current: CGFloat (),
+	                     previous: CGFloat (),
+	                     next: CGFloat ())
 
-// Nodes:
-extension Global {
-	/// All of our nodes:
+
+
 	struct Nodes: Singleton {		private init() {}
 		
 		var
-		wheel = SKSpriteNode(),
-		enemy = SKShapeNode()
+		wheel = Wheel(sceneName: Global.SELF),
+		enemy = Enemy(sceneToAddTo: Global.SELF)
 	}
-}
 
-// Angles:
-extension Global {
-	/// SHould probably move into the wheel category.
-	struct Angles {
-		
-		var
-		angle       = (current: CGFloat (),
-		               previous: CGFloat (),
-		               next: CGFloat ()),
-		
-		super_angle = CGFloat ()
-  
-	}
-}
 
-// X and Y:
-extension Global {
+
 	/// XY should probably be in the smoothing area...
 	struct XnY {
 		
 		typealias XY = Global.XnY
 		
-		 var
-		CENTER_SCREEN = CGPoint (),
+		var center_screen = CGPoint ()
 		
 		// For smoothing FIXME: Make tuple
-		y1            = CGFloat (), y2 = CGFloat (), y3 = CGFloat (),
-		/// The string, or y_tuple.0 is for INSANITY reasons
-		y_tuple       = ("tuple", XY.y1, XY.y2, XY.y3),
+		var		y1 = CGFloat (),
+					y2 = CGFloat (),
+					y3 = CGFloat ()
 		
-		y             = (first: CGF (),
-		                 previous: CGF (),
-		                 current: CGF ())
-  ;
+		/// The string, or y_tuple.0 is for INSANITY reasons
+		var	y_tuple = ("tuple", CGF(), CGF(), CGF())
+		
+		var	y = (first: CGF (),
+		   	     previous: CGF (),
+		   	     current: CGF ())
+  
 	}
-}
 
-// Functions:
-extension Global {
+
+
 	/// Cuz I like to get Funcy.. should be used only for the static vars
 	struct Funcs: Static {		private init() {}
 		
@@ -114,14 +75,14 @@ extension Global {
 		struct Sanity: Static {			private init() {}
 			
 			/// For sanity reasons of reassigning Gprevy
-			static func updatePreviousY (currentY not_current_y: YValue) -> YValue {
+			static func updatePreviousY (currentY not_current_y: CoordY) -> CoordY {
 				
 				return not_current_y
 			}
 			
 			/// for sanity reasons of updatin G currenty
-			static func updateCurrentY (new_y_coords: YValue) -> YValue {
-			
+			static func updateCurrentY (new_y_coords: CoordY) -> CoordY {
+				
 				return new_y_coords
 			}
 		}
@@ -136,9 +97,7 @@ extension Global {
 	
 	// Members:
 	static var
-	config = Config(),
 	nodes = Nodes(),
-	angles = Angles(),
 	xy = XnY()
 }
 

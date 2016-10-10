@@ -21,6 +21,7 @@
 		C16590581DABB24C0042C8FF /* U General.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16590571DABB24C0042C8FF /* U General.swift */; };
 		C165905A1DABC6390042C8FF /* U Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16590591DABC6390042C8FF /* U Protocol.swift */; };
 		C165905C1DABD11A0042C8FF /* U Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C165905B1DABD11A0042C8FF /* U Constant.swift */; };
+		C165905E1DABEACC0042C8FF /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C165905D1DABEACC0042C8FF /* GameConfig.swift */; };
 		C18B22921D7A25990008A65B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22911D7A25990008A65B /* AppDelegate.swift */; };
 		C18B22941D7A25990008A65B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C18B22931D7A25990008A65B /* GameScene.sks */; };
 		C18B22961D7A25990008A65B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B22951D7A25990008A65B /* GameScene.swift */; };
@@ -72,6 +73,7 @@
 		C16590571DABB24C0042C8FF /* U General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "U General.swift"; sourceTree = "<group>"; };
 		C16590591DABC6390042C8FF /* U Protocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "U Protocol.swift"; sourceTree = "<group>"; };
 		C165905B1DABD11A0042C8FF /* U Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "U Constant.swift"; sourceTree = "<group>"; };
+		C165905D1DABEACC0042C8FF /* GameConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
 		C18B228E1D7A25990008A65B /* Arena v1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Arena v1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18B22911D7A25990008A65B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Arena v1/AppDelegate.swift"; sourceTree = "<group>"; };
 		C18B22931D7A25990008A65B /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				C1422DD01D96419600D9EF54 /* TODO AND IDEAS.swift */,
+				C165905D1DABEACC0042C8FF /* GameConfig.swift */,
 				C18B22951D7A25990008A65B /* GameScene.swift */,
 				C1CD07651D9E22810064F50E /* GameStructs.swift */,
 				C1AEC4F91D7D811A00821CDB /* GameEnemy.swift */,
@@ -396,6 +399,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C16590561DABAEF30042C8FF /* U SpriteKit.swift in Sources */,
+				C165905E1DABEACC0042C8FF /* GameConfig.swift in Sources */,
 				C1CCD99B1D94EBA600738273 /* Globes protocols extensions.swift in Sources */,
 				C165905C1DABD11A0042C8FF /* U Constant.swift in Sources */,
 				C18B22961D7A25990008A65B /* GameScene.swift in Sources */,

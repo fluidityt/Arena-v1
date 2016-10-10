@@ -9,63 +9,39 @@
 import SpriteKit
 
 /// The wheel
-struct Wheel: Singleton {					private init() {}
+class Wheel: SKSpriteNode {
 	
-	// Mutating state because Swift :{
-	private static var first_wheel: Bool?
-	
-	/// These are just the private configuration data
-	struct Config {
-		private let
-		radius = CGFloat(300),
-		
-		position = Position.center,
-		
-		starting_angle = CGFloat(0)
-	}
-	
-	
-	// Make a new SpriteNode wheel and return it
-	static func initNewWheel(editorNodeName name: String,
-													sceneName scene: SKScene)
-													
-		-> SKSpriteNode  {
+	/// Make a new SpriteNode wheel and return it
+	init(editorNodeName name: String = "",
+			sceneName scene: SKScene)
+	{
 
-			if first_wheel != nil {	return SKSN()	}	// Make sure we don't make more than one wheel!
+		// Load our config data from file
+		let config = ConfigFile.WheelConfig()
 		
-			self.first_wheel = false // because swift won't let me use LET as static
-			
+		// Copy stuff
+		if name != "" {
+			let wheel_to_copy = scene.childNodeWithName(name) as! SKSN
+			self.texture = wheel_to_copy.texture
+		}
 		
-			let new_wheel: SKSN		// Our return object
-			let config = Wheel.Config() // Object is for config
-			
-			new_wheel = scene.childNodeWithName(name) as! SKSN	// New sknode from scene editor
-			
-			new_wheel.size	= CGSize(width: wheel_config.radius/2, // Simple math
-			              	         height: self.radius/2)
-			
-			// Translate member data into a CGPoint
-			new_wheel.position = { () -> CGPoint in
-				
-				// If == center
-				if position == center {
-					return CGPoint( x: scene.frame.midX,
-					                y: scene.frame.midY)
-				}
-				else
-				{
-					return self.position
-				}
-			}()
-			
-			OOP --> scene.addChild(new_wheel)			// Add to scene...
-			
-			// Sets the wheel to its starting angle
-			OOP --> new_wheel.runAction(SKAction.rotateToAngle (0, duration: 0))
-			
-			printToLog("new wheel made")
-			
-			
-			return new_wheel
+		self.size	= config.size
+		
+		// Translate member data into a CGPoint
+		self.position = setPosition(config.starting_position,
+		                            scene: scene)
+		
+		OOP --> scene.addChild(self)			// Add to scene...
+		
+		// Sets the wheel to its starting angle
+		OOP --> self.runAction(SKAction.rotateToAngle (0, duration: 0))
+		
+		printToLog("new wheel made")
+		
 	}
+	
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+	
 }
