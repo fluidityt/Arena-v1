@@ -10,52 +10,92 @@
 import SpriteKit
 
 
-// Base structure:
-class System: Singleton {
+class System:
+	
+	Singleton {	private init() {};	static let this = System()
+	
 	
 	var view = ( scene: SKScene() ,
-	            CENTER: CGPoint())
+	             CENTER: CGPoint())
 	
 	var misc = ( first_move: Bool(),
-							 nothing: Bool())
+	             nothing: Bool())
 	
 	var time = ( current: CFTI(0),
 	             stamp: CFTI(0),
 	             seconds: Double(0.0),
-	
+	             
 	             at_this_entry: CFTI(0),
 	             at_last_exit: CFTI(0))
 	
 	
-	var angle = ( current: CGFloat (),
-	              previous: CGFloat (),
-	              next: CGFloat ())
+	var angle = (current: CGFloat (),
+	             previous: CGFloat (),
+	             next: CGFloat ())
 	
-	var	nodes = ( wheel: SKSN(),
-							 enemy: SKShN())
-
-	var	y = ( accel:
-									(first: CGF (), previous: CGF (), current: CGF ()),
-				    smoother:
-									("tuple", CGF(), CGF(), CGF()) )
+	// TODO: add typealiases for returning
+	var	node = (
+		
+		wheel: (
+			radius: CGFloat(300),
+			size: CGFloat(300/2),
+			
+			speed: (
+				min: CGFloat (0.01),
+				max: CGFloat (0.4)),
+			
+			starting:	(
+				position: Position.center,
+				angle: CGFloat(0)),
+			
+			funk: (
+				updateSize: { return $0 * CGFloat(0.5) })
+		),
+		
+		enemy: (
+			radius: CGFloat(),
+			move_speed: NSTI(2),
+			
+			offset: CGPoint(),
+			bounds: CGPoint()
+		)
+	)
 	
-	/// Call at didMoveToView()
-	func initializeWithScene(scene: SKScene) {
-		self.view.scene = scene
-		self.view.CENTER = setPosition(Position.center, scene: scene)
+	var	y = (
+		accel:(
+			first: CGF (),
+			previous: CGF (),
+			current: CGF ()),
 		
-		self.nodes.wheel = Wheel.makeNewWheel(sceneName: scene)
-		self.nodes.enemy = Enemy.makeNewEnemy(sceneToAddTo: scene)
+		smoother:	(
+			y1: CGF(),
+			y2: CGF(),
+			y3: CGF())
+	)
+	
+	func testit() {
+		var wheel = System.this.node.wheel
+		let wf = wheel.funk
 		
+		wheel.size = wf.updateSize(wheel.radius)
 	}
-}
+	
+	
+}//EoC
+
+var sys = System.this
+
+
+
+
+
 
 /*
 Other way:
 
 class Nodes { private init() {}
-	var wheel = SKSN()
-	var enemy = SKShN()
+var wheel = SKSN()
+var enemy = SKShN()
 
 };let nodes = Nodes()
 
