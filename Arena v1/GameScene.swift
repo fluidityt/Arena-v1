@@ -5,29 +5,12 @@
 //  Created by Dude Guy  on 9/2/16.
 //  Copyright (c) 2016 Dude Guy . All rights reserved.
 
-// _ means global
-
 import SpriteKit
 
+					// MARK: Top:
 
 
-// MARK: Top
-// MARK: Move to other file
-typealias PrivateInit = Void
 
-
-/* Shortcuts */
-typealias G = Global
-let N = G.nodes
-let A = G.angles
-let XY = G.xy
-var time = G.time
-
-typealias Sanity = G.Funcs.Sanity
-
-// Typealias
-
-// MARK: Top:
 /// My game lol
 class GameScene: SKScene {
 

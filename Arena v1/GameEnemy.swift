@@ -11,7 +11,12 @@ import SpriteKit
 
 // Declaration
 
-/// BUllets spawn.. only in a local scope
+/** BUllets spawn.. only in a local scope
+#### Usage:
+		sys.node.enemy = Enemy.makeNewEnemy()
+
+- note: Requires data from ConfigFile
+*/
 struct Enemy: Static {
 typealias EnemyNode = SKShapeNode
 	
@@ -19,7 +24,7 @@ typealias EnemyNode = SKShapeNode
 														sceneToAddTo scene: SKScene)
  -> EnemyNode {
 
-		// on first run:
+		// On first run:
 		if old_enemy == nil {
 			
 			let new_enemy = SKShapeNode()
@@ -33,10 +38,10 @@ typealias EnemyNode = SKShapeNode
 			}
 		}
 	
-		// our return bitch:
+		// Our return bitch:
 		let new_enemy = old_enemy!
 	
-			// Give it a color
+			// Give it a random color
 			findAColor: do {
 				
 				let random_color = random(1,3)
@@ -63,7 +68,7 @@ typealias EnemyNode = SKShapeNode
 			}
 		
 			
-			// Give it a position
+			// Give it a random position
 		findAPosition: do {
 			
 			// Coords to spawnon (return):
@@ -73,7 +78,7 @@ typealias EnemyNode = SKShapeNode
 			let adjusted = (height: scene.frame.height/2,
 			                width: scene.frame.width/2)
 			
-			/// Our enemy instance!!
+			// Config Data to update our enemy instance with:
 			let config = ConfigFile.EnemyConfig(difficultyLvl: 2.5,
 			                                    sceneToAddTo: scene)
 			
@@ -107,6 +112,7 @@ typealias EnemyNode = SKShapeNode
 			new_enemy.position = CGP(x: x!, y: y!) // Positioning
 		}
 	
+	// We're done:
 		return new_enemy
 	}
 	

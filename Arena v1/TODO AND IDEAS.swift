@@ -19,7 +19,7 @@
 #### RESEARCH:
 - how to destroy a node
 - trailing skaction
-
+- declaration file versus implement?
 
 #### OTHERTODOS:
 - figure out where to store class info in configs

@@ -13,6 +13,7 @@ typealias Block = ()->()
 
 // Name shorters:
 typealias SKSN = SKSpriteNode
+typealias SKShN = SKShapeNode
 typealias CGF	 = CGFloat
 typealias CGP = CGPoint
 typealias CFTI = CFTimeInterval
@@ -24,11 +25,14 @@ typealias CoordY = CGFloat
 
 typealias DidSucceed = Bool
 
-
 										/* MARK: Enums */
 enum Position { case center }
 
 
 										/* MARK: Protocols */
+protocol Immutable {}
 protocol Singleton {}
 protocol Static {}
+protocol Directory {}
+protocol Declaration {}
+protocol Assignment {}

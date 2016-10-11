@@ -8,28 +8,42 @@
 
 import SpriteKit
 
-struct ConfigFile: Static {
+/** Directory for various configuration values
+#### Usage:
+		let config_instance       = DesiredStruct()
+
+		desired_instance.variable = config_object.value
+*/
+struct ConfigFile: Directory {
 	private init() {}
 	
-	// Adjust this later
-	static let
-	spawn_timer = 2.5,
-	difficulty: NSTimeInterval = 3,
 	
-	real_jump      = CGFloat (20),
-	accel_strength = CGFloat (0.001),
-	speed          = (min: CGFloat (0.01), // The min/max speed is 100/400 PPS
-										max: CGFloat (0.4))		// ...which is distance actuall
+	/// Feeds data to various palces -- Has a static member
+	struct GeneralConfig {
+		
+		var
+		spawn_timer = 2.5,
+		difficulty = NSTI(3),
+		
+		accel = (real_jump: CGFloat (20),
+						 strength: CGFloat (0.001))
+		
 	
+	};static let general = GeneralConfig()
 
-	struct WheelConfig {
+	
+	/// Feeds data into GameWheel
+	struct WheelConfig: Immutable {
 		
 		let
 		radius = CGFloat(300),
-		size: CGSize, 		// = radius/2
+		size: 	CGSize,// = radius/2
 		
-		starting_position = Position.center,
-		starting_angle = CGFloat(0)
+		speed = (min: CGFloat (0.01), // The min/max speed is 100/400 PPS
+				     max: CGFloat (0.4)),		// ...which is distance actuall
+		
+		starting = (position: Position.center,
+								starting_angle: CGFloat(0))
 		
 		init() {
 			size = CGSize(width:  self.radius/2, // Simple math
@@ -38,24 +52,27 @@ struct ConfigFile: Static {
 		
 	}
 	
-	struct EnemyConfig {
-		
+	
+	/// Feeds data into GameEnemy
+	struct EnemyConfig: Immutable {
 		
 		// Explanation... see extension for config
 		let
 		radius: CGFloat, 	  					// how big the circle enemy is
-		difficulty: NSTimeInterval,	// How fast it moves towards teh center
+		move_speed: NSTimeInterval,	// How fast it moves towards teh center
 		
 		offset: CGPoint, 			// Offsets of bounds (maybe set to .5 of enemy diameter?)
 		bounds: CGPoint 		 // Boundaries of the fram
 		
-		
+
 		/// Config the enemy here... possibly put it in Global.Config.EnemyConfig?
-		init(difficultyLvl difficulty_level: NSTI = ConfigFile.difficulty,
-				 sceneToAddTo scene: SKScene )	{
+		init(			difficultyLvl difficulty_level: NSTI,
+			
+			        sceneToAddTo scene: SKScene
+		 )	{
 			
 			radius 			= 10
-			difficulty 	= difficulty_level
+			move_speed 	= difficulty_level
 			
 			offset 			= CGP(x: radius/2, y: radius/2)
 			bounds 			= CGP(x: ( scene.frame.width - offset.x ),
