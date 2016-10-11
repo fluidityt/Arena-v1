@@ -11,10 +11,15 @@ import SpriteKit
 // Aliases
 typealias TimeEntryExit = (at_this_entry: CFTI, at_last_exit: CFTI)
 
-
+//typealias Wheelz = (node: SKSN, radius: CGFloat, size: CGFloat, speed: (min: CGFloat, max: CGFloat), starting: (position: Position, angle: CGFloat), funk: (updateSize: (CGFloat) -> CGFloat))
 // Data
-let sys = System()
+let sys = System.this
+var gView: SKView?
+
 
 // Enum
-let MyScene { case game_scene }
+enum MyScene { case game_scene }
+
+typealias Enemy = (node: Arena_v1.SKShN, radius: CGFloat, move_speed: Arena_v1.NSTI, offset: CGPoint, bounds: CGPoint)
+
 

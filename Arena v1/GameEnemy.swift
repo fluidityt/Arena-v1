@@ -17,66 +17,37 @@ import SpriteKit
 
 - note: Requires data from ConfigFile
 */
-struct Enemy: Static {
-typealias EnemyNode = SKShapeNode
+struct En3emy: Static {
+//
+//	static func makeNewEnemy(oldEnemy old_enemy: EnemyNode? = nil,
+//														sceneToAddTo scene: SKScene)
+// -> EnemyNode {
+//
+//		// On first run:
+//		if old_enemy == nil {
+//			
+//			let new_enemy = SKShapeNode()
+//			scene.addChild(new_enemy)
+//		
+//			Tryout() {
+//			
+//				// Can this actually work? am I recursion god?
+//				return	makeNewEnemy(oldEnemy: new_enemy,
+//														 sceneToAddTo: scene)
+//			}
+//		}
+//	
 	
-	static func makeNewEnemy(oldEnemy old_enemy: EnemyNode? = nil,
-														sceneToAddTo scene: SKScene)
- -> EnemyNode {
-
-		// On first run:
-		if old_enemy == nil {
-			
-			let new_enemy = SKShapeNode()
-			scene.addChild(new_enemy)
+	
+				
 		
-			Tryout() {
-			
-				// Can this actually work? am I recursion god?
-				return	makeNewEnemy(oldEnemy: new_enemy,
-														 sceneToAddTo: scene)
-			}
-		}
-	
-		// Our return bitch:
-		let new_enemy = old_enemy!
-	
-			// Give it a random color
-			findAColor: do {
-				
-				let random_color = random(1,3)
-				
-				// Match the color
-				switch random_color {
-				
-				case 1:
-					//blue
-					new_enemy.fillColor = UIColor.blueColor()
-				
-				case 2:
-					//green
-					new_enemy.fillColor = UIColor.greenColor()
-				
-				case 3:
-					//red
-					new_enemy.fillColor = UIColor.redColor()
-				
-				// TODO: Add a unit test for this
-				default:
-					printError("problem in enemy color pick \(random_color)")
-				}
-			}
-		
-			
 			// Give it a random position
-		findAPosition: do {
-			
+	let new_position = { (config: Enemy) -> CGPoint in
+		
 			// Coords to spawnon (return):
 			let 	x : CGFloat?
 			let 	y : CGFloat?
 			
-			let adjusted = (height: scene.frame.height/2,
-			                width: scene.frame.width/2)
 			
 			// Config Data to update our enemy instance with:
 			let config = ConfigFile.EnemyConfig(difficultyLvl: 2.5,

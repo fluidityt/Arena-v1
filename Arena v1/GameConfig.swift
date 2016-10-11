@@ -47,6 +47,8 @@ struct ConfigFile: Directory {
 		init() {
 			size = CGSize(width:  self.radius/2, // Simple math
 										height: self.radius/2)
+			
+
 		}
 		
 	}

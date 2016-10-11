@@ -10,12 +10,14 @@ import SpriteKit
 					// MARK: Top:
 
 
-
 /// My game lol
 class GameScene: SKScene {
 
 	override func didMoveToView (view: SKView) {
 
+		
+		gView = view
+		
 		genericInits:do {
 			
 			Global.SELF = self
