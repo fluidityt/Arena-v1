@@ -74,7 +74,7 @@ typealias AngleAsSpeed = CGFloat
 typealias AngleToRotateTo = CGFloat
 typealias YFirstPrev = (first:CGFloat, previous:CGFloat, current:CGFloat)
 
-typealias TripleFloat = (String, CGFloat, CGFloat, CGFloat)
+typealias TripleFloat = (y1: CGF, y2: CGF, y3: CGF)
 typealias SmoothedY = CGFloat
 typealias TimeFirstPrevCur = (first:CFTI, previous:CFTI, current:CFTI)
 typealias DeltaYAndTime = (y:CGFloat, t:CGFloat)
@@ -282,14 +282,14 @@ extension FindRotationAction {
 			yFP:						Global.XnY.y)
 	
 */
-	private static func adjustNextAngle (
-												accelAngle accelerated_angle: CGFloat,
-											  currentAngle current_angle: CGFloat,
-												yFirstPrev y: YFirstPrev
-	) -> AngleToRotateTo {
-
+	private static func adjustNextAngle( accelAngle accelerated_angle: CGFloat,
+																			 currentAngle current_angle: CGFloat,
+																			 previousY prev_y: CGF,
+																			 currentY cur_y: CGF)
+	 -> AngleToRotateTo {
+		
 		// Dragged up (clockwise)
-		if (y.current > y.previous) {
+		if (cur_y > prev_y) {
 			return current_angle + accelerated_angle
 		}
 
@@ -334,9 +334,9 @@ extension FindRotationAction {
 	static func implement1thru7(
 		
 		
-				inout globalYTuple		_G__y_tuple: 				TripleFloat,
+				globalYTuple		_G__y_tuple: 				TripleFloat,
 				
-				inout globalCurrentY 	_G__current_y: 			CGFloat,
+				globalCurrentY 	_G__current_y: 			CGFloat,
 
 				globalPreviousY				_G__previous_y: 		CGFloat,
 																		
@@ -356,51 +356,48 @@ extension FindRotationAction {
 				                  		
 				globalCurrentAngle 		_G__current_angle: 	CGFloat,
 				
-				inout globalNextAngle	_G__next_angle:			CGFloat )
+				globalNextAngle	_G__next_angle:			CGFloat )
 				                     	
 	
-		-> SKAction {
+		-> (finished_y: SmoothedY, finished_smoother: TripleFloat, finished_angle: AngleToRotateTo, finished_action: SKAction) {
 			
 		// 1:
-		let _L__y_tuple 			= setTupleY (						globalYs: _G__y_tuple,
-		                			             						currentY: _G__current_y
-		)
+		let _L__y_tuple 			= setTupleY 					(	globalYs: _G__y_tuple,
+		                			             						currentY: _G__current_y)
 		
-		// 2:
-		let _L__y_current 		= smoothCurrentY (			yTuple:   _L__y_tuple,
+		
+		// 2: Update current_y:
+		let _L__current_y 		= smoothCurrentY 			(	yTuple:   _L__y_tuple,
 		                  		                  			currentY: _G__current_y,
-		                  		                  			realJump: _G__real_jump
-		)
+		                  		                  			realJump: _G__real_jump)
 		
 		// 3:
-		let _L__delta_yt 			= findDeltaYT ( 				currentY: _L__y_current,
+		let _L__delta_yt 			= findDeltaYT					(	currentY: _L__current_y,
 		                 			               					prevY: 		_G__previous_y,
-		                 			               					timeEE: 	_G__time_ee
-		)
+		                 			               					timeEE: 	_G__time_ee)
+		
 		
 		// 4:
-		let _L__accel_angle 	= findAcceleratedAngle ( deltaYT: 		_L__delta_yt,
+		let _L__accel_angle 	= findAcceleratedAngle( deltaYT: 		_L__delta_yt,
 		                    	                         accelSlider: _G__accel_slider,
-		                    	                         speedMinMax: _G__speed_minmax
-		)
+		                    	                         speedMinMax: _G__speed_minmax)
 		
-		// 5:
-		let _L__next_angle		= adjustNextAngle (			accelAngle:  	_L__accel_angle,
+		
+		// 5: FIXME: Why do I have first/prev y here?... check that my new fix works
+		let _L__next_angle		= adjustNextAngle 		(	accelAngle:  	_L__accel_angle,
 		                  		                   			currentAngle: _G__current_angle,
-		                  		                   			yFirstPrev: 	_G__y_firstprev
-		)
+		                  		                   			previousY: _G__previous_y,
+		                  		                   			currentY: _L__current_y)
 		
 		// 6:
-		let _L__final_action	= makeAction ( 					nextAngle: _L__next_angle
-		)
-			
-		// 7:
-		_G__current_y 	= _L__y_current
-		_G__y_tuple 		= _L__y_tuple
-		_G__next_angle 	= _L__next_angle
+		let _L__final_action	= makeAction 					(	nextAngle: _L__next_angle)
 		
-		// Action to run back in TM
-		return _L__final_action
+
+		// 7:
+    return ( finished_y: _L__current_y,
+             finished_smoother:   _L__y_tuple,
+             finished_angle: _L__next_angle,
+             finished_action: _L__final_action)
 	}
 }
 

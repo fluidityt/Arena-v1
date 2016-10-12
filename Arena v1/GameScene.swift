@@ -15,47 +15,33 @@ class GameScene: SKScene {
 
 	override func didMoveToView (view: SKView) {
 
-		
+		// Init basic vars:
 		gView = view
 		
-		genericInits:do {
-			
-			Global.SELF = self
-			Global.first_drag = false // Confusing
-			
-			Global.xy.CENTER_SCREEN = <-Global.SELF.frame
-		}
-
-		initCircles:do {
-			
-			// Supra!
-			Global.nodes.wheel = self.childNodeWithName("bigger") as! SKSpriteNode
-			N.wheel.size = CGSize(width: 300, height: 300)
-			N.wheel.position = Global.xy.CENTER_SCREEN
-			N.wheel.runAction (SKAction.rotateToangle (0, duration: 0.5))
+		// Logic stuff:
+		sys.misc.first_move = false
+		sys.angle.current = 0
 		
-			let wheel_rotation = G.nodes.wheel.zRotation
-			Global.angles.angle.current = wheel_rotation
-		}
-		return // from DMtV
+		// Init wheel:
+		sys.wheel.node = self.childNodeWithName("bigger") as! SKSpriteNode
+		let wn = sys.wheel.node
+		
+		wn.size = CGSize(width: 300, height: 300)
+		wn.position = CGPoint(x: (gView?.frame.midX)!, y: (gView?.frame.midY)!)
+		wn.runAction(SKAction.rotateToAngle(sys.angle.current, duration: 0.5))
 	}
-
+	
 
 	override func touchesBegan (touches: Set<UITouch>, withEvent event: UIEvent?) {
 		
 		// The next input (TM) will be our 'first drag' | error checking is good!
-		if Global.first_drag == true {
-			// All is well :)
-		}
-		else {
-			Global.first_drag = true // correct msitake
-			printError ("first drag was f\\ked") // alert to logic error
+		if sys.misc.first_move == false {
+			sys.misc.first_move = true // correct msitake
+			printError ("first drag was f\\ked")
 		}
 		
 		// Where we just clicked is our new y.current
-		Global.xy.y.current = touches.first!.locationInNode (self).y
-		
-		return // from TB
+		sys.touch.y.current = touches.first!.locationInNode (self).y
 	}
 
 
@@ -63,78 +49,65 @@ class GameScene: SKScene {
 
 		// First entry (that is, first TM of however long series before TE) - special stuff
 		// TODO: Figure out the timing problem (hold TB then 5 sec later TM will minspeed
-		handleFirstEntry: do {
-			
-			if Global.first_drag == true {
-				
-				Global.first_drag = false    // This has to be false after first_entry
-				
-				let time_first = G.time.first
-				Global.time.previous = time_first // time.atTB compared with time.atMove
-			}
+		// first_move has to be false after the initial touchesMoved
+		if sys.misc.first_move == true {
+			sys.misc.first_move = false
 		}
 		
-		
-		// Main entry: Update Globes -> Update Timer -> Find Rotation Action -> Timer -> Run
+		// Main entry:
+		/* Update Globes -> Update Timer -> Find Rotation Action -> Timer -> Run */
 		for touch in touches {
-
-			// Update the globes with the new touch and time info
-			updateGlobes: do {
-				
-				// Y values are different now:
-				Global.xy.y.previous = Sanity.updatePreviousY (currentY: G.xy.y.current)
-				Global.xy.y.current  = Sanity.updateCurrentY  (touch.locationInNode (self).y)
-			}
-
-			// Handle the case where we need to pause... Lateral--no angle now--reset values
-			guardLateral: do {
-				
-				guard (G.xy.y.current != G.xy.y.previous) else {
-					printError ("paused but didn't release")
-					
-					// Reset values
-					Global.nodes.wheel.removeAllActions ()
-					Global.xy.y_tuple = ("refreshed", 0, 0, 0)
-					
-					return
-					
-				}
-			}
 			
-			// Find rotation action
+			// Update the globes with the new touch and time info:
+			sys.touch.y.previous = sys.touch.y.current
+			sys.touch.y.current  = touch.locationInNode(self).y
+			
+			
+			// Handle the case where we need to pause... Lateral--no angle now--reset values:
+			if (sys.touch.y.current == sys.touch.y.previous) {
+				printError ("paused but didn't release")
+				
+				// Reset values
+				Note(note: "I think that the type on smoother is wrong, and continue may not")
+				sys.wheel.node.removeAllActions ()
+				sys.smoother = (0, 0, 0)
+				continue
+			}
+		
+			// Find rotation action:
 			doRotation: do {
 				
 				// Update our timer (start)
-				time.at_this_entry = time.current
+				sys.time.logic.at_this_entry = sys.time.current
 				
 				// If no lateral movement, let's find our rotation action:
-				let fully_handled_rotation_action_with_acceleration_and_smoothing
+				let returned_vals
 					= FindRotationAction.implement1thru7(
-						globalYTuple: 				&G.xy.y_tuple,
-						globalCurrentY: 			&G.xy.y.current,
-						globalPreviousY: 			G.xy.y.previous,
-						globalYFirstPrev: 		G.xy.y,
-						globalRealJump: 			G.Config.real_jump,
+						globalYTuple: 				sys.smoother,
+						globalCurrentY: 			sys.touch.y.current,
+						globalPreviousY: 			sys.touch.y.previous,
+						globalYFirstPrev: 		sys.touch.y,
+						globalRealJump: 			sys.accel.real_jump,
 						
-						globalTimeEE:					G.time3,
+						globalTimeEE:					sys.time.logic,
 						
-						globalAccelSlider: 		G.Config.accel_strength,
-						globalSpeedMinMax: 		G.Config.speed,
-						globalCurrentAngle:		G.angles.angle.current,
-						globalNextAngle: 			&G.angles.angle.next)
+						globalAccelSlider: 		sys.accel.strength,
+						globalSpeedMinMax: 		sys.accel.speed,
+						globalCurrentAngle:		sys.angle.current,
+						globalNextAngle: 			sys.angle.next)
 				
 				// Update our timer (exit)
-				time.at_last_exit = time.current
-
-				// Rotate to the nextangle
-				N.wheel.runAction (fully_handled_rotation_action_with_acceleration_and_smoothing)
+				sys.time.logic.at_last_exit = sys.time.current
 				
-				// Our current angle is now something else to be something different
-				Global.angles.angle.current	= <-Global.angles.angle.next
+				// Update globes:
+				sys.touch.y.current 		= returned_vals.finished_y
+				sys.smoother 						= returned_vals.finished_smoother
+				sys.angle.current				=	returned_vals.finished_angle
+				
+				// FINALLY::: run the action (rotate!) TODO: Try putting this in update()
+				sys.wheel.node.runAction( returned_vals.finished_action )
 			}
 		}
-		
-		return // From TM
 	}
 
 	
@@ -144,40 +117,32 @@ class GameScene: SKScene {
 		// Maybe.. put all of the non-var needed data in a new object at start of TM?
 		resetEverything: do {
 			
-				// What harm could this do?
-				Global.xy.y.current = 0
-				
-				// Resets for TB entry
-				Global.first_drag = true
-				
-				// Reset our smoother
-				XY.y_tuple = ("refreshed", 0, 0, 0)
+			sys.touch.y.current = 0				// What harm could this do?
+			sys.misc.first_move = true		// Resets for TB entry
+			sys.smoother = (0, 0, 0)			// Reset our smoother
 			
-				// No crazy angles
-			Global.angles.angle.next = 0
+			sys.angle.next = 0	// No crazy angles
 		}
 	}
-
-
 
 	
 	override func update (currentTime: CFTimeInterval) {
 		
-		if time.current == 0 {		time.stamp  = currentTime		}
+		if sys.time.current == 0 {		sys.time.stamp  = currentTime		}
 		
-		time.current = currentTime
+		sys.time.current = currentTime
 	
 		// If one second has passed since last timestamp..
-		if time.current >= (time.stamp + 1) {
+		if sys.time.current >= (sys.time.stamp + 1) {
 			// Then increase seconds, and set stamp to current time
-			time.seconds 		+= 1
-			time.stamp = time.current
+			sys.time.seconds 		+= 1
+			sys.time.stamp = sys.time.current
 		}
 		
 		// Check for enemy spawn..
-		if time.seconds >= ConfigFile.spawn_timer {
+		if sys.time.seconds >= sys.misc.spawn_timer {
 			
-			Global.nodes.enemy = Enemy()		// Spawn enemy
+			sys.enemy.nodeGlobal.nodes.enemy = Enemy()		// Spawn enemy
 			
 			// Run it towards the wheel!
 			let attack_circle = SKAction.moveTo(Global.nodes.wheel,

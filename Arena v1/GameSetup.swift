@@ -10,16 +10,16 @@ import SpriteKit
 
 // Aliases
 typealias TimeEntryExit = (at_this_entry: CFTI, at_last_exit: CFTI)
+typealias Enemy = (node: Arena_v1.SKShN, radius: CGFloat, move_speed: Arena_v1.NSTI, offset: CGPoint, bounds: CGPoint, adjusted: (height: CGFloat, width: CGFloat), funk: (findColor: () -> UIColor, empty: () -> ()))
 
-//typealias Wheelz = (node: SKSN, radius: CGFloat, size: CGFloat, speed: (min: CGFloat, max: CGFloat), starting: (position: Position, angle: CGFloat), funk: (updateSize: (CGFloat) -> CGFloat))
-// Data
+
+// Vars:
+/// Used for EVERYTHING... Make sure to stay procedural and safe!
 let sys = System.this
+
+/// Don't forget to unwrap!
 var gView: SKView?
 
 
-// Enum
-enum MyScene { case game_scene }
-
-typealias Enemy = (node: Arena_v1.SKShN, radius: CGFloat, move_speed: Arena_v1.NSTI, offset: CGPoint, bounds: CGPoint)
 
 
