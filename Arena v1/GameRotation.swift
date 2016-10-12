@@ -107,21 +107,21 @@ extension FindRotationAction {
 
 
 		
-		if ys.1 == 0 {
-			return ("new_vals:", cur_y, ys.2, ys.3)        // y1 = current_y
+		if ys.y1 == 0 {
+			return (cur_y, ys.y2, ys.y3)        // y1 = current_y
 		}
 
-		else if ys.2 == 0 {
-			return ("new_vals:", cur_y, ys.1, ys.3)        // y2 = y1; y1 = current_y
+		else if ys.y2 == 0 {
+			return ( cur_y, ys.y1, ys.y3)        // y2 = y1; y1 = current_y
 		}
 
-		else if ys.3 == 0 {
-			return ("new_vals:", cur_y, ys.1, ys.2)        // y3 = y2; y2 = y1; y1 = current_y
+		else if ys.y3 == 0 {
+			return (cur_y, ys.y1, ys.y2)        // y3 = y2; y2 = y1; y1 = current_y
 		}
 
 		// FIXME: this is the same as above
 		else {
-			return ("new_vals:", cur_y, ys.1, ys.2)        // y3 = y2; y2 = y1; y1 = current_y
+			return (cur_y, ys.y1, ys.y2)        // y3 = y2; y2 = y1; y1 = current_y
 		}
 	}
 }
@@ -149,48 +149,48 @@ extension FindRotationAction {
 		let ys  = yt
 
 		/// delta-absolute-value of y2-y1
-		let dav = (y3y2: absV ((ys.3 - ys.2)),
-							 y2y1: absV ((ys.2 - ys.1)))
+		let dav = (y3y2: absV ((ys.y3 - ys.y2)),
+							 y2y1: absV ((ys.y2 - ys.y1)))
 
 
 		checkIfOnlyThreeInputs:do {
 			// See last function for values that are carried over or were 0
 
 			// Only first input
-			if ys.1 == cur_y {
-				return ys.1
+			if ys.y1 == cur_y {
+				return ys.y1
 			}
 
 			// Only second input
-			else if ys.2 == ys.1 {
-				return average ([ys.1, ys.2])
+			else if ys.y2 == ys.y1 {
+				return average ([ys.y1, ys.y2])
 			}
 		}
 
 		smoothFourthInput:do {
 			// The acceleration is real:
 			if (dav.y3y2 > real_jump) && (dav.y2y1 > real_jump) {
-				return average ([ys.1, ys.2, ys.3])
+				return average ([ys.y1, ys.y2, ys.y3])
 			}
 
 			// Slowing down?
 			else if (dav.y3y2 > real_jump) && (dav.y2y1 < real_jump) {
-				return average ([ys.2, ys.3])
+				return average ([ys.y2, ys.y3])
 			}
 
 			// Speeding up?
 			else if (dav.y3y2 < real_jump) && (dav.y2y1 > real_jump) {
-				return average ([ys.1, ys.2])
+				return average ([ys.y1, ys.y2])
 			}
 
 			// No accel:
 			else if (dav.y3y2 < real_jump) && (dav.y2y1 < real_jump) {
-				return average ([ys.1, ys.2, ys.3])
+				return average ([ys.y1, ys.y2, ys.y3])
 			}
 
 			// IDK lol... need to add cases for y1 and y3 with y2 being outlier
 			else {
-				return average ([ys.1, ys.2, ys.3])
+				return average ([ys.y1, ys.y2, ys.y3])
 			}
 		}
 	}
