@@ -50,40 +50,41 @@ Singleton {	private init() {};	static let this = System()
 											empty: {}	))
 	
 	
-	var enemy		=	(		node: 			SKShN(),
-	         		 	 		radius: 		CGFloat(30),
-	         		 	 		move_speed: NSTI(2),
-	         		 	 		offset: 		CGF(5),
-	         		 	 		bounds: 		CGPoint(),
+	var enemy = (
+		node: 			SKShN(),
 		
-	         		 	 		adjusted: (
-												height: gView!.frame.height/2,
-												width: gView!.frame.width/2),
-		
-			funk: (
-				
-				initiate: { () -> SKShN in
-					
-				},
+		data: (
+			radius: 		CGFloat(30),
+			move_speed: NSTI(2),
+			offset: 		CGF(5),
+			bounds: 		CGPoint(x: gView!.frame.width, y: gView!.frame.height/2),
 			
-				findColor: { () -> UIColor in
-					switch random(1,3) {
-					case 1:	return UIColor.blueColor()
-					case 2:	return UIColor.greenColor()
-					case 3:	return UIColor.redColor()
-					default:return UIColor.blackColor()}},
-				
-				findSide: { (e: Enemy) -> CGPoint in
-					let ran_x = random(e.offset.x, e.bounds.x) - e.adjusted.width
-					let ran_y = random(e.offset.y, e.bounds.y) - e.adjusted.height
-					
-					switch random(1,4) { // side to spawn on 1 top 4 left
-					case 1: return CGP(	x: ran_x,	y: (e.bounds.y - e.adjusted.height)) // top
-					case 3: return CGP( x: ran_x, y: (e.offset.y	- e.adjusted.height))
-					case 2: return CGP(	x: (e.bounds.x - e.adjusted.width), y: ran_y)  // bottom
-					case 4: return CGP( x: (e.offset.x - e.adjusted.width),	y: ran_y)
-					default: printError("problem in randysidepick"); return CGP(x:0,y:0)}}))
+			adjusted: (
+				width: gView!.frame.width/2,
+				height: gView!.frame.height/2)), // FIXME: supposed to  be /2
 		
+		funk: (
+			
+			findColor: { () -> UIColor in
+				switch random(1,3) {
+				case 1:	return UIColor.blueColor()
+				case 2:	return UIColor.greenColor()
+				case 3:	return UIColor.redColor()
+				default:return UIColor.blackColor()}},
+			
+			
+			findSide: { (e: EnemyData) -> CGPoint in
+				let ran_x = random(e.offset, e.bounds.x) - e.adjusted.width
+				let ran_y = random(e.offset, e.bounds.y) - e.adjusted.height
+				
+				switch random(1,4) { // side to spawn on 1 top 4 left
+				case 1: return CGP(	x: ran_x,	y: (e.bounds.y - e.adjusted.height)) // top
+				case 3: return CGP( x: ran_x, y: (e.offset	- e.adjusted.height))
+				case 2: return CGP(	x: (e.bounds.x - e.adjusted.width), y: ran_y)  // bottom
+				case 4: return CGP( x: (e.offset - e.adjusted.width),	y: ran_y)
+				default: printError("problem in randysidepick"); return CGP(x:0,y:0)}}))
+	
+	
 	// TODO: mirror this for X for portrait mode
 	var touch 	= ( z: 0,
 	          	    x: 0,

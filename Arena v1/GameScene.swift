@@ -17,6 +17,8 @@ class GameScene: SKScene {
 
 		// Init basic vars:
 		gView = view
+		gScene = self
+		gFirstRun = true
 		
 		// Logic stuff:
 		sys.misc.first_move = false
@@ -25,7 +27,7 @@ class GameScene: SKScene {
 		// Init wheel:
 		sys.wheel.node = self.childNodeWithName("bigger") as! SKSpriteNode
 		let wn = sys.wheel.node
-		
+
 		wn.size = CGSize(width: 300, height: 300)
 		wn.position = CGPoint(x: (gView?.frame.midX)!, y: (gView?.frame.midY)!)
 		wn.runAction(SKAction.rotateToAngle(sys.angle.current, duration: 0.5))
