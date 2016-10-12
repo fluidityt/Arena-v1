@@ -21,6 +21,18 @@ prefix func <-<T> (data: T) -> T {
 	return data
 }
 
+// let user know we are using a reference:
+prefix operator -& {}
+prefix func -&<T> (data: T) -> T {
+	return data
+}
+
+// let user know we are using a reference:
+prefix operator -* {}
+prefix func -*<T> (data: T) -> T {
+	return data
+}
+
 // One star debugger
 postfix operator +* {}
 postfix func +*<T> (data: T) -> T {

@@ -47,8 +47,6 @@ func setPosition( position: Position, scene: SKScene) -> CGPoint {
 	case .center:
 		return CGPoint( x: scene.frame.midX,
 		                y: scene.frame.midY)
-	default:
-		return CGPoint( x: 0, y: 0)
 	}
 }
 

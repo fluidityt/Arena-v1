@@ -5,9 +5,28 @@
 //  Created by Dude Guy  on 9/2/16.
 //  Copyright (c) 2016 Dude Guy . All rights reserved.
 
+/*
+#P jump to definition |shift  in asst
+#F next area
+#R Prev area
+
+#3 show asst |shift  Hide
+#5 show dbg  |shift  Hide
+
+^H Toggle Issues
+
+^#M Set mark | ^M Jump mark |^shiftM Select mark |^@ Delete to mark
+
+^I/K Scroll line Up
+
+^DEL Delete word <-  | Delete word ->
+@DEL Delete line <-  | Delete line ->
+
+
+*/
 import SpriteKit
 
-					// MARK: Top:
+// MARK: Top:
 
 
 /// My game lol
@@ -31,6 +50,12 @@ class GameScene: SKScene {
 		wn.size = CGSize(width: 300, height: 300)
 		wn.position = CGPoint(x: (gView?.frame.midX)!, y: (gView?.frame.midY)!)
 		wn.runAction(SKAction.rotateToAngle(sys.angle.current, duration: 0.5))
+		
+		// Init enemy:
+		let new_enemy = SKShapeNode(circleOfRadius: sys.enemy.data.radius)
+		new_enemy.fillColor = sys.enemy.funk.findColor()
+		new_enemy.position  = sys.enemy.funk.findSide(sys.enemy.data)
+		
 	}
 	
 
@@ -136,29 +161,28 @@ class GameScene: SKScene {
 	
 		// If one second has passed since last timestamp..
 		if sys.time.current >= (sys.time.stamp + 1) {
-			// Then increase seconds, and set stamp to current time
+			// Then increase seconds, and set stamp to current time:
 			sys.time.seconds 		+= 1
 			sys.time.stamp = sys.time.current
 		}
 		
-		// Check for enemy spawn..
+		// Check for enemy spawn:
 		if sys.time.seconds >= sys.misc.spawn_timer {
 			
-			sys.enemy.nodeGlobal.nodes.enemy = Enemy()		// Spawn enemy
-			
-			// Run it towards the wheel!
-			let attack_circle = SKAction.moveTo(Global.nodes.wheel,
-			                                    duration: ConfigFile.difficulty)
-			
-			OOP --> runAction( attack_circle, on: Global.nodes.wheel)
-			
-			time.seconds = 0	// Reset timer for next enemy
-		}
-		
-		
-		return // from update
-	}
+			// Update color and position:
+			let e_node = -&sys.enemy.node
+			e_node.fillColor 		  = sys.enemy.funk.findColor()
+			e_node.position  			= sys.enemy.funk.findSide(sys.enemy.data)
 
+			// Make it atack our helpless wheel!:
+			let attack_wheel = SKAction.moveTo(sys.wheel.node.position,
+			                                   duration: sys.misc.difficulty)
+			OOP --> e_node.runAction(attack_wheel)
+
+			// Reset timer for next enemy spawn:
+			sys.time.seconds = 0
+		}
+	}
 }//EoC
 
 func shapeTex (node: SKShapeNode) {

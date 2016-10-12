@@ -16,7 +16,8 @@ Singleton {	private init() {};	static let this = System()
 	
 	var misc = ( first_move: 	Bool(),
 	             score: Int(0),
-	             spawn_timer: NSTI(3))
+	             spawn_timer: NSTI(3),
+	             difficulty:  NSTI(2.5))
 	             
 	var time = ( current: CFTI(0),
 	             stamp: 	CFTI(0),
@@ -61,10 +62,9 @@ Singleton {	private init() {};	static let this = System()
 			
 			adjusted: (
 				width: gView!.frame.width/2,
-				height: gView!.frame.height/2)), // FIXME: supposed to  be /2
+				height: gView!.frame.height/2)),
 		
 		funk: (
-			
 			findColor: { () -> UIColor in
 				switch random(1,3) {
 				case 1:	return UIColor.blueColor()
