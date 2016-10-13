@@ -26,7 +26,7 @@ struct Debugging: Static {
 	code_group = false,
 	logging = false,
 	
-	one_star = false,
+	one_star = true,
 	two_star = false
 	
 

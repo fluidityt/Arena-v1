@@ -30,6 +30,7 @@ func average (nums: [CGFloat]) -> CGFloat {	var total = CGFloat(0)
 
 /// Random int
 func random(min: Int,_ max: Int) -> Int {
+	// TODO: dont forget to check for neg
 	
 	// Make sure we can progress the program (true = found error)
 	func foundIntError (min2: Int,_
@@ -37,12 +38,12 @@ func random(min: Int,_ max: Int) -> Int {
 		-> Bool {
 			
 			if min2 > max2 {
-				print("random INT error, min (\(min2)) greater than max (\(max2))")
+				printError("random INT error:       in (\(min2)) greater than max (\(max2))")
 				return true
 			}
 				
 			else if min2 == max2 {
-				print("random INT error, min == max  (\(min2))")
+				printError("random INT error:       min == max  (\(min2))")
 				return true
 			}
 			
@@ -51,7 +52,7 @@ func random(min: Int,_ max: Int) -> Int {
 	
 	if foundIntError(min, max)  {
 		// Should cause problems!
-		print ("random: returning (\(min) -1")
+		printError ("random INT error:         returning (\(min-1)) \n")
 		return min - 1
 	}
 	
@@ -79,12 +80,17 @@ func random(min: CGFloat,_ max: CGFloat) -> CGFloat {
 		-> Bool {
 			
 			if min2 > max2 {
-				print("random CGFloat error, min (\(min2)) greater than max (\(max2))")
+				printError("random CGFloat error:    min (\(min2)) greater than max (\(max2))")
 				return true
 			}
 				
 			else if min2 == max2 {
-				print("random CGFloat error, min == max  (\(min2))")
+				printError("random CGFloat error:    min == max  (\(min2))")
+				return true
+			}
+				
+			else if max < 0 {
+				printError("random CGFloat error:    max is negative!  (\(max2))")
 				return true
 			}
 			
@@ -93,14 +99,20 @@ func random(min: CGFloat,_ max: CGFloat) -> CGFloat {
 	
 	if foundCGFloatError(min, max)  {
 		// Should cause problems!
-		print ("random: returning (\(min) -1")
+		printError ("random CGFloat:     returning (\(min-1)) \n")
 		return min - 1
 	}
 	
+	// Handle a negative min
+	let
+ minner = UInt32(absV(min)),
+ maxxer = UInt32(UInt32(max) + minner),
+ submin = CGFloat(minner)
+	
 	// Trash values for math:
 	let
-	min3 = UInt32(min),
-	max3 = UInt32(max),
+	min3 = UInt32(0),
+	max3 = UInt32(maxxer),
 	new_max = ((max3 - min3) + 1)
 	
 	// Random value to return:
@@ -109,9 +121,37 @@ func random(min: CGFloat,_ max: CGFloat) -> CGFloat {
 	result2 = result + min3,
 	result3 = CGFloat(result2)
 	
-	return result3
+	// TODO: Figure out if maximum is negative
+	return result3 - submin
 }
-
-
-
-
+//func random(oneVal val: CGFloat) -> CGFloat {
+//	
+//	if val < 0 {
+//		let result = arc4random_uniform(UInt32(absV(val)))
+//		return val
+//	}
+//	
+//	// Handle a negative min
+//	let
+// minner = UInt32(absV(min)),
+// maxxer = UInt32(UInt32(max) + minner),
+// submin = CGFloat(minner)
+//	
+//	// Trash values for math:
+//	let
+//	min3 = UInt32(0),
+//	max3 = UInt32(maxxer),
+//	new_max = ((max3 - min3) + 1)
+//	
+//	// Random value to return:
+//	let
+//	result  = arc4random_uniform(new_max),
+//	result2 = result + min3,
+//	result3 = CGFloat(result2)
+//	
+//	// TODO: Figure out if maximum is negative
+//	return result3 - submin
+//}
+//
+//
+//

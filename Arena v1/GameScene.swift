@@ -44,18 +44,18 @@ class GameScene: SKScene {
 		sys.angle.current = 0
 		
 		// Init wheel:
-		sys.wheel.node = self.childNodeWithName("bigger") as! SKSpriteNode
+		sys.wheel.node = self.childNodeWithName("wheel") as! SKSpriteNode
 		let wn = sys.wheel.node
 
-		wn.size = CGSize(width: 300, height: 300)
-		wn.position = CGPoint(x: (gView?.frame.midX)!, y: (gView?.frame.midY)!)
+		wn.size = CGSize(width: 250, height: 250)
+		wn.position = CGPoint(x: 0,y: 0)
 		wn.runAction(SKAction.rotateToAngle(sys.angle.current, duration: 0.5))
 		
 		// Init enemy:
 		let new_enemy = SKShapeNode(circleOfRadius: sys.enemy.data.radius)
 		new_enemy.fillColor = sys.enemy.funk.findColor()
 		new_enemy.position  = sys.enemy.funk.findSide(sys.enemy.data)
-		
+		sys.enemy.node = new_enemy
 	}
 	
 
@@ -92,7 +92,7 @@ class GameScene: SKScene {
 			
 			// Handle the case where we need to pause... Lateral--no angle now--reset values:
 			if (sys.touch.y.current == sys.touch.y.previous) {
-				printError ("paused but didn't release")
+				// paused but didn't release
 				
 				// Reset values
 				Note(note: "I think that the type on smoother is wrong, and continue may not")
@@ -155,7 +155,15 @@ class GameScene: SKScene {
 	
 	override func update (currentTime: CFTimeInterval) {
 		
-		if sys.time.current == 0 {		sys.time.stamp  = currentTime		}
+		// Do some shit at start
+		if gFirstRun {
+			OOP --> gScene!.addChild(-*sys.enemy.node)
+			sys.time.stamp  = currentTime
+		
+			gFirstRun = false
+		}
+		
+		
 		
 		sys.time.current = currentTime
 	

@@ -30,7 +30,6 @@ public struct Hotfix {	public init (_ block: ()->() ) { block() } }
 /// Gives a warning witha  message to myself
 struct Note {
 	init(note: String) {
-		print(note)
 	}
 }
 

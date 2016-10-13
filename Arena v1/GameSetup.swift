@@ -24,4 +24,4 @@ var gFirstRun = false
 
 
 
-typealias EnemyData = (radius: CGFloat, move_speed: NSTI, offset: CGF, bounds: CGPoint, adjusted: (width: CGFloat, height: CGFloat))
+typealias EnemyData = (radius: CGFloat, move_speed: NSTI, origin: CGP, bounds: CGPoint)

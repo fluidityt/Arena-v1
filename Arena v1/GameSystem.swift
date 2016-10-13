@@ -16,8 +16,8 @@ Singleton {	private init() {};	static let this = System()
 	
 	var misc = ( first_move: 	Bool(),
 	             score: Int(0),
-	             spawn_timer: NSTI(3),
-	             difficulty:  NSTI(2.5))
+	             spawn_timer: NSTI(2),
+	             difficulty:  NSTI(1.5))
 	             
 	var time = ( current: CFTI(0),
 	             stamp: 	CFTI(0),
@@ -39,8 +39,8 @@ Singleton {	private init() {};	static let this = System()
 	   	         		size: 	CGFloat(300/2),
 	   	         		
 	   	         		speed: (
-											min: CGFloat (0.01),
-											max: CGFloat (0.4)),
+											min: CGFloat (0),
+											max: CGFloat (0)),
 	   	         		
 	   	         		starting:	(
 											position: CGP( x: gView!.frame.midX,	y: gView!.frame.midY),
@@ -55,15 +55,11 @@ Singleton {	private init() {};	static let this = System()
 		node: 			SKShN(),
 		
 		data: (
-			radius: 		CGFloat(30),
-			move_speed: NSTI(2),
-			offset: 		CGF(5),
-			bounds: 		CGPoint(x: gView!.frame.width, y: gView!.frame.height/2),
+			radius: 		CGFloat(10),
+			move_speed: NSTI(0),
+			origin: 		CGP(x: (25 - gView!.frame.width), y: (200 - gView!.frame.height)),
+			bounds: 		CGPoint(x: (gView!.frame.width - 25), y: (gView!.frame.height - 200))),
 			
-			adjusted: (
-				width: gView!.frame.width/2,
-				height: gView!.frame.height/2)),
-		
 		funk: (
 			findColor: { () -> UIColor in
 				switch random(1,3) {
@@ -74,14 +70,14 @@ Singleton {	private init() {};	static let this = System()
 			
 			
 			findSide: { (e: EnemyData) -> CGPoint in
-				let ran_x = random(e.offset, e.bounds.x) - e.adjusted.width
-				let ran_y = random(e.offset, e.bounds.y) - e.adjusted.height
+				let ran_x = random(e.origin.x, e.bounds.x) //random(e.offset, e.bounds.x) 							- e.adjusted.width/2
+				let ran_y = random(e.origin.y, e.bounds.y)  //- e.adjusted.height
 				
 				switch random(1,4) { // side to spawn on 1 top 4 left
-				case 1: return CGP(	x: ran_x,	y: (e.bounds.y - e.adjusted.height)) // top
-				case 3: return CGP( x: ran_x, y: (e.offset	- e.adjusted.height))
-				case 2: return CGP(	x: (e.bounds.x - e.adjusted.width), y: ran_y)  // bottom
-				case 4: return CGP( x: (e.offset - e.adjusted.width),	y: ran_y)
+				case 1: return CGP(	x: ran_x,				y: e.bounds.y)
+				case 3: return CGP( x: ran_x, 			y: e.origin.y)
+				case 2: return CGP(	x: e.bounds.x, 	y: ran_y)
+				case 4: return CGP( x: e.origin.x,	y: ran_y)
 				default: printError("problem in randysidepick"); return CGP(x:0,y:0)}}))
 	
 	
@@ -98,11 +94,11 @@ Singleton {	private init() {};	static let this = System()
 	   	          	 y2: CGF(),
 	   	          	 y3: CGF())
 	
-	var accel = 		( real_jump: 		CGF(),
-	            		  strength:			CGF(),
+	var accel = 		( real_jump: 		CGF(0),
+	            		  strength:			CGF(0),
 	            		  speed: (
-											min: CGF(0.01),
-											max: CGF(3.5)))
+											min: CGF(0.005),
+											max: CGF(0.22))) // TODO: scales to radius of wheel
 	
 	func testit() {
 		var wheel = System.this.wheel
