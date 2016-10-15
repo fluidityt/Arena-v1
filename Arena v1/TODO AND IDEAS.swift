@@ -5,24 +5,25 @@
 
 
 #### NEXTACTION:
-- make a big empty node that you can removeChildren() for all enemies
+- hit detection
+- labels
 
 #### NEEDSDONE:
-- algo to crossplatform / resolution speed 
+- algo to crossplatform / resolution speed
+- square empty node
+- saved scores
+- sensitivity menu
+- horizontal mode
 
-### TODO:
-- adjust minspeed (super jumpy dir changes)
+### OTHER:
 - make sliders for CONFIG values
 - make 'margin of error' for hit detection
 
 
 #### RESEARCH:
+- make a big empty node that you can removeChildren() for all enemies
 - how to destroy a node
 - trailing skaction
-- declaration file versus implement?
-
-#### OTHERTODOS:
-- figure out where to store class info in configs
 
 
 */
