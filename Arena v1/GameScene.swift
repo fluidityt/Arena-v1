@@ -31,9 +31,11 @@ import SpriteKit
 
 /// My game lol
 class GameScene: SKScene {
-
+	// Checkit: passing returning a tuple or an object? How about lazy?
+	let z_ = sys.wheel
+	
 	override func didMoveToView (view: SKView) {
-
+		
 		// Init basic vars:
 		gView = view
 		gScene = self

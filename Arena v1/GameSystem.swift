@@ -63,10 +63,10 @@ Singleton {	private init() {};	static let this = System()
 		funk: (
 			findColor: { () -> UIColor in
 				switch random(1,3) {
-				case 1:	return UIColor.blueColor()
-				case 2:	return UIColor.greenColor()
-				case 3:	return UIColor.redColor()
-				default:return UIColor.blackColor()}},
+					case 1:	return UIColor.blueColor()
+					case 2:	return UIColor.greenColor()
+					case 3:	return UIColor.redColor()
+					default:return UIColor.blackColor()}},
 			
 			
 			findSide: { (e: EnemyData) -> CGPoint in
@@ -74,11 +74,11 @@ Singleton {	private init() {};	static let this = System()
 				let ran_y = random(e.origin.y, e.bounds.y)  //- e.adjusted.height
 				
 				switch random(1,4) { // side to spawn on 1 top 4 left
-				case 1: return CGP(	x: ran_x,				y: e.bounds.y)
-				case 3: return CGP( x: ran_x, 			y: e.origin.y)
-				case 2: return CGP(	x: e.bounds.x, 	y: ran_y)
-				case 4: return CGP( x: e.origin.x,	y: ran_y)
-				default: printError("problem in randysidepick"); return CGP(x:0,y:0)}}))
+					case 1: return CGP(	x: ran_x,				y: e.bounds.y)
+					case 3: return CGP( x: ran_x, 			y: e.origin.y)
+					case 2: return CGP(	x: e.bounds.x, 	y: ran_y)
+					case 4: return CGP( x: e.origin.x,	y: ran_y)
+					default: printError("problem in randysidepick"); return CGP(x:0,y:0)}}))
 	
 	
 	// TODO: mirror this for X for portrait mode
